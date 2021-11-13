@@ -1,7 +1,13 @@
-import React from "react";
+// import { menuItems } from "./menuItems";
 
-function headerMenu({ href, text }) {
-    return <li class="list__item"><a class="list__link" href={href}>{text}</a></li>;
-}
+const HeaderMenu = props => {
+  return (
+    <li className="list__item">
+      <a className="list__link" href={props.href}>
+        {props.text}
+      </a>
+    </li>
+  );
+};
 
-export default headerMenu;
+export default HeaderMenu;

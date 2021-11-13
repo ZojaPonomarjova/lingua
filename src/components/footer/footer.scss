@@ -1,0 +1,49 @@
+@import "../assets/styles/vars.scss";
+@import "../assets/styles/fonts.scss";
+
+.footer {
+  padding: 5px 50px;
+
+  font-family: "OpenSans-Medium", sans-serif;
+  font-weight: 500;
+  font-size: 18px;
+
+  color: $lightGreen;
+  background-color: $yellow;
+}
+
+.footer__content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+
+  margin: 0;
+}
+
+.footer__social {
+  display: flex;
+}
+
+.footer__icon-container {
+  width: 35px;
+  margin-right: 10px;
+}
+
+.footer__icon {
+  max-width: 100%;
+  color: $lightGreen;
+}
+
+.footer__copyright {
+  margin-right: 30px;
+}
+// .footer__link {
+//   &:hover {
+//     background-color: #69855c;
+//   }
+
+//   &:visited {
+//     color: $brown;
+//   }
+// }
