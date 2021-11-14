@@ -1,13 +1,20 @@
 import "./tableHeader.scss";
+import { tableHeaderData } from "./tableHeaderData";
 
-function Headercell() {
+const HeaderCell = ({ text }) => {
+  return <th className="table__header-cell">{text}</th>;
+};
+
+const HeaderRow = () => {
   return (
-    <tr>
-      <th></th>
-      <th></th>
-      <th></th>
+    <tr className="table__header-row">
+      {tableHeaderData.map(headerCellData => (
+        <HeaderCell
+          key={headerCellData.headerText}
+          text={headerCellData.headerText}
+        />
+      ))}
     </tr>
   );
-}
-
-export default Headercell;
+};
+export default HeaderRow;

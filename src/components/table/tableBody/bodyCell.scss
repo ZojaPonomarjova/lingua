@@ -1,0 +1,12 @@
+.table__input {
+  width: 90%;
+  height: 22px;
+
+  border: 1px solid #c6854b;
+  border-radius: 2px;
+
+  outline: none;
+  &:hover {
+    box-shadow: 0px 0px 8px 0px rgba(34, 60, 80, 0.2);
+  }
+}

@@ -1,0 +1,16 @@
+@import "../assets/styles/mixins.scss";
+@import "../assets/styles/vars.scss";
+
+.title {
+  @include titleMargin();
+
+  color: $darkGreen;
+
+  font-family: "OpenSans-Bold", sans-serif;
+  font-weight: 700;
+  font-size: 30px;
+
+  text-align: center;
+
+  margin-bottom: 20px;
+}
