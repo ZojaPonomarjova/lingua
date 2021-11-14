@@ -1,6 +1,6 @@
 export const tableHeaderData = [
   { headerText: "#" },
-  { headerText: "Inglish" },
+  { headerText: "English" },
   { headerText: "Transcription" },
   { headerText: "Russian" },
   //   { headerText: "Tags" },
