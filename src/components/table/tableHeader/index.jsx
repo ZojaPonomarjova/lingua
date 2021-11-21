@@ -1,5 +1,5 @@
 import "./tableHeader.scss";
-import { tableHeaderData } from "./tableHeaderData";
+import { tableHeaderData } from "../tableData/tableHeaderData";
 
 const HeaderCell = ({ text }) => {
   return <th className="table__header-cell">{text}</th>;

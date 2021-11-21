@@ -1,4 +1,4 @@
-import { menuItems } from "./menuItems";
+import { menuItems } from "../data/menuItems";
 import HeaderMenu from "./headerMenu";
 import "./header.scss";
 

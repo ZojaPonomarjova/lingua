@@ -6,19 +6,25 @@ const buttonsData = [
   { alt: "confetti", src: "../assets/images/confetti.png" },
 ];
 
-const Button = ({ alt, src }) => {
+const Button = ({ alt, src, onClick, ...props }) => {
   return (
-    <div className="table__button">
+    <div className={`table__button ${props.class}`} onClick={onClick}>
       <img src={src} alt={alt} className="button__img" />
     </div>
   );
 };
 
-const ButtonRow = () => {
+const ButtonRow = ({ onClick }) => {
   return (
     <div className="table__button-row">
-      {buttonsData.map(button => (
-        <Button key={button.alt} alt={button.alt} src={button.src} />
+      {buttonsData.map((button, index) => (
+        <Button
+          key={button.alt}
+          alt={button.alt}
+          src={button.src}
+          class={""}
+          onClick={index === 0 ? onClick : undefined}
+        />
       ))}
     </div>
   );
@@ -28,4 +34,4 @@ const SaveButton = () => {
   return <div className="table__save-button">Сохранить</div>;
 };
 
-export { ButtonRow, SaveButton };
+export { ButtonRow, SaveButton, Button };

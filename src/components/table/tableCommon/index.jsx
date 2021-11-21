@@ -1,9 +1,19 @@
-import "./table.scss";
-import HeaderRow from "../tableHeader/index";
-import { bodyCellData } from "./bodyCellData";
-import { BodyRow } from "../tableBody";
+import { useState } from "react";
+import "./tableCommon.scss";
+import HeaderRow from "../tableHeader";
+import { bodyCellData } from "../tableData/bodyCellData";
+import { BodyRowSelection } from "../tableBody";
 
 const Table = () => {
+  const [selectedRowIndex, setSelectedRowIndex] = useState(-1);
+  const handleClick = id => {
+    if (selectedRowIndex !== id) {
+      setSelectedRowIndex(id);
+    } else {
+      setSelectedRowIndex(-1);
+    }
+  };
+
   return (
     <table className="table">
       <thead>
@@ -11,13 +21,15 @@ const Table = () => {
       </thead>
       <tbody>
         {bodyCellData.map((bodyRow, index) => (
-          <BodyRow
+          <BodyRowSelection
+            onClick={() => handleClick(index)}
             key={bodyRow.id}
             index={index + 1}
             english={bodyRow.english}
             transcription={bodyRow.transcription}
             russian={bodyRow.russian}
-            isChanged={bodyRow.isChanged}
+            isChanged={index === selectedRowIndex}
+
             // tags={bodyRow.tags}
           />
         ))}

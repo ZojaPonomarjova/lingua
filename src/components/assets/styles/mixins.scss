@@ -17,3 +17,7 @@
 @mixin linkStyle {
   text-decoration: none;
 }
+
+@mixin paragraphMargin {
+  margin: 0;
+}

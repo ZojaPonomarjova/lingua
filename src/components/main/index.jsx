@@ -1,7 +1,7 @@
 import "./main.scss";
 import Title from "../titles";
-
 import Table from "../table/tableCommon";
+import WordCard from "../wordCard";
 
 const titles = ["Рекомендуемые слова и наборы", "Мой словарь"];
 
@@ -10,6 +10,7 @@ function Main() {
     <main className="main">
       <Title name={titles[1]} />
       <Table />
+      <WordCard />
     </main>
   );
 }

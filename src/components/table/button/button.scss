@@ -1,6 +1,8 @@
 .table__save-button {
+  transition: 0.25s;
   padding: 5px 20px;
-  margin-left: 20px;
+  margin-right: 20px;
+  margin-left: -30px;
   max-width: 200px;
   border-radius: 2px;
 
@@ -15,7 +17,7 @@
   cursor: pointer;
 
   &:hover {
-    box-shadow: 0px 0px 8px 0px rgba(34, 60, 80, 0.2);
+    box-shadow: 0px 0px 8px 0px rgba(34, 60, 80, 0.4);
   }
 
   &:active {
@@ -30,6 +32,11 @@
 }
 
 .table__button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  transition: 0.25s;
   width: 30px;
 
   margin-right: 30px;
@@ -39,15 +46,16 @@
   cursor: pointer;
 
   background-color: #f7fbfb;
+  box-shadow: 0px 0px 8px 0px rgba(34, 60, 80, 0.2);
 
   &:hover {
     opacity: 0.8;
-    box-shadow: 0px 0px 8px 0px rgba(34, 60, 80, 0.2);
+    box-shadow: 0px 0px 10px 0px rgba(34, 60, 80, 0.2) inset;
   }
 
   &:active {
     opacity: 0.5;
-    box-shadow: 0px 0px 8px 0px rgba(34, 60, 80, 0.2);
+    box-shadow: 0px 0px 10px 0px rgba(34, 60, 80, 0.2) inset;
   }
 }
 

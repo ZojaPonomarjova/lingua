@@ -1,6 +1,6 @@
 import "./footer.scss";
 import FooterSocial from "./footerSocial";
-import { icons } from "./iconsData";
+import { icons } from "../data/iconsData";
 
 const Footer = () => {
   return (
