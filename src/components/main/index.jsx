@@ -1,16 +1,18 @@
 import "./main.scss";
 import Title from "../titles";
 import Table from "../table/tableCommon";
-import WordCard from "../wordCard";
+// import WordCardContainer from "../wordCard/wordCardContainer";
+// import { useState } from "react";
+// import { bodyCellData } from "../table/tableData/bodyCellData";
 
 const titles = ["Рекомендуемые слова и наборы", "Мой словарь"];
 
-function Main() {
+function Main(props) {
   return (
     <main className="main">
       <Title name={titles[1]} />
-      <Table />
-      <WordCard />
+      <Table {...props} />
+      {/* <WordCardContainer /> */}
     </main>
   );
 }

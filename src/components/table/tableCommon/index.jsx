@@ -1,11 +1,21 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import "./tableCommon.scss";
 import HeaderRow from "../tableHeader";
 import { bodyCellData } from "../tableData/bodyCellData";
 import { BodyRowSelection } from "../tableBody";
+import WordCardContainer from "../wordCard/wordCardContainer";
 
 const Table = () => {
+  const [learnedRowIndex, setLearnedRowIndex] = useState(-1);
+  const handleClickToLearn = id => {
+    if (learnedRowIndex !== id) {
+      setLearnedRowIndex(id);
+    } else {
+      setLearnedRowIndex(-1);
+    }
+  };
   const [selectedRowIndex, setSelectedRowIndex] = useState(-1);
+
   const handleClick = id => {
     if (selectedRowIndex !== id) {
       setSelectedRowIndex(id);
@@ -15,26 +25,37 @@ const Table = () => {
   };
 
   return (
-    <table className="table">
-      <thead>
-        <HeaderRow />
-      </thead>
-      <tbody>
-        {bodyCellData.map((bodyRow, index) => (
-          <BodyRowSelection
-            onClick={() => handleClick(index)}
-            key={bodyRow.id}
-            index={index + 1}
-            english={bodyRow.english}
-            transcription={bodyRow.transcription}
-            russian={bodyRow.russian}
-            isChanged={index === selectedRowIndex}
+    <React.Fragment>
+      <table className="table">
+        <thead>
+          <HeaderRow />
+        </thead>
+        <tbody>
+          {bodyCellData.map((bodyRow, i) => (
+            <BodyRowSelection
+              onClick={() => handleClick(i)}
+              key={bodyRow.id}
+              // index={props.i}
 
-            // tags={bodyRow.tags}
-          />
-        ))}
-      </tbody>
-    </table>
+              english={bodyRow.english}
+              transcription={bodyRow.transcription}
+              russian={bodyRow.russian}
+              isChanged={i === selectedRowIndex}
+              onClick1={() => handleClickToLearn(i)}
+              // tags={bodyRow.tags}
+            />
+          ))}
+        </tbody>
+      </table>
+      {learnedRowIndex >= 0 ? (
+        <WordCardContainer
+          learnedRowIndex={learnedRowIndex}
+          onclickCardClose={() => {
+            setLearnedRowIndex(-1);
+          }}
+        />
+      ) : null}
+    </React.Fragment>
   );
 };
 

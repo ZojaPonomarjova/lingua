@@ -1,4 +1,4 @@
-import react, { useState } from "react";
+import React, { useState } from "react";
 import "./tableBody.scss";
 import { Button, ButtonRow, SaveButton } from "../button";
 
@@ -31,21 +31,22 @@ const BodyRow = ({
   english,
   transcription,
   russian,
-  // tags,
+
   index,
   onClick,
+  ...props
 }) => {
   return (
-    <react.Fragment>
+    <React.Fragment>
       <Bodycell text={index} />
       <Bodycell text={english} />
       <Bodycell text={transcription} />
       <Bodycell text={russian} />
       {/* <Bodycell text={tags} /> */}
       <td className="table__body-cell  table__body-cell_buttons">
-        <ButtonRow onClick={onClick} />
+        <ButtonRow onClick={onClick} onClick1={props.onClick1} />
       </td>
-    </react.Fragment>
+    </React.Fragment>
   );
 };
 
@@ -57,7 +58,7 @@ const BodyRowChange = ({
   ...props
 }) => {
   return (
-    <react.Fragment>
+    <React.Fragment>
       <Bodycell text={index} english={english} />
       <BodyCellChange
         defaultValue={english}
@@ -86,7 +87,7 @@ const BodyRowChange = ({
           />
         </div>
       </td>
-    </react.Fragment>
+    </React.Fragment>
   );
 };
 
@@ -116,6 +117,7 @@ const BodyRowSelection = ({
           russian={russian}
           index={index}
           onClick={props.onClick}
+          onClick1={props.onClick1}
         />
       )}
     </tr>

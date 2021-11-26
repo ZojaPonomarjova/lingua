@@ -8,13 +8,18 @@ const buttonsData = [
 
 const Button = ({ alt, src, onClick, ...props }) => {
   return (
-    <div className={`table__button ${props.class}`} onClick={onClick}>
-      <img src={src} alt={alt} className="button__img" />
+    <div className="button__container">
+      <div className={`table__button ${props.class}`} onClick={onClick}>
+        <img src={src} alt={alt} className="button__img" />
+      </div>
+      <div className={`button__hidden-text ${props.classForText}`}>
+        {props.text}
+      </div>
     </div>
   );
 };
 
-const ButtonRow = ({ onClick }) => {
+const ButtonRow = ({ onClick, ...props }) => {
   return (
     <div className="table__button-row">
       {buttonsData.map((button, index) => (
@@ -23,7 +28,23 @@ const ButtonRow = ({ onClick }) => {
           alt={button.alt}
           src={button.src}
           class={""}
-          onClick={index === 0 ? onClick : undefined}
+          classForText={
+            index === 0
+              ? "button_edit"
+              : index === 1
+              ? "button_learn"
+              : "button_known"
+          }
+          onClick={
+            index === 0 ? onClick : index === 1 ? props.onClick1 : undefined
+          }
+          text={
+            index === 0
+              ? "Редактировать"
+              : index === 1
+              ? "Учить слова"
+              : "Знаю слово!"
+          }
         />
       ))}
     </div>
