@@ -1,11 +1,21 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import "./tableCommon.scss";
 import HeaderRow from "../tableHeader";
 import { bodyCellData } from "../tableData/bodyCellData";
 import { BodyRowSelection } from "../tableBody";
+import WordCardContainer from "../wordCard/wordCardContainer";
 
 const Table = () => {
+  const [learnedRowIndex, setLearnedRowIndex] = useState(-1);
+  const handleClickToLearn = id => {
+    if (learnedRowIndex !== id) {
+      setLearnedRowIndex(id);
+    } else {
+      setLearnedRowIndex(-1);
+    }
+  };
   const [selectedRowIndex, setSelectedRowIndex] = useState(-1);
+
   const handleClick = id => {
     if (selectedRowIndex !== id) {
       setSelectedRowIndex(id);
@@ -15,26 +25,44 @@ const Table = () => {
   };
 
   return (
-    <table className="table">
-      <thead>
-        <HeaderRow />
-      </thead>
-      <tbody>
-        {bodyCellData.map((bodyRow, index) => (
-          <BodyRowSelection
-            onClick={() => handleClick(index)}
-            key={bodyRow.id}
-            index={index + 1}
-            english={bodyRow.english}
-            transcription={bodyRow.transcription}
-            russian={bodyRow.russian}
-            isChanged={index === selectedRowIndex}
+    <React.Fragment>
+      <div className="scroll-table">
+        <table className="table">
+          <thead>
+            <HeaderRow />
+          </thead>
+        </table>
+        <div className="scroll-table-body">
+          <table className="table">
+            <tbody>
+              {bodyCellData.map((bodyRow, i) => (
+                <BodyRowSelection
+                  onClickEditWord={() => handleClick(i)}
+                  onClickCancel={() => handleClick(i)}
+                  key={bodyRow.id}
+                  index={i}
+                  english={bodyRow.english}
+                  transcription={bodyRow.transcription}
+                  russian={bodyRow.russian}
+                  isChanged={i === selectedRowIndex}
+                  onClickLearn={() => handleClickToLearn(i)}
+                  // tags={bodyRow.tags}
+                />
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
 
-            // tags={bodyRow.tags}
-          />
-        ))}
-      </tbody>
-    </table>
+      {learnedRowIndex >= 0 ? (
+        <WordCardContainer
+          learnedRowIndex={learnedRowIndex}
+          onclickCardClose={() => {
+            setLearnedRowIndex(-1);
+          }}
+        />
+      ) : null}
+    </React.Fragment>
   );
 };
 

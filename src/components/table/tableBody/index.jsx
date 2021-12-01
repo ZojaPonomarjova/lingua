@@ -1,6 +1,7 @@
-import react, { useState } from "react";
+import React, { useState } from "react";
 import "./tableBody.scss";
-import { Button, ButtonRow, SaveButton } from "../button";
+import { Button, SaveButton } from "../button";
+import ButtonsRow from "../buttonsRow";
 
 const Bodycell = ({ text }) => {
   return (
@@ -31,21 +32,25 @@ const BodyRow = ({
   english,
   transcription,
   russian,
-  // tags,
+
   index,
-  onClick,
+  onClickEditWord,
+  ...props
 }) => {
   return (
-    <react.Fragment>
+    <React.Fragment>
       <Bodycell text={index} />
       <Bodycell text={english} />
       <Bodycell text={transcription} />
       <Bodycell text={russian} />
       {/* <Bodycell text={tags} /> */}
       <td className="table__body-cell  table__body-cell_buttons">
-        <ButtonRow onClick={onClick} />
+        <ButtonsRow
+          onClickEditWord={onClickEditWord}
+          onClickLearn={props.onClickLearn}
+        />
       </td>
-    </react.Fragment>
+    </React.Fragment>
   );
 };
 
@@ -57,7 +62,7 @@ const BodyRowChange = ({
   ...props
 }) => {
   return (
-    <react.Fragment>
+    <React.Fragment>
       <Bodycell text={index} english={english} />
       <BodyCellChange
         defaultValue={english}
@@ -81,12 +86,12 @@ const BodyRowChange = ({
           <Button
             alt="Arrow"
             src="../assets/images/arrow.png"
-            class="button__cancel"
-            onClick={props.onClick}
+            type="cancelButton"
+            onClick={props.onClickCancel}
           />
         </div>
       </td>
-    </react.Fragment>
+    </React.Fragment>
   );
 };
 
@@ -107,7 +112,7 @@ const BodyRowSelection = ({
           transcription={transcription}
           russian={russian}
           index={index}
-          onClick={props.onClick}
+          onClickCancel={props.onClickCancel}
         />
       ) : (
         <BodyRow
@@ -115,7 +120,8 @@ const BodyRowSelection = ({
           transcription={transcription}
           russian={russian}
           index={index}
-          onClick={props.onClick}
+          onClickEditWord={props.onClickEditWord}
+          onClickLearn={props.onClickLearn}
         />
       )}
     </tr>
