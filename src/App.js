@@ -3,6 +3,7 @@ import "./components/assets/styles/common.scss";
 import Header from "./components/header/header";
 import Main from "./components/main";
 import Footer from "./components/footer/footer";
+// import PageNotFound from "./components/pageNotFound/pageNotFound";
 
 const App = () => {
   return (
@@ -10,6 +11,7 @@ const App = () => {
       <Header />
       <Main />
       <Footer />
+      {/* <PageNotFound /> */}
     </div>
   );
 };

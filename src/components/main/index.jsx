@@ -4,6 +4,7 @@ import Table from "../table/tableCommon";
 // import WordCardContainer from "../wordCard/wordCardContainer";
 // import { useState } from "react";
 // import { bodyCellData } from "../table/tableData/bodyCellData";
+// import Loader from "../loader";
 
 const titles = ["Рекомендуемые слова и наборы", "Мой словарь"];
 
