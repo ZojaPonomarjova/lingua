@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "./tableBody.scss";
-import { Button, ButtonRow, SaveButton } from "../button";
+import { Button, SaveButton } from "../button";
+import ButtonsRow from "../buttonsRow";
 
 const Bodycell = ({ text }) => {
   return (
@@ -33,7 +34,7 @@ const BodyRow = ({
   russian,
 
   index,
-  onClick,
+  onClickEditWord,
   ...props
 }) => {
   return (
@@ -44,7 +45,10 @@ const BodyRow = ({
       <Bodycell text={russian} />
       {/* <Bodycell text={tags} /> */}
       <td className="table__body-cell  table__body-cell_buttons">
-        <ButtonRow onClick={onClick} onClick1={props.onClick1} />
+        <ButtonsRow
+          onClickEditWord={onClickEditWord}
+          onClickLearn={props.onClickLearn}
+        />
       </td>
     </React.Fragment>
   );
@@ -82,8 +86,8 @@ const BodyRowChange = ({
           <Button
             alt="Arrow"
             src="../assets/images/arrow.png"
-            class="button__cancel"
-            onClick={props.onClick}
+            type="cancelButton"
+            onClick={props.onClickCancel}
           />
         </div>
       </td>
@@ -108,7 +112,7 @@ const BodyRowSelection = ({
           transcription={transcription}
           russian={russian}
           index={index}
-          onClick={props.onClick}
+          onClickCancel={props.onClickCancel}
         />
       ) : (
         <BodyRow
@@ -116,8 +120,8 @@ const BodyRowSelection = ({
           transcription={transcription}
           russian={russian}
           index={index}
-          onClick={props.onClick}
-          onClick1={props.onClick1}
+          onClickEditWord={props.onClickEditWord}
+          onClickLearn={props.onClickLearn}
         />
       )}
     </tr>

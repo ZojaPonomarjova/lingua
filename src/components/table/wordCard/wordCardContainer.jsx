@@ -32,11 +32,11 @@ const WordCardContainer = props => {
     const nextIndex = selectedCardIndex + 1;
     if (nextIndex < bodyCellData.length) {
       setSelectedCardIndex(nextIndex);
-      if (clicked === true) {
+      if (clicked) {
         setComponent(!clicked);
       }
     } else if (nextIndex >= bodyCellData.length) {
-      setCardsEnded(!cardsEnded);
+      setCardsEnded(true);
     }
   };
   const handleClickPrev = () => {

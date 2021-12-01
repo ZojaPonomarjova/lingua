@@ -26,27 +26,34 @@ const Table = () => {
 
   return (
     <React.Fragment>
-      <table className="table">
-        <thead>
-          <HeaderRow />
-        </thead>
-        <tbody>
-          {bodyCellData.map((bodyRow, i) => (
-            <BodyRowSelection
-              onClick={() => handleClick(i)}
-              key={bodyRow.id}
-              // index={props.i}
+      <div className="scroll-table">
+        <table className="table">
+          <thead>
+            <HeaderRow />
+          </thead>
+        </table>
+        <div className="scroll-table-body">
+          <table className="table">
+            <tbody>
+              {bodyCellData.map((bodyRow, i) => (
+                <BodyRowSelection
+                  onClickEditWord={() => handleClick(i)}
+                  onClickCancel={() => handleClick(i)}
+                  key={bodyRow.id}
+                  index={i}
+                  english={bodyRow.english}
+                  transcription={bodyRow.transcription}
+                  russian={bodyRow.russian}
+                  isChanged={i === selectedRowIndex}
+                  onClickLearn={() => handleClickToLearn(i)}
+                  // tags={bodyRow.tags}
+                />
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
 
-              english={bodyRow.english}
-              transcription={bodyRow.transcription}
-              russian={bodyRow.russian}
-              isChanged={i === selectedRowIndex}
-              onClick1={() => handleClickToLearn(i)}
-              // tags={bodyRow.tags}
-            />
-          ))}
-        </tbody>
-      </table>
       {learnedRowIndex >= 0 ? (
         <WordCardContainer
           learnedRowIndex={learnedRowIndex}
