@@ -3,6 +3,7 @@ import React from "react";
 
 import { Button } from "../button";
 
+//кнопка показать перевод
 const ShowTranslationButton = props => {
   return (
     <div className="word-card__show-button" onClick={props.onClick}>
@@ -11,10 +12,12 @@ const ShowTranslationButton = props => {
   );
 };
 
+//перевод, "спрятанный под кнопкой"
 const HiddenText = ({ translation }) => {
   return <p className="word-card__translation">{translation}</p>;
 };
 
+//карточка компонент
 const WordCard = props => {
   return (
     <div className="word-card" key={props.id}>
@@ -28,7 +31,7 @@ const WordCard = props => {
       <p className="word-card__english">{props.english}</p>
       <p className="word-card__transcription">{props.transcription}</p>
       <div className="word-card__selection">
-        {props.clicked ? (
+        {props.clicked ? ( //если нажата кнопка, то будет показан текст с кнопкой спрятать текст
           <React.Fragment>
             <HiddenText translation={props.russian} />
             <Button
@@ -36,7 +39,7 @@ const WordCard = props => {
               alt={"eye"}
               class={"return-button"}
               text={"Скрыть перевод"}
-              onClick={props.onClick1}
+              onClick={props.onClickHideTranslation}
             />
           </React.Fragment>
         ) : (

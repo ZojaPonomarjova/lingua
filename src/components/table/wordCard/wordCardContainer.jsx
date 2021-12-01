@@ -4,6 +4,7 @@ import { bodyCellData } from "../tableData/bodyCellData";
 import { useState } from "react";
 import classnames from "classnames";
 
+//компонент для стрелок в карусели
 const Arrow = props => {
   return (
     <div className="word-card__img-container">
@@ -17,6 +18,7 @@ const Arrow = props => {
   );
 };
 
+//компонент родительский контейнер, в котором собирается карусель
 const WordCardContainer = props => {
   const [selectedCardIndex, setSelectedCardIndex] = useState(
     props.learnedRowIndex,
@@ -24,10 +26,12 @@ const WordCardContainer = props => {
   const [clicked, setComponent] = useState(false);
   const [cardsEnded, setCardsEnded] = useState(false);
 
+  //функция для показа перевода и чтобы спрятать его)
   const handleChange = () => {
     setComponent(!clicked);
   };
 
+  //функция для перемотки вперед
   const handleClickNext = () => {
     const nextIndex = selectedCardIndex + 1;
     if (nextIndex < bodyCellData.length) {
@@ -39,6 +43,8 @@ const WordCardContainer = props => {
       setCardsEnded(true);
     }
   };
+
+  //функция для перемотки назад
   const handleClickPrev = () => {
     const nextIndex = selectedCardIndex - 1;
     if (nextIndex >= 0) {
@@ -86,7 +92,7 @@ const WordCardContainer = props => {
             russian={bodyCellData[selectedCardIndex].russian}
             transcription={bodyCellData[selectedCardIndex].transcription}
             onClick={handleChange}
-            onClick1={handleChange}
+            onClickHideTranslation={handleChange}
             clicked={clicked}
             selectedCardIndex={props.learnedRowIndex}
             {...props}
@@ -105,6 +111,7 @@ const WordCardContainer = props => {
         )}
       </div>
       <p className="word-card__pages">
+        {/*параграф для показа номера текущей карточки и общего количества карточек*/}
         {selectedCardIndex + 1} / {bodyCellData.length}
       </p>
     </div>

@@ -1,5 +1,4 @@
-import { menuItems } from "../data/menuItems";
-import HeaderMenu from "./headerMenu";
+import MenuItem from "./headerMenu";
 import "./header.scss";
 
 const Header = () => {
@@ -10,13 +9,9 @@ const Header = () => {
       </div>
       <nav className="header__nav">
         <ul className="header__list">
-          {menuItems.map(menuItem => (
-            <HeaderMenu
-              text={menuItem.text}
-              href={menuItem.href}
-              key={menuItem.id}
-            ></HeaderMenu>
-          ))}
+          <MenuItem text="Главная" href="/"></MenuItem>
+          <MenuItem text="Мои слова" href="/my-words"></MenuItem>
+          <MenuItem text="Добавить слово" href="/add-word"></MenuItem>
         </ul>
       </nav>
     </header>

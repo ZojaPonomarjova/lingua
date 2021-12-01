@@ -3,6 +3,7 @@ import "./tableBody.scss";
 import { Button, SaveButton } from "../button";
 import ButtonsRow from "../buttonsRow";
 
+//компонент для клетки в таблице
 const Bodycell = ({ text }) => {
   return (
     <td className="table__body-cell">
@@ -11,6 +12,7 @@ const Bodycell = ({ text }) => {
   );
 };
 
+//компонент для клетки с инпутом внутри
 const BodyCellChange = ({ english, text, defaultValue }) => {
   const [value, setValue] = useState(defaultValue || "");
 
@@ -28,6 +30,7 @@ const BodyCellChange = ({ english, text, defaultValue }) => {
   );
 };
 
+//компонент ряд в таблице с текстом и кнопками учить/редактировать
 const BodyRow = ({
   english,
   transcription,
@@ -54,6 +57,7 @@ const BodyRow = ({
   );
 };
 
+//компонент ряд в таблице для редактирования слова с кнопками сохранить/отмена
 const BodyRowChange = ({
   english,
   transcription,
@@ -95,6 +99,7 @@ const BodyRowChange = ({
   );
 };
 
+//компонент выбора типа строки при изменения props.isChanged
 const BodyRowSelection = ({
   english,
   transcription,

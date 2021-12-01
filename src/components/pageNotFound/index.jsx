@@ -1,4 +1,5 @@
 import "./pageNotFound.scss";
+import { Link } from "react-router-dom";
 
 const PageNotFound = () => {
   return (
@@ -11,9 +12,9 @@ const PageNotFound = () => {
 
         <p>Возможно, она была перемещена, удалена или переименована.</p>
 
-        <a href="#" className="link_404">
+        <Link to="/" className="link_404">
           На главную
-        </a>
+        </Link>
       </div>
     </div>
   );

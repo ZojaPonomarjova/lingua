@@ -5,7 +5,9 @@ import { bodyCellData } from "../tableData/bodyCellData";
 import { BodyRowSelection } from "../tableBody";
 import WordCardContainer from "../wordCard/wordCardContainer";
 
+//компонент таблица
 const Table = () => {
+  //функция для показа карточки при нажатии на кнопку учить слова
   const [learnedRowIndex, setLearnedRowIndex] = useState(-1);
   const handleClickToLearn = id => {
     if (learnedRowIndex !== id) {
@@ -14,6 +16,8 @@ const Table = () => {
       setLearnedRowIndex(-1);
     }
   };
+
+  //функция для редактирования строки и отмены редактирования строки
   const [selectedRowIndex, setSelectedRowIndex] = useState(-1);
 
   const handleClick = id => {

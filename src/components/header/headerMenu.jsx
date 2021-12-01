@@ -1,13 +1,14 @@
 // import { menuItems } from "./menuItems";
+import { Link } from "react-router-dom";
 
-const HeaderMenu = props => {
+const MenuItem = props => {
   return (
     <li className="list__item">
-      <a className="list__link" href={props.href}>
+      <Link className="list__link" to={props.href}>
         {props.text}
-      </a>
+      </Link>
     </li>
   );
 };
 
-export default HeaderMenu;
+export default MenuItem;
