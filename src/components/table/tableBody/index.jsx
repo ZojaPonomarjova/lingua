@@ -7,7 +7,7 @@ import ButtonsRow from "../buttonsRow";
 const Bodycell = ({ text }) => {
   return (
     <td className="table__body-cell">
-      <p className="table__text">{text}</p>{" "}
+      <p className="table__text">{text}</p>
     </td>
   );
 };
@@ -51,6 +51,7 @@ const BodyRow = ({
         <ButtonsRow
           onClickEditWord={onClickEditWord}
           onClickLearn={props.onClickLearn}
+          clicked={props.clicked}
         />
       </td>
     </React.Fragment>
@@ -127,6 +128,7 @@ const BodyRowSelection = ({
           index={index}
           onClickEditWord={props.onClickEditWord}
           onClickLearn={props.onClickLearn}
+          clicked={props.clicked}
         />
       )}
     </tr>

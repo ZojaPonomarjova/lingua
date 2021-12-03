@@ -33,7 +33,7 @@ const LearnButton = props => {
 };
 
 //компонент кнопки с хлопушкой для выученного слова
-const KnownButton = props => {
+const KnownButton = () => {
   return (
     <React.Fragment>
       <Button
@@ -52,7 +52,7 @@ const ButtonsRow = ({ onClickLearn, ...props }) => {
   return (
     <div className="table__button-row">
       <EditButton onClickEditWord={props.onClickEditWord} />
-      <LearnButton onClickLearn={onClickLearn} />
+      <LearnButton onClickLearn={onClickLearn} clicked={props.clicked} />
       <KnownButton />
     </div>
   );

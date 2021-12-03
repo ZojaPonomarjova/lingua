@@ -1,5 +1,7 @@
 import "./footer.scss";
 
+//компонент для иконок социальных сетей в футере
+
 const FooterSocial = props => {
   return (
     <div className="footer__icon-container">

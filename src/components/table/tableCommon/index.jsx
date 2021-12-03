@@ -6,8 +6,8 @@ import { BodyRowSelection } from "../tableBody";
 import WordCardContainer from "../wordCard/wordCardContainer";
 
 //компонент таблица
-const Table = () => {
-  //функция для показа карточки при нажатии на кнопку учить слова
+const Table = props => {
+  // //функция для показа карточки при нажатии на кнопку учить слова
   const [learnedRowIndex, setLearnedRowIndex] = useState(-1);
   const handleClickToLearn = id => {
     if (learnedRowIndex !== id) {
@@ -44,28 +44,32 @@ const Table = () => {
                   onClickEditWord={() => handleClick(i)}
                   onClickCancel={() => handleClick(i)}
                   key={bodyRow.id}
-                  index={i}
+                  // id={bodyRow.id}
+                  index={i + 1}
                   english={bodyRow.english}
                   transcription={bodyRow.transcription}
                   russian={bodyRow.russian}
                   isChanged={i === selectedRowIndex}
+                  // onClickLearn={props.onClickLearn}
+                  id={props.id}
+                  learnedRowIndex={selectedRowIndex}
+                  clicked={props.clicked}
                   onClickLearn={() => handleClickToLearn(i)}
                   // tags={bodyRow.tags}
                 />
               ))}
             </tbody>
           </table>
+          {learnedRowIndex >= 0 ? (
+            <WordCardContainer
+              learnedRowIndex={learnedRowIndex}
+              onclickCardClose={() => {
+                setLearnedRowIndex(-1);
+              }}
+            />
+          ) : null}
         </div>
       </div>
-
-      {learnedRowIndex >= 0 ? (
-        <WordCardContainer
-          learnedRowIndex={learnedRowIndex}
-          onclickCardClose={() => {
-            setLearnedRowIndex(-1);
-          }}
-        />
-      ) : null}
     </React.Fragment>
   );
 };

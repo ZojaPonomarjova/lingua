@@ -1,6 +1,7 @@
 // import { menuItems } from "./menuItems";
 import { Link } from "react-router-dom";
 
+//компонент для ссылки
 const MenuItem = props => {
   return (
     <li className="list__item">
