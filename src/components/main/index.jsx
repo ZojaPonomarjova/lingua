@@ -4,10 +4,12 @@ import Table from "../table/tableCommon";
 import React from "react";
 import WordCardContainer from "../wordCard/wordCardContainer";
 import { useState } from "react";
-// import { bodyCellData } from "../table/tableData/bodyCellData";
+import { bodyCellData } from "../table/tableData/bodyCellData";
 // import Loader from "../loader";
 import { Switch, Route } from "react-router-dom";
 import PageNotFound from "../pageNotFound";
+import CollectionCard from "../collectionCard";
+import TextLoader from "../textLoader/textLoader";
 
 //массив с заголовками для страниц
 const titles = [
@@ -56,6 +58,30 @@ const MainPage = () => {
   return (
     <React.Fragment>
       <Title name={titles[0]} />
+      <CollectionCard
+        cardTitle="Рекомендуемые слова"
+        type="commonWords"
+        collectionCardPath=""
+        linkText="Посмотреть"
+        amount={<TextLoader />}
+      />
+      <Title name={titles[1]} />
+      <div className="main__collection-cards-container">
+        <CollectionCard
+          cardTitle="Слова для изучения"
+          type="myWords"
+          collectionCardPath="/my-words"
+          amount={bodyCellData.length || <TextLoader />}
+          linkText="Посмотреть"
+        />
+        <CollectionCard
+          cardTitle="Выученные слова"
+          type="knownWords"
+          collectionCardPath=""
+          linkText="Повторим?"
+          amount={<TextLoader />}
+        />
+      </div>
     </React.Fragment>
   );
 };

@@ -3,7 +3,7 @@ import "./tableCommon.scss";
 import HeaderRow from "../tableHeader";
 import { bodyCellData } from "../tableData/bodyCellData";
 import { BodyRowSelection } from "../tableBody";
-import WordCardContainer from "../wordCard/wordCardContainer";
+// import WordCardContainer from "../wordCard/wordCardContainer";
 
 //компонент таблица
 const Table = props => {
