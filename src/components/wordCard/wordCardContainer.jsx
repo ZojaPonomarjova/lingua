@@ -21,12 +21,12 @@ const Arrow = props => {
 //компонент родительский контейнер, в котором собирается карусель
 const WordCardContainer = props => {
   const [selectedCardIndex, setSelectedCardIndex] = useState(0);
-  const [clicked, setComponent] = useState(false);
+  const [clickedShowTranslation, setComponent] = useState(false);
   const [cardsEnded, setCardsEnded] = useState(false);
 
   //функция для показа перевода и чтобы спрятать его)
   const handleChange = () => {
-    setComponent(!clicked);
+    setComponent(!clickedShowTranslation);
   };
 
   //функция для перемотки вперед
@@ -34,8 +34,8 @@ const WordCardContainer = props => {
     const nextIndex = selectedCardIndex + 1;
     if (nextIndex < bodyCellData.length) {
       setSelectedCardIndex(nextIndex);
-      if (clicked) {
-        setComponent(!clicked);
+      if (clickedShowTranslation) {
+        setComponent(!clickedShowTranslation);
       }
     } else if (nextIndex >= bodyCellData.length) {
       setCardsEnded(true);
@@ -47,8 +47,8 @@ const WordCardContainer = props => {
     const nextIndex = selectedCardIndex - 1;
     if (nextIndex >= 0) {
       setSelectedCardIndex(nextIndex);
-      if (clicked === true) {
-        setComponent(!clicked);
+      if (clickedShowTranslation === true) {
+        setComponent(!clickedShowTranslation);
       }
       if (cardsEnded === true) {
         setCardsEnded(!cardsEnded);
@@ -70,7 +70,7 @@ const WordCardContainer = props => {
         />
         {cardsEnded ? (
           <div className="word-card">
-            <div className="cl-btn-2" onClick={props.onclickCardClose}>
+            <div className="cl-btn-2" onClick={props.handleClickToLearn}>
               <div>
                 <div className="leftright"></div>
                 <div className="rightleft"></div>
@@ -92,7 +92,7 @@ const WordCardContainer = props => {
             id={bodyCellData[selectedCardIndex].id}
             onClick={handleChange}
             onClickHideTranslation={handleChange}
-            clicked={clicked}
+            clicked={clickedShowTranslation}
             selectedCardIndex={props.learnedRowIndex}
             handleClickToLearn={props.handleClickToLearn}
             {...props}
