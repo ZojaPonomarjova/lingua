@@ -20,9 +20,7 @@ const Arrow = props => {
 
 //компонент родительский контейнер, в котором собирается карусель
 const WordCardContainer = props => {
-  const [selectedCardIndex, setSelectedCardIndex] = useState(
-    props.learnedRowIndex,
-  );
+  const [selectedCardIndex, setSelectedCardIndex] = useState(0);
   const [clicked, setComponent] = useState(false);
   const [cardsEnded, setCardsEnded] = useState(false);
 
@@ -88,9 +86,10 @@ const WordCardContainer = props => {
           </div>
         ) : (
           <WordCard
-            // english={bodyCellData[selectedCardIndex].english}
-            // russian={bodyCellData[selectedCardIndex].russian}
-            // transcription={bodyCellData[selectedCardIndex].transcription}
+            english={bodyCellData[selectedCardIndex].english}
+            russian={bodyCellData[selectedCardIndex].russian}
+            transcription={bodyCellData[selectedCardIndex].transcription}
+            id={bodyCellData[selectedCardIndex].id}
             onClick={handleChange}
             onClickHideTranslation={handleChange}
             clicked={clicked}
