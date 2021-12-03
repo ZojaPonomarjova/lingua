@@ -21,7 +21,7 @@ const HiddenText = ({ translation }) => {
 const WordCard = props => {
   return (
     <div className="word-card" key={props.id}>
-      <div className="cl-btn-2" onClick={props.onclickCardClose}>
+      <div className="cl-btn-2" onClick={props.handleClickToLearn}>
         <div>
           <div className="leftright"></div>
           <div className="rightleft"></div>

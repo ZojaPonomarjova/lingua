@@ -88,13 +88,14 @@ const WordCardContainer = props => {
           </div>
         ) : (
           <WordCard
-            english={bodyCellData[selectedCardIndex].english}
-            russian={bodyCellData[selectedCardIndex].russian}
-            transcription={bodyCellData[selectedCardIndex].transcription}
+            // english={bodyCellData[selectedCardIndex].english}
+            // russian={bodyCellData[selectedCardIndex].russian}
+            // transcription={bodyCellData[selectedCardIndex].transcription}
             onClick={handleChange}
             onClickHideTranslation={handleChange}
             clicked={clicked}
             selectedCardIndex={props.learnedRowIndex}
+            handleClickToLearn={props.handleClickToLearn}
             {...props}
           />
         )}

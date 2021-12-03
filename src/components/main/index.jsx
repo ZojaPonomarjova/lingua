@@ -2,8 +2,8 @@ import "./main.scss";
 import Title from "../titles";
 import Table from "../table/tableCommon";
 import React from "react";
-// import WordCardContainer from "../wordCard/wordCardContainer";
-// import { useState } from "react";
+import WordCardContainer from "../wordCard/wordCardContainer";
+import { useState } from "react";
 // import { bodyCellData } from "../table/tableData/bodyCellData";
 // import Loader from "../loader";
 import { Switch, Route } from "react-router-dom";
@@ -18,8 +18,6 @@ const titles = [
 
 //компонент для таблицы со словами пользователя
 const MyWords = props => {
-  // console.log("MyWords", props);
-
   //функция для показа карточки при нажатии на кнопку учить слова
   // const [learnedRowIndex, setLearnedRowIndex] = useState(-1);
   // const handleClickToLearn = id => {
@@ -30,22 +28,25 @@ const MyWords = props => {
   //   }
   // };
 
+  const [clicked, setClicked] = useState(false);
+  const handleClickToLearn = () => {
+    setClicked(!clicked);
+  };
+
   // console.log(isClicked);
   return (
     <React.Fragment>
       <Title name={titles[1]} />
-      <Table
-        {...props}
-        // onClickLearn={() => handleClickToLearn()}
-      />
-      {/* {learnedRowIndex >= 0 ? (
+      <Table {...props} onClickLearn={handleClickToLearn} />
+      {clicked === true ? (
         <WordCardContainer
-          learnedRowIndex={learnedRowIndex}
-          onclickCardClose={() => {
-            setLearnedRowIndex(-1);
-          }}
+          // learnedRowIndex={learnedRowIndex}
+          // onclickCardClose={() => {
+          //   setLearnedRowIndex(-1);
+          // }}
+          handleClickToLearn={handleClickToLearn}
         />
-      ) : null} */}
+      ) : null}
     </React.Fragment>
   );
 };
