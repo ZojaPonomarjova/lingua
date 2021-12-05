@@ -20,7 +20,7 @@ const Arrow = props => {
 
 //компонент родительский контейнер, в котором собирается карусель
 const WordCardContainer = props => {
-  const [selectedCardIndex, setSelectedCardIndex] = useState(0);
+  const [selectedCardIndex, setSelectedCardIndex] = useState(props.selected);
   const [clickedShowTranslation, setComponent] = useState(false);
   const [cardsEnded, setCardsEnded] = useState(false);
 
@@ -70,7 +70,10 @@ const WordCardContainer = props => {
         />
         {cardsEnded ? (
           <div className="word-card">
-            <div className="cl-btn-2" onClick={props.handleClickToLearn}>
+            <div
+              className="cl-btn-2"
+              onClick={() => props.handleClickToLearn(null)}
+            >
               <div>
                 <div className="leftright"></div>
                 <div className="rightleft"></div>

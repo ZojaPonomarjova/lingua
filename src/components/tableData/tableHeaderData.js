@@ -1,5 +1,5 @@
 export const tableHeaderData = [
-  { headerText: "#" },
+  // { headerText: "#" },
   { headerText: "English" },
   { headerText: "Transcription" },
   { headerText: "Russian" },

@@ -21,18 +21,10 @@ const titles = [
 //компонент для таблицы со словами пользователя
 const MyWords = props => {
   //функция для показа карточки при нажатии на кнопку учить слова
-  // const [learnedRowIndex, setLearnedRowIndex] = useState(-1);
-  // const handleClickToLearn = id => {
-  //   if (learnedRowIndex !== id) {
-  //     setLearnedRowIndex(id);
-  //   } else {
-  //     setLearnedRowIndex(-1);
-  //   }
-  // };
 
-  const [clicked, setClicked] = useState(false);
-  const handleClickToLearn = () => {
-    setClicked(!clicked);
+  const [clicked, setClicked] = useState(null);
+  const handleClickToLearn = i => {
+    setClicked(i);
   };
 
   // console.log(isClicked);
@@ -40,12 +32,9 @@ const MyWords = props => {
     <React.Fragment>
       <Title name={titles[1]} />
       <Table {...props} onClickLearn={handleClickToLearn} />
-      {clicked === true ? (
+      {clicked != null ? (
         <WordCardContainer
-          // learnedRowIndex={learnedRowIndex}
-          // onclickCardClose={() => {
-          //   setLearnedRowIndex(-1);
-          // }}
+          selected={clicked}
           handleClickToLearn={handleClickToLearn}
         />
       ) : null}

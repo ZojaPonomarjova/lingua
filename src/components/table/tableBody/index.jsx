@@ -42,7 +42,7 @@ const BodyRow = ({
 }) => {
   return (
     <React.Fragment>
-      <Bodycell text={index} />
+      {/* <Bodycell text={index} /> */}
       <Bodycell text={english} />
       <Bodycell text={transcription} />
       <Bodycell text={russian} />
@@ -52,6 +52,7 @@ const BodyRow = ({
           onClickEditWord={onClickEditWord}
           onClickLearn={props.onClickLearn}
           clicked={props.clicked}
+          learnButtonIndex={props.learnButtonIndex}
         />
       </td>
     </React.Fragment>
@@ -68,7 +69,7 @@ const BodyRowChange = ({
 }) => {
   return (
     <React.Fragment>
-      <Bodycell text={index} english={english} />
+      {/* <Bodycell text={index} english={english} /> */}
       <BodyCellChange
         defaultValue={english}
         english={english}
@@ -129,6 +130,7 @@ const BodyRowSelection = ({
           onClickEditWord={props.onClickEditWord}
           onClickLearn={props.onClickLearn}
           clicked={props.clicked}
+          learnButtonIndex={props.learnButtonIndex}
         />
       )}
     </tr>

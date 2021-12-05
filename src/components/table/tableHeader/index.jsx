@@ -10,12 +10,10 @@ const HeaderCell = ({ text }) => {
 const HeaderRow = () => {
   return (
     <tr className="table__header-row">
-      {tableHeaderData.map(headerCellData => (
-        <HeaderCell
-          key={headerCellData.headerText}
-          text={headerCellData.headerText}
-        />
-      ))}
+      <HeaderCell text="English" />
+      <HeaderCell text="Transcription" />
+      <HeaderCell text="Russian" />
+      <HeaderCell text="" />
     </tr>
   );
 };

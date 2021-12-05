@@ -21,7 +21,7 @@ const HiddenText = ({ translation }) => {
 const WordCard = props => {
   return (
     <div className="word-card" key={props.id} id={props.id}>
-      <div className="cl-btn-2" onClick={props.handleClickToLearn}>
+      <div className="cl-btn-2" onClick={() => props.handleClickToLearn(null)}>
         <div>
           <div className="leftright"></div>
           <div className="rightleft"></div>
@@ -38,7 +38,6 @@ const WordCard = props => {
               src="../assets/images/hidden.png"
               alt="eye"
               type="cancelButton"
-              // class="return-button"
               text="Скрыть перевод"
               onClick={props.onClickHideTranslation}
             />
