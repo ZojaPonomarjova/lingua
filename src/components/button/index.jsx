@@ -1,5 +1,6 @@
 import "./button.scss";
 import classnames from "classnames";
+import { useEffect, useRef, forwardRef } from "react";
 
 //компонент кнопка с рисунком внутри
 const Button = ({ alt, src, onClick, ...props }) => {
@@ -25,6 +26,23 @@ const Button = ({ alt, src, onClick, ...props }) => {
   );
 };
 
+//кнопка показать перевод
+const ShowTranslationButton = (props, ref) => {
+  // const ref = useRef();
+  // useEffect(() => ref.current.focus(), []);
+  // console.log(ref);
+  return (
+    <input
+      type="button"
+      value="Показать перевод"
+      className="word-card__show-button"
+      onClick={props.onClick}
+      ref={ref}
+    />
+  );
+};
+
+export default forwardRef(ShowTranslationButton);
 //компонент кнопка "сохранить"
 
 // const SaveButton = () => {
