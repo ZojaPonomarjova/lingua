@@ -1,22 +1,19 @@
-import { menuItems } from "../data/menuItems";
-import HeaderMenu from "./headerMenu";
+import MenuItem from "./headerMenu";
 import "./header.scss";
+import { Link } from "react-router-dom";
 
 const Header = () => {
+  // console.log(props);
   return (
     <header className="header">
-      <div className="header__logo">
+      <Link className="header__logo" to="/">
         <img src="../assets/images/books.png" alt="books" className="logo" />
-      </div>
+      </Link>
       <nav className="header__nav">
         <ul className="header__list">
-          {menuItems.map(menuItem => (
-            <HeaderMenu
-              text={menuItem.text}
-              href={menuItem.href}
-              key={menuItem.id}
-            ></HeaderMenu>
-          ))}
+          <MenuItem text="Главная" href="/"></MenuItem>
+          <MenuItem text="Мои слова" href="/my-words"></MenuItem>
+          <MenuItem text="Добавить слово" href="/add-word"></MenuItem>
         </ul>
       </nav>
     </header>

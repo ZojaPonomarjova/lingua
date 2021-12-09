@@ -3,17 +3,10 @@ import "./tableCommon.scss";
 import HeaderRow from "../tableHeader";
 import { bodyCellData } from "../tableData/bodyCellData";
 import { BodyRowSelection } from "../tableBody";
-import WordCardContainer from "../wordCard/wordCardContainer";
 
-const Table = () => {
-  const [learnedRowIndex, setLearnedRowIndex] = useState(-1);
-  const handleClickToLearn = id => {
-    if (learnedRowIndex !== id) {
-      setLearnedRowIndex(id);
-    } else {
-      setLearnedRowIndex(-1);
-    }
-  };
+//компонент таблица
+const Table = props => {
+  //функция для редактирования строки и отмены редактирования строки
   const [selectedRowIndex, setSelectedRowIndex] = useState(-1);
 
   const handleClick = id => {
@@ -40,12 +33,15 @@ const Table = () => {
                   onClickEditWord={() => handleClick(i)}
                   onClickCancel={() => handleClick(i)}
                   key={bodyRow.id}
-                  index={i}
+                  id={bodyRow.id}
+                  // index={i + 1}
                   english={bodyRow.english}
                   transcription={bodyRow.transcription}
                   russian={bodyRow.russian}
                   isChanged={i === selectedRowIndex}
-                  onClickLearn={() => handleClickToLearn(i)}
+                  onClickLearn={() => props.onClickLearn(i)}
+                  clicked={props.clicked}
+                  learnButtonIndex={i}
                   // tags={bodyRow.tags}
                 />
               ))}
@@ -53,15 +49,6 @@ const Table = () => {
           </table>
         </div>
       </div>
-
-      {learnedRowIndex >= 0 ? (
-        <WordCardContainer
-          learnedRowIndex={learnedRowIndex}
-          onclickCardClose={() => {
-            setLearnedRowIndex(-1);
-          }}
-        />
-      ) : null}
     </React.Fragment>
   );
 };

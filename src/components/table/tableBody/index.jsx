@@ -3,14 +3,16 @@ import "./tableBody.scss";
 import { Button, SaveButton } from "../button";
 import ButtonsRow from "../buttonsRow";
 
+//компонент для клетки в таблице
 const Bodycell = ({ text }) => {
   return (
     <td className="table__body-cell">
-      <p className="table__text">{text}</p>{" "}
+      <p className="table__text">{text}</p>
     </td>
   );
 };
 
+//компонент для клетки с инпутом внутри
 const BodyCellChange = ({ english, text, defaultValue }) => {
   const [value, setValue] = useState(defaultValue || "");
 
@@ -28,6 +30,7 @@ const BodyCellChange = ({ english, text, defaultValue }) => {
   );
 };
 
+//компонент ряд в таблице с текстом и кнопками учить/редактировать
 const BodyRow = ({
   english,
   transcription,
@@ -39,7 +42,7 @@ const BodyRow = ({
 }) => {
   return (
     <React.Fragment>
-      <Bodycell text={index} />
+      {/* <Bodycell text={index} /> */}
       <Bodycell text={english} />
       <Bodycell text={transcription} />
       <Bodycell text={russian} />
@@ -48,12 +51,15 @@ const BodyRow = ({
         <ButtonsRow
           onClickEditWord={onClickEditWord}
           onClickLearn={props.onClickLearn}
+          clicked={props.clicked}
+          learnButtonIndex={props.learnButtonIndex}
         />
       </td>
     </React.Fragment>
   );
 };
 
+//компонент ряд в таблице для редактирования слова с кнопками сохранить/отмена
 const BodyRowChange = ({
   english,
   transcription,
@@ -63,7 +69,7 @@ const BodyRowChange = ({
 }) => {
   return (
     <React.Fragment>
-      <Bodycell text={index} english={english} />
+      {/* <Bodycell text={index} english={english} /> */}
       <BodyCellChange
         defaultValue={english}
         english={english}
@@ -95,6 +101,7 @@ const BodyRowChange = ({
   );
 };
 
+//компонент выбора типа строки при изменения props.isChanged
 const BodyRowSelection = ({
   english,
   transcription,
@@ -122,6 +129,8 @@ const BodyRowSelection = ({
           index={index}
           onClickEditWord={props.onClickEditWord}
           onClickLearn={props.onClickLearn}
+          clicked={props.clicked}
+          learnButtonIndex={props.learnButtonIndex}
         />
       )}
     </tr>

@@ -27,15 +27,36 @@
 }
 
 @font-face {
-  font-family: "Roboto-Medium.ttf";
+  font-family: "Roboto-Medium";
   src: url("../fonts/Roboto/Roboto-Medium.ttf") format("truetype");
   font-weight: 500;
   font-style: normal;
 }
 
 @font-face {
-  font-family: "Roboto-Bold.ttf";
+  font-family: "Roboto-Bold";
   src: url("../fonts/Roboto/Roboto-Bold.ttf") format("truetype");
   font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Rubik-Bold";
+  src: url("../fonts/Rubik/Rubik-Bold.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Rubik-Black";
+  src: url("../fonts/Rubik/Rubik-Black.ttf") format("truetype");
+  // font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Rubik-Medium";
+  src: url("../fonts/Rubik/Rubik-Medium.ttf") format("truetype");
+  font-weight: 500;
   font-style: normal;
 }

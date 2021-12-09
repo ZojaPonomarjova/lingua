@@ -1,0 +1,79 @@
+@import "../assets/styles/fonts.scss";
+@import "../assets/styles/mixins.scss";
+@import "../assets/styles/vars.scss";
+
+.collection-card {
+  //   border: 1px solid black;
+  max-width: 100%;
+
+  border-radius: 3px;
+  padding: 20px 40px;
+  margin: 40px 0px;
+
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.collection-card__title {
+  @include titleMargin();
+
+  font-family: "OpenSans-Bold", sans-serif;
+  font-weight: 700;
+  font-size: 20px;
+  margin-bottom: 20px;
+}
+
+.collection-card__amount {
+  font-family: "OpenSans-Semibold", sans-serif;
+  font-weight: 600;
+  font-size: 18px;
+}
+
+.collection-card__link {
+  @include linkStyle();
+  align-self: flex-end;
+  position: relative;
+  padding: 8px 20px;
+  border-radius: 2px;
+
+  font-family: "OpenSans-Semibold", sans-serif;
+  font-weight: 600;
+  font-size: 18px;
+
+  color: $brown;
+  background-color: $beige;
+
+  box-shadow: 0px 0px 8px 0px rgba(34, 60, 80, 0.4);
+
+  &:hover {
+    // color: $beige-yellow;
+    top: 2px;
+    box-shadow: 0px -5px 5px -5px rgba(34, 60, 80, 0.6);
+  }
+
+  &:active {
+    color: $orange;
+  }
+}
+
+.common-words {
+  background-color: $orange1;
+  padding: 20px 60px;
+  color: $darkGreen;
+}
+
+.my-words {
+  background-color: #bad0ab;
+
+  color: $darkGreen;
+
+  width: 40%;
+}
+
+.known-words {
+  background-color: $beige-yellow;
+
+  color: $darkGreen;
+  width: 40%;
+}
