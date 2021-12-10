@@ -36,7 +36,7 @@ const ShowTranslationButton = (props, ref) => {
       type="button"
       value="Показать перевод"
       className="word-card__show-button"
-      onClick={props.onClick}
+      onClick={props.ShowTranslationButtonOnClick}
       ref={ref}
     />
   );

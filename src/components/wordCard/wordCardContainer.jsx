@@ -1,7 +1,7 @@
 import "./wordCard.scss";
 import WordCard from "./wordCard";
 import { bodyCellData } from "../tableData/bodyCellData";
-import { useState } from "react";
+import { useCallback, useState, useEffect } from "react";
 import classnames from "classnames";
 
 //компонент для стрелок в карусели
@@ -23,8 +23,10 @@ const WordCardContainer = props => {
   const [selectedCardIndex, setSelectedCardIndex] = useState(props.selected);
   const [clickedShowTranslation, setComponent] = useState(false);
   const [cardsEnded, setCardsEnded] = useState(false);
+  const [learnedWordsCount, setLearnedWordsCount] = useState(0);
 
   //функция для показа перевода и чтобы спрятать его)
+
   const handleChange = () => {
     setComponent(!clickedShowTranslation);
   };
@@ -54,6 +56,21 @@ const WordCardContainer = props => {
         setCardsEnded(!cardsEnded);
         setSelectedCardIndex(bodyCellData.length - 1);
       }
+    }
+  };
+
+  //функция для показа количества выученных слов
+  const [clicked, setClicked] = useState(false);
+  //чтобы при многократном нажатии на кнопку "показать перевод" счетчик не срабатывал, отслеживаем состояние clicked и меняем его на false, когда переключаем карточку
+  useEffect(() => {
+    setClicked(false);
+  }, [selectedCardIndex]);
+
+  const showLearnedWordsCount = () => {
+    if (!clickedShowTranslation && clicked === false) {
+      setLearnedWordsCount(learnedWordsCount + 1);
+      //меняем clicked на true, чтобы отключить счетчик
+      setClicked(true);
     }
   };
 
@@ -93,7 +110,10 @@ const WordCardContainer = props => {
             russian={bodyCellData[selectedCardIndex].russian}
             transcription={bodyCellData[selectedCardIndex].transcription}
             id={bodyCellData[selectedCardIndex].id}
-            onClick={handleChange}
+            ShowTranslationButtonOnClick={() => {
+              handleChange();
+              showLearnedWordsCount();
+            }}
             onClickHideTranslation={handleChange}
             clicked={clickedShowTranslation}
             selectedCardIndex={props.learnedRowIndex}
@@ -117,6 +137,14 @@ const WordCardContainer = props => {
         {/*параграф для показа номера текущей карточки и общего количества карточек*/}
         {selectedCardIndex + 1} / {bodyCellData.length}
       </p>
+      {/*параграф для показа количества выученных слов*/}
+
+      {learnedWordsCount > 0 && (
+        <p className="word-card__words-count word-card__pages">
+          Количество слов, выученных за тренировку: {learnedWordsCount}
+          {/* За эту тренировку вы выучили {learnedWordsCount} слов */}
+        </p>
+      )}
     </div>
   );
 };

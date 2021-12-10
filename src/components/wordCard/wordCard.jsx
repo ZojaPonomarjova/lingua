@@ -37,7 +37,7 @@ const WordCard = props => {
           </React.Fragment>
         ) : (
           <ShowTranslationButton
-            onClick={props.onClick}
+            ShowTranslationButtonOnClick={props.ShowTranslationButtonOnClick}
             // clicked={props.clicked}
             ref={ref}
           />
