@@ -1,7 +1,7 @@
 import "./wordCard.scss";
 import WordCard from "./wordCard";
 import { bodyCellData } from "../tableData/bodyCellData";
-import { useCallback, useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import classnames from "classnames";
 
 //компонент для стрелок в карусели
@@ -24,6 +24,7 @@ const WordCardContainer = props => {
   const [clickedShowTranslation, setComponent] = useState(false);
   const [cardsEnded, setCardsEnded] = useState(false);
   const [learnedWordsCount, setLearnedWordsCount] = useState(0);
+  const [clickedToCount, setClickedToCount] = useState(false);
 
   //функция для показа перевода и чтобы спрятать его)
 
@@ -47,6 +48,7 @@ const WordCardContainer = props => {
   //функция для перемотки назад
   const handleClickPrev = () => {
     const nextIndex = selectedCardIndex - 1;
+
     if (nextIndex >= 0) {
       setSelectedCardIndex(nextIndex);
       if (clickedShowTranslation === true) {
@@ -60,19 +62,32 @@ const WordCardContainer = props => {
   };
 
   //функция для показа количества выученных слов
-  const [clicked, setClicked] = useState(false);
+
   //чтобы при многократном нажатии на кнопку "показать перевод" счетчик не срабатывал, отслеживаем состояние clicked и меняем его на false, когда переключаем карточку
-  useEffect(() => {
-    setClicked(false);
+  // const id = bodyCellData[selectedCardIndex].id;
+  // const showLearnedWordsCount = useCallback(() => {
+  //   // console.log(clickedToCount);
+  //   // if (!clickedShowTranslation && clickedToCount === false) {
+  //   setLearnedWordsCount(learnedWordsCount + 1);
+
+  //   //меняем clicked на true, чтобы отключить счетчик
+  //   // }
+  // }, [id]);
+  // // const id = bodyCellData[selectedCardIndex].id;
+  // // useEffect(() => {
+
+  // //   setClicked(false);
+
+  // // }, [id]);
+
+  const showLearnedWordsCount = useCallback(() => {
+    setLearnedWordsCount(learnedWordsCount + 1);
+    setClickedToCount(true);
   }, [selectedCardIndex]);
 
-  const showLearnedWordsCount = () => {
-    if (!clickedShowTranslation && clicked === false) {
-      setLearnedWordsCount(learnedWordsCount + 1);
-      //меняем clicked на true, чтобы отключить счетчик
-      setClicked(true);
-    }
-  };
+  // useEffect(() => {
+  //   setClickedToCount(false);
+  // }, [selectedCardIndex]);
 
   return (
     <div className="word-card__shadow-container">
@@ -110,14 +125,13 @@ const WordCardContainer = props => {
             russian={bodyCellData[selectedCardIndex].russian}
             transcription={bodyCellData[selectedCardIndex].transcription}
             id={bodyCellData[selectedCardIndex].id}
-            ShowTranslationButtonOnClick={() => {
-              handleChange();
-              showLearnedWordsCount();
-            }}
+            showTranslationButtonOnClick={handleChange}
+            clickedToCount={clickedToCount}
             onClickHideTranslation={handleChange}
             clicked={clickedShowTranslation}
             selectedCardIndex={props.learnedRowIndex}
             handleClickToLearn={props.handleClickToLearn}
+            onClickKnownWordCount={showLearnedWordsCount}
             {...props}
           />
         )}

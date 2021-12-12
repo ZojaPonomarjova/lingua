@@ -17,9 +17,13 @@ const Button = ({ alt, src, onClick, ...props }) => {
 
   return (
     <div className="button__container">
-      <div className={`table__button ${className}`} onClick={onClick}>
+      <button
+        className={`table__button ${className}`}
+        onClick={onClick}
+        type="button"
+      >
         <img src={src} alt={alt} className="button__img" />
-      </div>
+      </button>
       <div className={`button__hidden-text ${classForText}`}>{props.text}</div>
     </div>
   );

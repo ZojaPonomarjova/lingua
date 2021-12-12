@@ -27,17 +27,27 @@ const WordCard = props => {
         {props.clicked ? ( //если нажата кнопка, то будет показан текст с кнопкой спрятать текст
           <React.Fragment>
             <HiddenText translation={props.russian} />
-            <Button
-              src="../assets/images/hidden.png"
-              alt="eye"
-              type="cancelButton"
-              text="Скрыть перевод"
-              onClick={props.onClickHideTranslation}
-            />
+            <div className="word-card__buttons-container">
+              <Button
+                src="../assets/images/hidden.png"
+                alt="eye"
+                type="cancelButton"
+                text="Скрыть перевод"
+                onClick={props.onClickHideTranslation}
+              />
+              <Button
+                src="../assets/images/confetti.png"
+                alt="confetti"
+                // type="cancelButton"
+                text="Знаю слово"
+                onClick={props.onClickKnownWordCount}
+                disabled={props.clickedToCount}
+              />
+            </div>
           </React.Fragment>
         ) : (
           <ShowTranslationButton
-            ShowTranslationButtonOnClick={props.ShowTranslationButtonOnClick}
+            showTranslationButtonOnClick={props.showTranslationButtonOnClick}
             // clicked={props.clicked}
             ref={ref}
           />

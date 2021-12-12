@@ -37,10 +37,13 @@
   align-items: center;
 
   transition: 0.25s;
-  width: 30px;
+  // width: 30px;
+  width: 50px;
+  height: 40px;
 
   padding: 5px 10px;
   border-radius: 2px;
+  border: none;
 
   cursor: pointer;
 
@@ -59,7 +62,7 @@
 }
 
 .button__img {
-  max-width: 100%;
+  max-width: 90%;
 }
 
 .button__container {
@@ -77,4 +80,9 @@
 .button__container:hover .button__hidden-text {
   display: block;
   z-index: 2;
+}
+
+.disabled {
+  background-color: gray;
+  cursor: no-drop;
 }
