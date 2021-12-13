@@ -38,10 +38,12 @@ const WordCard = props => {
               <Button
                 src="../assets/images/confetti.png"
                 alt="confetti"
-                // type="cancelButton"
+                type="cancelButton"
                 text="Знаю слово"
                 onClick={props.onClickKnownWordCount}
-                disabled={props.clickedToCount}
+                disabled={props.islearned}
+
+                // ref={ref}
               />
             </div>
           </React.Fragment>

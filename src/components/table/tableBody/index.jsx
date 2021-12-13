@@ -1,7 +1,11 @@
 import React, { useState } from "react";
 import "./tableBody.scss";
 import { Button, SaveButton } from "../button";
-import ButtonsRow from "../buttonsRow";
+import {
+  ButtonsRow,
+  ButtonsRowRecommendedWords,
+  ButtonsRowKnownWords,
+} from "../buttonsRow";
 
 //компонент для клетки в таблице
 const Bodycell = ({ text }) => {
@@ -56,6 +60,37 @@ const BodyRow = ({
         />
       </td>
     </React.Fragment>
+  );
+};
+
+//компонент ряд в таблице с текстом и кнопками учить/редактировать для рекомендованные слова
+const BodyRowRecommendedWords = ({
+  english,
+  transcription,
+  russian,
+
+  index,
+  onClickEditWord,
+  ...props
+}) => {
+  return (
+    <tr className="table__body-row">
+      {/* <Bodycell text={index} /> */}
+      <Bodycell text={english} />
+      <Bodycell text={transcription} />
+      <Bodycell text={russian} />
+      {/* <Bodycell text={tags} /> */}
+      <td className="table__body-cell  table__body-cell_buttons">
+        <ButtonsRowRecommendedWords
+          // onClickEditWord={onClickEditWord}
+          onClickLearn={props.onClickLearn}
+          clicked={props.clicked}
+          learnButtonIndex={props.learnButtonIndex}
+          addWordToMyWords={props.addWordToMyWords}
+          clickedToAdd={props.clickedToAdd}
+        />
+      </td>
+    </tr>
   );
 };
 
@@ -137,4 +172,4 @@ const BodyRowSelection = ({
   );
 };
 
-export { BodyRowSelection };
+export { BodyRowSelection, BodyRowRecommendedWords };

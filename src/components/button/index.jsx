@@ -10,12 +10,12 @@ const Button = ({ alt, src, onClick, ...props }) => {
     disabled: props.disabled,
     "": props.type === undefined,
   });
-  const classForText = classnames("", {
-    button_edit: props.type === "buttonEdit",
-    button_learn: props.type === "buttonLearn",
-    button_known: props.type === "buttonKnown",
-    "": props.type === undefined,
-  });
+  // const classForText = classnames("", {
+  //   button_edit: props.type === "buttonEdit",
+  //   button_learn: props.type === "buttonLearn",
+  //   button_known: props.type === "buttonKnown",
+  //   // "": props.type === undefined,
+  // });
 
   return (
     <div className="button__container">
@@ -23,12 +23,12 @@ const Button = ({ alt, src, onClick, ...props }) => {
         className={`table__button ${className}`}
         onClick={onClick}
         disabled={props.disabled}
-        tabIndex={0}
         type="button"
+        // ref={ref}
       >
         <img src={src} alt={alt} className="button__img" />
       </button>
-      <div className={`button__hidden-text ${classForText}`}>{props.text}</div>
+      <div className={`button__hidden-text `}>{props.text}</div>
     </div>
   );
 };

@@ -3,20 +3,17 @@ import Title from "../titles";
 import Table from "../table/tableCommon";
 import React from "react";
 import WordCardContainer from "../wordCard/wordCardContainer";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { bodyCellData } from "../table/tableData/bodyCellData";
 // import Loader from "../loader";
 import { Switch, Route } from "react-router-dom";
 import PageNotFound from "../pageNotFound";
 import CollectionCard from "../collectionCard";
 import TextLoader from "../textLoader/textLoader";
+import TableRecommendedWords from "../table/tableRecommendedWords/tableRecommendedWords";
 
 //массив с заголовками для страниц
-const titles = [
-  "Рекомендуемые слова и наборы",
-  "Мой словарь",
-  "Добавьте свое слово",
-];
+const titles = ["Рекомендуемые слова", "Мой словарь", "Добавьте свое слово"];
 
 //компонент для таблицы со словами пользователя
 const MyWords = props => {
@@ -50,9 +47,9 @@ const MainPage = () => {
       <CollectionCard
         cardTitle="Рекомендуемые слова"
         type="commonWords"
-        collectionCardPath=""
+        collectionCardPath="/recommended-words"
         linkText="Посмотреть"
-        amount={<TextLoader />}
+        amount={bodyCellData.length || <TextLoader />}
       />
       <Title name={titles[1]} />
       <div className="main__collection-cards-container">
@@ -75,6 +72,33 @@ const MainPage = () => {
   );
 };
 
+//компонент для страницы с рекомендованными словами
+const RecommendedWords = () => {
+  //функция для показа карточки при нажатии на кнопку учить слова
+  useEffect(() => {
+    if (localStorage.getItem("myWords") === null) {
+      localStorage.setItem("myWords", "[]");
+    }
+  }, []);
+
+  const [clicked, setClicked] = useState(null);
+  const handleClickToLearn = i => {
+    setClicked(i);
+  };
+  return (
+    <React.Fragment>
+      <Title name={titles[0]} />
+      <TableRecommendedWords onClickLearn={handleClickToLearn} />
+      {clicked != null ? (
+        <WordCardContainer
+          selected={clicked}
+          handleClickToLearn={handleClickToLearn}
+        />
+      ) : null}
+    </React.Fragment>
+  );
+};
+
 //делаем Switch, чтобы в main рендерились разные компоненты
 const Main = () => {
   return (
@@ -84,6 +108,8 @@ const Main = () => {
         <Route exact path="/add-word">
           <Title name={titles[2]} />
         </Route>
+        <Route exact path="/recommended-words" component={RecommendedWords} />
+
         <Route exact path="/" component={MainPage} />
         <Route component={PageNotFound} />
       </Switch>
