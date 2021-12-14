@@ -6,6 +6,7 @@ const Button = ({ alt, src, onClick, ...props }) => {
   //пропсы для передачи класса внутрь кнопки
   const className = classnames("", {
     button__cancel: props.type === "cancelButton",
+    disabled: props.disabled,
     null: props.type === undefined,
   });
   const classForText = classnames("", {
@@ -17,9 +18,14 @@ const Button = ({ alt, src, onClick, ...props }) => {
 
   return (
     <div className="button__container">
-      <div className={`table__button ${className}`} onClick={onClick}>
+      <button
+        className={`table__button ${className}`}
+        onClick={onClick}
+        type="button"
+        disabled={props.disabled}
+      >
         <img src={src} alt={alt} className="button__img" />
-      </div>
+      </button>
       <div className={`button__hidden-text ${classForText}`}>{props.text}</div>
     </div>
   );

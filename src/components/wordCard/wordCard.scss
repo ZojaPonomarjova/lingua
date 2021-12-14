@@ -120,6 +120,7 @@
   padding: 0.8em 2em;
   outline: none;
   border-radius: 1px;
+  border: none;
   background: linear-gradient(
       to left,
       rgba(0, 0, 0, 0.05),
@@ -145,6 +146,11 @@
     top: 3px;
     box-shadow: inset #ebab00 0 -1px 1px, inset 0 1px 1px #ffbf00,
       #cc7722 0 0 0 1px, #000 0 5px 10px -10px;
+  }
+
+  &:focus {
+    // border: 1px dotted #cc7722;
+    outline: 3px solid #cc7722;
   }
 }
 
@@ -246,4 +252,20 @@
     opacity: 0.5;
     box-shadow: 0px 0px 5px 0px rgba(34, 60, 80, 0.4) inset;
   }
+}
+
+.word-card__buttons-container {
+  display: flex;
+
+  width: 200px;
+  justify-content: space-around;
+
+  position: relative;
+}
+
+.button__hidden-text {
+  position: absolute;
+  top: 40px;
+
+  width: 120px;
 }

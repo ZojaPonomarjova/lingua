@@ -37,7 +37,7 @@ const KnownButton = () => {
   return (
     <React.Fragment>
       <Button
-        alt="sticky-notes"
+        alt="confetti"
         src="../assets/images/confetti.png"
         type="buttonKnown"
         text={"Знаю слово!"}
@@ -47,7 +47,23 @@ const KnownButton = () => {
   );
 };
 
-//Компонент для ряда из трех кнопок в таблице
+//компонент кнопки добавления слов в "мои слова"
+const AddButton = props => {
+  return (
+    <React.Fragment>
+      <Button
+        alt="icon-add"
+        src="../assets/images/icon-add.png"
+        type="buttonKnown"
+        text={"Добавить в 'Мои слова'"}
+        onClick={props.addWordToMyWords}
+        disabled={props.disabled}
+      />
+    </React.Fragment>
+  );
+};
+
+//Компонент для ряда из трех кнопок в таблице "мои слова"
 const ButtonsRow = ({ onClickLearn, ...props }) => {
   return (
     <div className="table__button-row">
@@ -58,4 +74,30 @@ const ButtonsRow = ({ onClickLearn, ...props }) => {
   );
 };
 
-export default ButtonsRow;
+//компонент для ряда кнопок в таблице рекомендуемые слова
+
+const ButtonsRowRecommendedWords = ({ onClickLearn, ...props }) => {
+  return (
+    <div className="table__button-row">
+      <AddButton
+        addWordToMyWords={props.addWordToMyWords}
+        disabled={props.clickedToAdd}
+      />
+      <LearnButton onClickLearn={onClickLearn} clicked={props.clicked} />
+      {/* <KnownButton /> */}
+    </div>
+  );
+};
+
+//компонент для ряда кнопок в таблице выученные слова
+
+const ButtonsRowKnownWords = ({ onClickLearn, ...props }) => {
+  return (
+    <div className="table__button-row">
+      <EditButton onClickEditWord={props.onClickEditWord} />
+      <LearnButton onClickLearn={onClickLearn} clicked={props.clicked} />
+    </div>
+  );
+};
+
+export { ButtonsRow, ButtonsRowRecommendedWords, ButtonsRowKnownWords };

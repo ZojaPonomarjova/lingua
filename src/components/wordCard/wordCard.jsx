@@ -1,16 +1,6 @@
 import "./wordCard.scss";
-import React from "react";
-
-import { Button } from "../button";
-
-//кнопка показать перевод
-const ShowTranslationButton = props => {
-  return (
-    <div className="word-card__show-button" onClick={props.onClick}>
-      Показать перевод
-    </div>
-  );
-};
+import React, { useEffect, useRef } from "react";
+import ShowTranslationButton, { Button } from "../button";
 
 //перевод, "спрятанный под кнопкой"
 const HiddenText = ({ translation }) => {
@@ -19,6 +9,9 @@ const HiddenText = ({ translation }) => {
 
 //карточка компонент
 const WordCard = props => {
+  const ref = useRef();
+  useEffect(() => ref.current.focus(), []);
+
   return (
     <div className="word-card" key={props.id} id={props.id}>
       <div className="cl-btn-2" onClick={() => props.handleClickToLearn(null)}>
@@ -34,18 +27,31 @@ const WordCard = props => {
         {props.clicked ? ( //если нажата кнопка, то будет показан текст с кнопкой спрятать текст
           <React.Fragment>
             <HiddenText translation={props.russian} />
-            <Button
-              src="../assets/images/hidden.png"
-              alt="eye"
-              type="cancelButton"
-              text="Скрыть перевод"
-              onClick={props.onClickHideTranslation}
-            />
+            <div className="word-card__buttons-container">
+              <Button
+                src="../assets/images/hidden.png"
+                alt="eye"
+                type="cancelButton"
+                text="Скрыть перевод"
+                onClick={props.onClickHideTranslation}
+              />
+              <Button
+                src="../assets/images/confetti.png"
+                alt="confetti"
+                type="cancelButton"
+                text="Знаю слово"
+                onClick={props.onClickKnownWordCount}
+                disabled={props.islearned}
+
+                // ref={ref}
+              />
+            </div>
           </React.Fragment>
         ) : (
           <ShowTranslationButton
-            onClick={props.onClick}
+            showTranslationButtonOnClick={props.showTranslationButtonOnClick}
             // clicked={props.clicked}
+            ref={ref}
           />
         )}
       </div>

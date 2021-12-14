@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./tableCommon.scss";
 import HeaderRow from "../tableHeader";
-import { bodyCellData } from "../tableData/bodyCellData";
+// import { bodyCellData } from "../tableData/bodyCellData";
 import { BodyRowSelection } from "../tableBody";
 
 //компонент таблица
@@ -17,6 +17,8 @@ const Table = props => {
     }
   };
 
+  const myWordsArr = JSON.parse(localStorage.getItem("myWords"));
+
   return (
     <React.Fragment>
       <div className="scroll-table">
@@ -28,23 +30,27 @@ const Table = props => {
         <div className="scroll-table-body">
           <table className="table">
             <tbody>
-              {bodyCellData.map((bodyRow, i) => (
-                <BodyRowSelection
-                  onClickEditWord={() => handleClick(i)}
-                  onClickCancel={() => handleClick(i)}
-                  key={bodyRow.id}
-                  id={bodyRow.id}
-                  // index={i + 1}
-                  english={bodyRow.english}
-                  transcription={bodyRow.transcription}
-                  russian={bodyRow.russian}
-                  isChanged={i === selectedRowIndex}
-                  onClickLearn={() => props.onClickLearn(i)}
-                  clicked={props.clicked}
-                  learnButtonIndex={i}
-                  // tags={bodyRow.tags}
-                />
-              ))}
+              {myWordsArr.length === 0 ? (
+                <p>Вы не добавили ни одного слова</p>
+              ) : (
+                myWordsArr.map((bodyRow, i) => (
+                  <BodyRowSelection
+                    onClickEditWord={() => handleClick(i)}
+                    onClickCancel={() => handleClick(i)}
+                    key={bodyRow.id}
+                    id={bodyRow.id}
+                    // index={i + 1}
+                    english={bodyRow.english}
+                    transcription={bodyRow.transcription}
+                    russian={bodyRow.russian}
+                    isChanged={i === selectedRowIndex}
+                    onClickLearn={() => props.onClickLearn(i)}
+                    clicked={props.clicked}
+                    learnButtonIndex={i}
+                    // tags={bodyRow.tags}
+                  />
+                ))
+              )}
             </tbody>
           </table>
         </div>
