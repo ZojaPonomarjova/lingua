@@ -41,6 +41,7 @@ const MyWords = props => {
 
 //компонент для главной страницы
 const MainPage = () => {
+  const myWordsArr = JSON.parse(localStorage.getItem("myWords"));
   return (
     <React.Fragment>
       <Title name={titles[0]} />
@@ -57,7 +58,7 @@ const MainPage = () => {
           cardTitle="Слова для изучения"
           type="myWords"
           collectionCardPath="/my-words"
-          amount={bodyCellData.length || <TextLoader />}
+          amount={myWordsArr.length || <TextLoader />}
           linkText="Посмотреть"
         />
         <CollectionCard

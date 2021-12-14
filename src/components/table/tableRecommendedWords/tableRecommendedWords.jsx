@@ -6,10 +6,15 @@ import { BodyRowRecommendedWords } from "../tableBody";
 
 //компонент таблица
 const TableRecommendedWords = props => {
+  //массив для сохранения слов в localStorage
   const [myWordsArray, setMyWordsArray] = useState(
     JSON.parse(localStorage.getItem("myWords")) || [],
   );
-  const [clickedToAdd, setClickedToAdd] = useState(false);
+  //отдельный массив с ид, чтобы по ним дизэйблить кнопку добавления. Иначе не смогла
+  const [idArr, setIdArr] = useState(
+    JSON.parse(localStorage.getItem("myWordsId")) || [],
+  );
+
   //функция для редактирования строки и отмены редактирования строки
   //   const [selectedRowIndex, setSelectedRowIndex] = useState(-1);
 
@@ -24,24 +29,28 @@ const TableRecommendedWords = props => {
   //добавляем слова в массив
   const addWordToMyWords = word => {
     //если слова не было в массиве, добавляем его в массив
-    if (myWordsArray.length > 0) {
-      setMyWordsArray([...myWordsArray, word]);
-    } else {
-      const emptyArray = [];
-      emptyArray.push(word);
-      setMyWordsArray(emptyArray);
+    if (!JSON.parse(localStorage.getItem("myWords")).includes(word)) {
+      //если длина массива больше ноля, то myWordsArray является итерируемым и мы можем так сделать
+      if (myWordsArray.length > 0) {
+        setMyWordsArray([...myWordsArray, word]);
+        setIdArr([...idArr, word.id]);
+      } else {
+        //Если нет, то сделала добавление нового слова через копию массива
+        const emptyArray = [];
+        emptyArray.push(word);
+        setMyWordsArray(emptyArray);
+        const emptyArray1 = [];
+        emptyArray1.push(word.id);
+        setIdArr(emptyArray1);
+      }
     }
-    if (!myWordsArray.includes(word)) {
-      setClickedToAdd(true);
-    }
-    console.log(myWordsArray);
   };
 
   // //обновляем массив в хранилище
   useEffect(() => {
     localStorage.setItem("myWords", JSON.stringify(myWordsArray));
-  }, [myWordsArray]);
-  console.log(localStorage.getItem("myWords"));
+    localStorage.setItem("myWordsId", JSON.stringify(idArr));
+  }, [myWordsArray, idArr]);
 
   return (
     <React.Fragment>
@@ -70,8 +79,13 @@ const TableRecommendedWords = props => {
                   learnButtonIndex={i}
                   // tags={bodyRow.tags}
                   addWordToMyWords={() => addWordToMyWords(bodyRow)}
-                  // clickedToAdd={clickedToAdd}
-                  clickedToAdd={myWordsArray.includes(bodyRow)}
+                  clickedToAdd={
+                    JSON.parse(localStorage.getItem("myWordsId"))
+                      ? JSON.parse(localStorage.getItem("myWordsId")).includes(
+                          bodyRow.id,
+                        )
+                      : false
+                  }
                 />
               ))}
             </tbody>
