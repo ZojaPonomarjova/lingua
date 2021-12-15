@@ -46,12 +46,13 @@ const TableRecommendedWords = props => {
     }
   };
 
-  // //обновляем массив в хранилище
+  // //обновляем массивы в хранилище
   useEffect(() => {
     localStorage.setItem("myWords", JSON.stringify(myWordsArray));
     localStorage.setItem("myWordsId", JSON.stringify(idArr));
   }, [myWordsArray, idArr]);
 
+  const myWordsIdArr = JSON.parse(localStorage.getItem("myWordsId"));
   return (
     <React.Fragment>
       <div className="scroll-table">
@@ -80,10 +81,9 @@ const TableRecommendedWords = props => {
                   // tags={bodyRow.tags}
                   addWordToMyWords={() => addWordToMyWords(bodyRow)}
                   clickedToAdd={
-                    JSON.parse(localStorage.getItem("myWordsId"))
-                      ? JSON.parse(localStorage.getItem("myWordsId")).includes(
-                          bodyRow.id,
-                        )
+                    myWordsIdArr
+                      ? myWordsIdArr.includes(bodyRow.id) ||
+                        idArr.includes(bodyRow.id)
                       : false
                   }
                 />

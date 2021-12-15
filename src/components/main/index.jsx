@@ -33,6 +33,7 @@ const MyWords = props => {
         <WordCardContainer
           selected={clicked}
           handleClickToLearn={handleClickToLearn}
+          arrayToShow={JSON.parse(localStorage.getItem("myWords")) || []}
         />
       ) : null}
     </React.Fragment>
@@ -94,6 +95,7 @@ const RecommendedWords = () => {
         <WordCardContainer
           selected={clicked}
           handleClickToLearn={handleClickToLearn}
+          arrayToShow={bodyCellData}
         />
       ) : null}
     </React.Fragment>
