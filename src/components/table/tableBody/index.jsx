@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useRef, forwardRef } from "react";
 import "./tableBody.scss";
 import { Button, SaveButton } from "../button";
+import classnames from "classnames";
 import {
   ButtonsRow,
   ButtonsRowRecommendedWords,
@@ -16,23 +17,49 @@ const Bodycell = ({ text }) => {
   );
 };
 
-//компонент для клетки с инпутом внутри
-const BodyCellChange = ({ english, text, defaultValue }) => {
-  const [value, setValue] = useState(defaultValue || "");
-
+//компонент для клетки с инпутом внутри без форвардРеф на всякий случай)
+// const BodyCellChange = ({ name, text, defaultValue, ...props }) => {
+//   // const [value, setValue] = useState(defaultValue || "");
+//   const className = classnames("table__input", {
+//     "input-error": props.inputError && name === props.inputWithErrorName,
+//     // "": props.type === undefined,
+//   });
+//   return (
+//     <td className="table__body-cell">
+//       <input
+//         type="text"
+//         name={name}
+//         id={text}
+//         className={className}
+//         onChange={props.onChangeWords}
+//         defaultValue={defaultValue}
+//       />
+//     </td>
+//   );
+// };
+const BodyCellChange = forwardRef(function BodyCellChange(
+  { name, text, defaultValue, ...props },
+  ref,
+) {
+  const className = classnames("", {
+    // "input-error": props.inputError,
+    // "": props.inputError === false,
+  });
   return (
     <td className="table__body-cell">
       <input
         type="text"
-        name={english}
+        name={name}
         id={text}
-        className="table__input"
-        defaultValue={value}
-        onChange={event => setValue(event.target.value)}
+        className={`table__input ${className}`}
+        onChange={props.onChangeWords}
+        defaultValue={defaultValue}
+        ref={ref}
       />
+      <p className="body-cell__error">{props.errorText}</p>
     </td>
   );
-};
+});
 
 //компонент ряд в таблице с текстом и кнопками учить/редактировать
 const BodyRow = ({
@@ -69,8 +96,6 @@ const BodyRowRecommendedWords = ({
   transcription,
   russian,
 
-  index,
-  onClickEditWord,
   ...props
 }) => {
   return (
@@ -107,23 +132,39 @@ const BodyRowChange = ({
       {/* <Bodycell text={index} english={english} /> */}
       <BodyCellChange
         defaultValue={english}
-        english={english}
-        value={english}
+        name="english"
+        value={props.value}
+        onChangeWords={props.onChangeWords}
+        ref={props.englishRef}
+        errorText={props.englishErrorText}
       />
       <BodyCellChange
         defaultValue={transcription}
-        english={english}
-        value={transcription}
+        name="transcription"
+        value={props.value}
+        onChangeWords={props.onChangeWords}
+        ref={props.transcriptionRef}
+        errorText={props.transcriptionErrorText}
       />
       <BodyCellChange
         defaultValue={russian}
-        english={english}
-        value={russian}
+        name="translation"
+        value={props.value}
+        onChangeWords={props.onChangeWords}
+        ref={props.translationRef}
+        errorText={props.translationErrorText}
       />
       {/* <Bodycell text={tags} /> */}
       <td className="table__body-cell table__body-cell_buttons">
         <div className="table__button-row">
-          <SaveButton />
+          <SaveButton
+            saveOnClick={props.handleClickToSave}
+            disabled={
+              props.translationErrorText !== "" ||
+              props.transcriptionErrorText !== "" ||
+              props.englishErrorText !== ""
+            }
+          />
           <Button
             alt="Arrow"
             src="../assets/images/arrow.png"
@@ -155,6 +196,16 @@ const BodyRowSelection = ({
           russian={russian}
           index={index}
           onClickCancel={props.onClickCancel}
+          saveOnClick={props.saveOnClick}
+          handleClickToSave={props.handleClickToSave}
+          value={props.value}
+          onChangeWords={props.onChangeWords}
+          translationRef={props.translationRef}
+          translationErrorText={props.translationErrorText}
+          transcriptionRef={props.transcriptionRef}
+          transcriptionErrorText={props.transcriptionErrorText}
+          englishRef={props.englishRef}
+          englishErrorText={props.englishErrorText}
         />
       ) : (
         <BodyRow

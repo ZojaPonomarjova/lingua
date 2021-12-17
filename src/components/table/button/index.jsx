@@ -33,8 +33,20 @@ const Button = ({ alt, src, onClick, ...props }) => {
 
 //компонент кнопка "сохранить"
 
-const SaveButton = () => {
-  return <div className="table__save-button">Сохранить</div>;
+const SaveButton = props => {
+  const className = classnames("table__save-button", {
+    disabled: props.disabled,
+    // "": props.type === undefined,
+  });
+  return (
+    <input
+      type="button"
+      className={className}
+      onClick={props.saveOnClick}
+      disabled={props.disabled}
+      value="Сохранить"
+    />
+  );
 };
 
 export { SaveButton, Button };
