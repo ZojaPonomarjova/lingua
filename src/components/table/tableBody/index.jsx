@@ -53,7 +53,8 @@ const BodyCellChange = forwardRef(function BodyCellChange(
         id={text}
         className={`table__input ${className}`}
         onChange={props.onChangeWords}
-        defaultValue={defaultValue}
+        // defaultValue={defaultValue}
+        value={props.value}
         ref={ref}
       />
       <p className="body-cell__error">{props.errorText}</p>
@@ -131,25 +132,25 @@ const BodyRowChange = ({
     <React.Fragment>
       {/* <Bodycell text={index} english={english} /> */}
       <BodyCellChange
-        defaultValue={english}
+        // defaultValue={english}
         name="english"
-        value={props.value}
+        value={props.englishValue}
         onChangeWords={props.onChangeWords}
         ref={props.englishRef}
         errorText={props.englishErrorText}
       />
       <BodyCellChange
-        defaultValue={transcription}
+        // defaultValue={transcription}
         name="transcription"
-        value={props.value}
+        value={props.transcriptionValue}
         onChangeWords={props.onChangeWords}
         ref={props.transcriptionRef}
         errorText={props.transcriptionErrorText}
       />
       <BodyCellChange
-        defaultValue={russian}
+        // defaultValue={russian}
         name="translation"
-        value={props.value}
+        value={props.translationValue}
         onChangeWords={props.onChangeWords}
         ref={props.translationRef}
         errorText={props.translationErrorText}
@@ -206,6 +207,9 @@ const BodyRowSelection = ({
           transcriptionErrorText={props.transcriptionErrorText}
           englishRef={props.englishRef}
           englishErrorText={props.englishErrorText}
+          englishValue={props.englishValue}
+          transcriptionValue={props.transcriptionValue}
+          translationValue={props.translationValue}
         />
       ) : (
         <BodyRow

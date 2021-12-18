@@ -156,6 +156,9 @@ const Table = props => {
                     transcriptionErrorText={transcriptionErrorText}
                     englishRef={englishRef}
                     englishErrorText={englishErrorText}
+                    englishValue={value.english}
+                    transcriptionValue={value.transcription}
+                    translationValue={value.translation}
                   />
                 ))
               )}
