@@ -5,7 +5,7 @@ import { bodyCellData } from "../tableData/bodyCellData";
 import { BodyRowRecommendedWords } from "../tableBody";
 
 //компонент таблица
-const TableRecommendedWords = props => {
+const TableKnownWords = props => {
   //массив для сохранения слов в localStorage
   const [myWordsArray, setMyWordsArray] = useState(
     JSON.parse(localStorage.getItem("myWords")) || [],
@@ -14,17 +14,6 @@ const TableRecommendedWords = props => {
   const [idArr, setIdArr] = useState(
     JSON.parse(localStorage.getItem("myWordsId")) || [],
   );
-
-  //функция для редактирования строки и отмены редактирования строки
-  //   const [selectedRowIndex, setSelectedRowIndex] = useState(-1);
-
-  //   const handleClick = id => {
-  //     if (selectedRowIndex !== id) {
-  //       setSelectedRowIndex(id);
-  //     } else {
-  //       setSelectedRowIndex(-1);
-  //     }
-  //   };
 
   //добавляем слова в массив
   const addWordToMyWords = word => {
@@ -96,4 +85,4 @@ const TableRecommendedWords = props => {
   );
 };
 
-export default TableRecommendedWords;
+export default TableKnownWords;

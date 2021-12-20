@@ -3,7 +3,7 @@ import Title from "../titles";
 import Table from "../table/tableCommon";
 import React from "react";
 import WordCardContainer from "../wordCard/wordCardContainer";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import { bodyCellData } from "../table/tableData/bodyCellData";
 // import Loader from "../loader";
 import { Switch, Route } from "react-router-dom";
@@ -42,24 +42,11 @@ const MyWords = props => {
         onClickLearn={handleClickToLearn}
         handleChangeWord={handleChangeWord}
         selectedRowIndex={selectedRowIndex}
-        // handleClickToSave={handleClickToSave}
-        // value={value}
-        // onChangeWords={onChangeWords}
-        // translationRef={translationRef}
-        // translationErrorText={translationErrorText}
-        // transcriptionRef={transcriptionRef}
-        // transcriptionErrorText={transcriptionErrorText}
-        // englishRef={englishRef}
-        // englishErrorText={englishErrorText}
-
-        // defaultValue={value}
       />
       {clicked != null ? (
         <WordCardContainer
           selected={clicked}
           handleClickToLearn={handleClickToLearn}
-          // saveOnClick={saveOnClick}
-
           arrayToShow={JSON.parse(localStorage.getItem("myWords")) || []}
         />
       ) : null}

@@ -17,102 +17,8 @@ const Table = props => {
   //   }
   // };
 
-  //состояние для вывода текста ошибки под инпутами
-  const [englishErrorText, setEnglishErrorText] = useState("");
-  const [transcriptionErrorText, setTranscriptionErrorText] = useState("");
-  const [translationErrorText, setTranslationErrorText] = useState("");
-  //рефы для инпутов
-  const englishRef = useRef();
-  const transcriptionRef = useRef();
-  const translationRef = useRef();
-
-  //состояние для value инпутов
-  const [value, setValue] = useState({
-    english: "",
-    transcription: "",
-    translation: "",
-  });
-
   //Достаем из хранилища массив со словами для генерации таблицы
-  const myWordsArr = JSON.parse(localStorage.getItem("myWords"));
-  //функция для сброса состояния инпутов к начальному значению, если нажимаем на кнопку отмена редактирования
-  const resetValue = index => {
-    setValue({
-      english: myWordsArr[index].english,
-      transcription: myWordsArr[index].transcription,
-      translation: myWordsArr[index].russian,
-    });
-  };
-
-  // console.log(myWordsArr[props.selectedRowIndex].english);
-  //функция для внесения изменений в инпутах с проверкой на наличие ошибок
-  const onChangeWords = event => {
-    //сохраняем состояние при изменении слов в инпутах
-    setValue({
-      ...value,
-      [event.target.name]: event.target.value
-        .replace(/ +/g, " ")
-        .trim()
-        .toLowerCase(),
-    });
-
-    //проверка на ниличие русских и английских букв там, где не надо
-    const rusReg = /^[а-яё\s]+$/gi;
-    const regForRussianLetters = /([а-я]+)/iu;
-    const engReg = /^[a-z\s]+$/gi;
-
-    //функция для проверки соответствия регулярному выражению
-    const testInput = (reg, str) => {
-      return reg.test(str);
-    };
-
-    //Проверка на пустые строки для каждого компонента с инпутом
-
-    //Для английского слова
-    if (englishRef.current.value === "") {
-      setEnglishErrorText("Эта графа не должна быть пустой");
-      englishRef.current.className = "table__input input-error";
-    } else if (!testInput(engReg, englishRef.current.value)) {
-      setEnglishErrorText("Используйте только латинские буквы");
-      englishRef.current.className = "table__input input-error";
-    } else {
-      setEnglishErrorText("");
-      englishRef.current.className = "";
-    }
-
-    //Для транскрипции
-    if (transcriptionRef.current.value === "") {
-      setTranscriptionErrorText("Эта графа не должна быть пустой");
-      transcriptionRef.current.className = "table__input input-error";
-    } else if (
-      transcriptionRef.current.value.match(regForRussianLetters) !== null
-    ) {
-      setTranscriptionErrorText(
-        "Используйте только латинские буквы и специальные символы",
-      );
-      transcriptionRef.current.className = "table__input input-error";
-    } else {
-      setTranscriptionErrorText("");
-      transcriptionRef.current.className = "";
-    }
-
-    //Для перевода
-    if (translationRef.current.value === "") {
-      setTranslationErrorText("Эта графа не должна быть пустой");
-      translationRef.current.className = "table__input input-error";
-    } else if (!testInput(rusReg, translationRef.current.value)) {
-      setTranslationErrorText("Используйте только русские буквы");
-      translationRef.current.className = "table__input input-error";
-    } else {
-      setTranslationErrorText("");
-      translationRef.current.className = "";
-    }
-  };
-  //функция выводит измененное состояние в консоль и закрывает режим редактирования
-  const handleClickToSave = id => {
-    console.log(value);
-    props.handleChangeWord(id);
-  };
+  const myWordsArr = JSON.parse(localStorage.getItem("myWords")) || [];
 
   return (
     <React.Fragment>
@@ -125,14 +31,14 @@ const Table = props => {
         <div className="scroll-table-body">
           <table className="table">
             <tbody>
-              {myWordsArr.length === 0 ? (
+              {myWordsArr?.length === 0 ? (
                 <p>Вы не добавили ни одного слова</p>
               ) : (
-                myWordsArr.map((bodyRow, i) => (
+                myWordsArr?.map((bodyRow, i) => (
                   <BodyRowSelection
                     onClickEditWord={() => {
                       props.handleChangeWord(i);
-                      resetValue(i);
+                      // resetValue(i);
                     }}
                     onClickCancel={() => props.handleChangeWord(i)}
                     key={bodyRow.id}
@@ -147,18 +53,9 @@ const Table = props => {
                     learnButtonIndex={i}
                     saveOnClick={() => props.saveOnClick(i)}
                     selectedRowIndex={props.selectedRowIndex}
-                    handleClickToSave={() => handleClickToSave(i)}
-                    value={value}
-                    onChangeWords={onChangeWords}
-                    translationRef={translationRef}
-                    translationErrorText={translationErrorText}
-                    transcriptionRef={transcriptionRef}
-                    transcriptionErrorText={transcriptionErrorText}
-                    englishRef={englishRef}
-                    englishErrorText={englishErrorText}
-                    englishValue={value.english}
-                    transcriptionValue={value.transcription}
-                    translationValue={value.translation}
+                    selectedRowIndexForEditing={i}
+                    // isClickedToSave={() => props.handleClickToSave(i)}
+                    handleChangeWord={props.handleChangeWord}
                   />
                 ))
               )}
