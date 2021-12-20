@@ -18,49 +18,21 @@ const Bodycell = ({ text }) => {
 };
 
 //компонент для клетки с инпутом внутри без форвардРеф на всякий случай)
-// const BodyCellChange = ({ name, text, defaultValue, ...props }) => {
-//   // const [value, setValue] = useState(defaultValue || "");
-//   const className = classnames("table__input", {
-//     "input-error": props.inputError && name === props.inputWithErrorName,
-//     // "": props.type === undefined,
-//   });
-//   return (
-//     <td className="table__body-cell">
-//       <input
-//         type="text"
-//         name={name}
-//         id={text}
-//         className={className}
-//         onChange={props.onChangeWords}
-//         defaultValue={defaultValue}
-//       />
-//     </td>
-//   );
-// };
-const BodyCellChange = forwardRef(function BodyCellChange(
-  { name, text, ...props },
-  ref,
-) {
-  const className = classnames("", {
-    // "input-error": props.inputError,
-    // "": props.inputError === false,
-  });
+const BodyCellChange = ({ name, text, ...props }) => {
   return (
     <td className="table__body-cell">
       <input
         type="text"
         name={name}
         id={text}
-        className={`table__input ${className}`}
+        className={`table__input ${props.className}`}
         onChange={props.onChangeWords}
-        // defaultValue={defaultValue}
         value={props.value}
-        ref={ref}
       />
       <p className="body-cell__error">{props.errorText}</p>
     </td>
   );
-});
+};
 
 //компонент ряд в таблице с текстом и кнопками учить/редактировать
 const BodyRow = ({
@@ -140,22 +112,22 @@ const BodyRowChange = ({
         name="english"
         onChangeWords={props.onChangeWords}
         value={props.englishValue}
-        ref={props.englishRef}
         errorText={props.englishErrorText}
+        className={props.englishErrorText ? "input-error" : ""}
       />
       <BodyCellChange
         name="transcription"
         onChangeWords={props.onChangeWords}
-        ref={props.transcriptionRef}
         errorText={props.transcriptionErrorText}
         value={props.transcriptionValue}
+        className={props.transcriptionErrorText ? "input-error" : ""}
       />
       <BodyCellChange
         name="translation"
         onChangeWords={props.onChangeWords}
-        ref={props.translationRef}
         errorText={props.translationErrorText}
         value={props.translationValue}
+        className={props.translationErrorText ? "input-error" : ""}
       />
       <td className="table__body-cell table__body-cell_buttons">
         <div className="table__button-row">
@@ -189,20 +161,18 @@ const BodyRowSelection = ({
   isChanged,
   ...props
 }) => {
-  //состояние для вывода текста ошибки под инпутами
-  const [englishErrorText, setEnglishErrorText] = useState("");
-  const [transcriptionErrorText, setTranscriptionErrorText] = useState("");
-  const [translationErrorText, setTranslationErrorText] = useState("");
-  //рефы для инпутов
-  const englishRef = useRef();
-  const transcriptionRef = useRef();
-  const translationRef = useRef();
-
   //состояние для value инпутов
   const [value, setValue] = useState({
     english: english,
     transcription: transcription,
     translation: russian,
+  });
+
+  //состояние для текста ошибок
+  const [errors, setErrors] = useState({
+    english: "",
+    transcription: "",
+    translation: "",
   });
 
   //функция для внесения изменений в инпутах с проверкой на наличие ошибок
@@ -217,46 +187,42 @@ const BodyRowSelection = ({
     });
 
     //Проверка на пустые строки для каждого компонента с инпутом
-    //Для английского слова
-    if (englishRef.current.value === "") {
-      setEnglishErrorText("Эта графа не должна быть пустой");
-      englishRef.current.className = "table__input input-error";
-    } else if (!/^[a-z\s]+$/gi.test(englishRef.current.value)) {
-      setEnglishErrorText("Используйте только латинские буквы");
-      englishRef.current.className = "table__input input-error";
-    } else {
-      setEnglishErrorText("");
-      englishRef.current.className = "";
-    }
-
-    //Для транскрипции
-    if (transcriptionRef.current.value === "") {
-      setTranscriptionErrorText("Эта графа не должна быть пустой");
-      transcriptionRef.current.className = "table__input input-error";
+    if (event.target.value === "") {
+      setErrors({
+        ...errors,
+        [event.target.name]: "Эта графа не должна быть пустой",
+      });
     } else if (
-      transcriptionRef.current.value.match(regForRussianLetters) !== null
+      event.target.name === "english" &&
+      !/^[a-z\s]+$/gi.test(event.target.value)
     ) {
-      setTranscriptionErrorText(
-        "Используйте только латинские буквы и специальные символы",
-      );
-      transcriptionRef.current.className = "table__input input-error";
+      setErrors({
+        ...errors,
+        english: "Используйте только латинские буквы",
+      });
+    } else if (
+      event.target.name === "transcription" &&
+      event.target.value.match(regForRussianLetters) !== null
+    ) {
+      setErrors({
+        ...errors,
+        transcription:
+          "Используйте только латинские буквы и специальные символы",
+      });
+    } else if (
+      event.target.name === "translation" &&
+      !/^[а-яё\s]+$/gi.test(event.target.value)
+    ) {
+      setErrors({
+        ...errors,
+        translation: "Используйте только русские буквы",
+      });
     } else {
-      setTranscriptionErrorText("");
-      transcriptionRef.current.className = "";
+      setErrors({
+        ...errors,
+        [event.target.name]: "",
+      });
     }
-
-    //Для перевода
-    if (translationRef.current.value === "") {
-      setTranslationErrorText("Эта графа не должна быть пустой");
-      translationRef.current.className = "table__input input-error";
-    } else if (!/^[а-яё\s]+$/gi.test(translationRef.current.value)) {
-      setTranslationErrorText("Используйте только русские буквы");
-      translationRef.current.className = "table__input input-error";
-    } else {
-      setTranslationErrorText("");
-      translationRef.current.className = "";
-    }
-    console.log(value);
   };
 
   //функция выводит измененное состояние в консоль и закрывает режим редактирования
@@ -282,14 +248,11 @@ const BodyRowSelection = ({
           selectedRowIndexForEditing={props.selectedRowIndexForEditing}
           translationValue={value.translation}
           onChangeWords={onChangeWords}
-          translationRef={translationRef}
-          translationErrorText={translationErrorText}
+          translationErrorText={errors.translation}
           transcriptionValue={value.transcription}
-          transcriptionRef={transcriptionRef}
-          transcriptionErrorText={transcriptionErrorText}
+          transcriptionErrorText={errors.transcription}
           englishValue={value.english}
-          englishRef={englishRef}
-          englishErrorText={englishErrorText}
+          englishErrorText={errors.english}
         />
       ) : (
         <BodyRow
