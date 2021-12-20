@@ -91,9 +91,9 @@ const BodyRowRecommendedWords = ({
   );
 };
 //проверка на ниличие русских и английских букв там, где не надо
-// const rusReg = /^[а-яё\s]+$/gi;
+const rusReg = /^[а-яё\s]+$/gi;
 const regForRussianLetters = /([а-я]+)/i;
-// const engReg = /^[a-z\s]+$/gi;
+const engReg = /^[a-z\s]+$/gi;
 
 //функция для проверки соответствия регулярному выражению
 // const testInput = (reg, str) => {
@@ -194,7 +194,7 @@ const BodyRowSelection = ({
       });
     } else if (
       event.target.name === "english" &&
-      !/^[a-z\s]+$/gi.test(event.target.value)
+      !engReg.test(event.target.value)
     ) {
       setErrors({
         ...errors,
@@ -211,7 +211,7 @@ const BodyRowSelection = ({
       });
     } else if (
       event.target.name === "translation" &&
-      !/^[а-яё\s]+$/gi.test(event.target.value)
+      !rusReg.test(event.target.value)
     ) {
       setErrors({
         ...errors,
