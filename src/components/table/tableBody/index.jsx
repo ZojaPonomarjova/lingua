@@ -1,7 +1,7 @@
-import React, { forwardRef, useState, useRef } from "react";
+import React, { useState } from "react";
 import "./tableBody.scss";
 import { Button, SaveButton } from "../button";
-import classnames from "classnames";
+// import classnames from "classnames";
 import {
   ButtonsRow,
   ButtonsRowRecommendedWords,
@@ -56,13 +56,43 @@ const BodyRow = ({
           onClickLearn={props.onClickLearn}
           clicked={props.clicked}
           learnButtonIndex={props.learnButtonIndex}
+          addWordToKnown={props.addWordToKnown}
+          addedToKnown={props.addedToKnown}
         />
       </td>
     </React.Fragment>
   );
 };
 
-//компонент ряд в таблице с текстом и кнопками учить/редактировать для рекомендованные слова
+//компонент ряд в таблице для изученных слов с кнопкой удалить
+
+const BodyRowKnownWords = ({
+  english,
+  transcription,
+  russian,
+  deleteWord,
+  ...props
+}) => {
+  return (
+    <tr className="table__body-row">
+      {/* <Bodycell text={index} /> */}
+      <Bodycell text={english} />
+      <Bodycell text={transcription} />
+      <Bodycell text={russian} />
+      {/* <Bodycell text={tags} /> */}
+      <td className="table__body-cell  table__body-cell_buttons">
+        <ButtonsRowKnownWords
+          deleteWord={deleteWord}
+          onClickLearn={props.onClickLearn}
+          clicked={props.clicked}
+          learnButtonIndex={props.learnButtonIndex}
+        />
+      </td>
+    </tr>
+  );
+};
+
+//компонент ряд в таблице с текстом и кнопками учить/добавить для рекомендованные слова
 const BodyRowRecommendedWords = ({
   english,
   transcription,
@@ -264,10 +294,12 @@ const BodyRowSelection = ({
           onClickLearn={props.onClickLearn}
           clicked={props.clicked}
           learnButtonIndex={props.learnButtonIndex}
+          addWordToKnown={props.addWordToKnown}
+          addedToKnown={props.addedToKnown}
         />
       )}
     </tr>
   );
 };
 
-export { BodyRowSelection, BodyRowRecommendedWords };
+export { BodyRowSelection, BodyRowRecommendedWords, BodyRowKnownWords };

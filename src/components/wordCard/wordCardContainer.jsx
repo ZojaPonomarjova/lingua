@@ -1,7 +1,7 @@
 import "./wordCard.scss";
 import WordCard from "./wordCard";
-import { bodyCellData } from "../tableData/bodyCellData";
-import { useState, useEffect, useCallback, useRef } from "react";
+// import { bodyCellData } from "../tableData/bodyCellData";
+import { useState, useEffect, useCallback } from "react";
 import classnames from "classnames";
 
 //компонент для стрелок в карусели

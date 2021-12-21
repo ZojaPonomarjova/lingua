@@ -33,7 +33,7 @@ const LearnButton = props => {
 };
 
 //компонент кнопки с хлопушкой для выученного слова
-const KnownButton = () => {
+const KnownButton = props => {
   return (
     <React.Fragment>
       <Button
@@ -41,7 +41,8 @@ const KnownButton = () => {
         src="../assets/images/confetti.png"
         type="buttonKnown"
         text={"Знаю слово!"}
-        onClick={undefined}
+        onClick={props.addWordToKnown}
+        disabled={props.disabled}
       />
     </React.Fragment>
   );
@@ -63,13 +64,32 @@ const AddButton = props => {
   );
 };
 
+//компонент кнопки удаления слова
+const DeleteButton = props => {
+  return (
+    <React.Fragment>
+      <Button
+        alt="icon-delete"
+        src="../assets/images/basket.svg"
+        type="buttonKnown"
+        text={"Удалить слово"}
+        onClick={props.deleteWord}
+        // disabled={props.disabled}
+      />
+    </React.Fragment>
+  );
+};
+
 //Компонент для ряда из трех кнопок в таблице "мои слова"
 const ButtonsRow = ({ onClickLearn, ...props }) => {
   return (
     <div className="table__button-row">
       <EditButton onClickEditWord={props.onClickEditWord} />
       <LearnButton onClickLearn={onClickLearn} clicked={props.clicked} />
-      <KnownButton />
+      <KnownButton
+        addWordToKnown={props.addWordToKnown}
+        disabled={props.addedToKnown}
+      />
     </div>
   );
 };
@@ -94,7 +114,7 @@ const ButtonsRowRecommendedWords = ({ onClickLearn, ...props }) => {
 const ButtonsRowKnownWords = ({ onClickLearn, ...props }) => {
   return (
     <div className="table__button-row">
-      <EditButton onClickEditWord={props.onClickEditWord} />
+      <DeleteButton deleteWord={props.deleteWord} />
       <LearnButton onClickLearn={onClickLearn} clicked={props.clicked} />
     </div>
   );
