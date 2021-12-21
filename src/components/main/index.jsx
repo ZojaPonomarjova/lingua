@@ -87,7 +87,7 @@ const MainPage = () => {
           type="knownWords"
           collectionCardPath="/known-words"
           linkText="Повторим?"
-          amount={knownWordsArr?.length || <TextLoader />}
+          amount={knownWordsArr?.length || "0"}
         />
       </div>
     </React.Fragment>

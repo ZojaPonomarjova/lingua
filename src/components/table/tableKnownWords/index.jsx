@@ -10,7 +10,10 @@ const TableKnownWords = props => {
   return (
     <React.Fragment>
       {knownWordsArr?.length === 0 ? (
-        <p>Вы не добавили ни одного слова</p>
+        <p className="table__error-message">
+          Вы не добавили ни одного слова. Чтобы добавить слово, зайдите в раздел
+          &quot;Мои слова&quot; и нажмите кнопку &quot;Знаю слово!&quot;
+        </p>
       ) : (
         <div className="scroll-table">
           <table className="table">

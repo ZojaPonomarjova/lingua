@@ -74,7 +74,11 @@ const Table = props => {
   return (
     <React.Fragment>
       {myWordsArray?.length === 0 ? (
-        <p>Вы не добавили ни одного слова</p>
+        <p className="table__error-message">
+          Вы не добавили ни одного слова. Чтобы добавить слово, зайдите в раздел
+          &quot;Рекомендуемые слова&quot; и нажмите кнопку &quot;Добавить в
+          &apos;Мои слова&apos;&quot;
+        </p>
       ) : (
         <div className="scroll-table">
           <table className="table">
