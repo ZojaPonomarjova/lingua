@@ -49,7 +49,7 @@ const Table = props => {
       }
       //убираем из массива с моими словами выученные слова
       const myWordsArrUpdate = myWordsArray.filter(item => {
-        if (!knownWordsIdArr.includes(item.id)) {
+        if (item.id !== word.id) {
           return item;
         }
       });

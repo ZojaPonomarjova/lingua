@@ -120,10 +120,6 @@ const BodyRowRecommendedWords = ({
     </tr>
   );
 };
-//проверка на ниличие русских и английских букв там, где не надо
-const rusReg = /^[а-яё\s]+$/gi;
-const regForRussianLetters = /([а-я]+)/i;
-const engReg = /^[a-z\s]+$/gi;
 
 //функция для проверки соответствия регулярному выражению
 // const testInput = (reg, str) => {
@@ -181,6 +177,15 @@ const BodyRowChange = ({
   );
 };
 
+//проверка на ниличие русских и английских букв там, где не надо
+const regForRussianLetters = /([а-я]+)/i;
+const onlyLatinCharacters = value => {
+  return /^[a-zA-Z\s]+$/.test(value);
+};
+const onlyRussianCharacters = value => {
+  return /^[а-яё\s]+$/i.test(value);
+};
+
 //компонент выбора типа строки при изменения props.isChanged
 const BodyRowSelection = ({
   english,
@@ -224,7 +229,7 @@ const BodyRowSelection = ({
       });
     } else if (
       event.target.name === "english" &&
-      !engReg.test(event.target.value)
+      !onlyLatinCharacters(event.target.value)
     ) {
       setErrors({
         ...errors,
@@ -241,7 +246,7 @@ const BodyRowSelection = ({
       });
     } else if (
       event.target.name === "translation" &&
-      !rusReg.test(event.target.value)
+      !onlyRussianCharacters(event.target.value)
     ) {
       setErrors({
         ...errors,
