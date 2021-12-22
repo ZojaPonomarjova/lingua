@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "./tableBody.scss";
 import { Button, SaveButton } from "../button";
+// import classnames from "classnames";
 import {
   ButtonsRow,
   ButtonsRowRecommendedWords,
@@ -16,20 +17,19 @@ const Bodycell = ({ text }) => {
   );
 };
 
-//компонент для клетки с инпутом внутри
-const BodyCellChange = ({ english, text, defaultValue }) => {
-  const [value, setValue] = useState(defaultValue || "");
-
+//компонент для клетки с инпутом внутри без форвардРеф на всякий случай)
+const BodyCellChange = ({ name, text, ...props }) => {
   return (
     <td className="table__body-cell">
       <input
         type="text"
-        name={english}
+        name={name}
         id={text}
-        className="table__input"
-        defaultValue={value}
-        onChange={event => setValue(event.target.value)}
+        className={`table__input ${props.className}`}
+        onChange={props.onChangeWords}
+        value={props.value}
       />
+      <p className="body-cell__error">{props.errorText}</p>
     </td>
   );
 };
@@ -40,7 +40,6 @@ const BodyRow = ({
   transcription,
   russian,
 
-  index,
   onClickEditWord,
   ...props
 }) => {
@@ -57,20 +56,48 @@ const BodyRow = ({
           onClickLearn={props.onClickLearn}
           clicked={props.clicked}
           learnButtonIndex={props.learnButtonIndex}
+          addWordToKnown={props.addWordToKnown}
+          addedToKnown={props.addedToKnown}
         />
       </td>
     </React.Fragment>
   );
 };
 
-//компонент ряд в таблице с текстом и кнопками учить/редактировать для рекомендованные слова
+//компонент ряд в таблице для изученных слов с кнопкой удалить
+
+const BodyRowKnownWords = ({
+  english,
+  transcription,
+  russian,
+  deleteWord,
+  ...props
+}) => {
+  return (
+    <tr className="table__body-row">
+      {/* <Bodycell text={index} /> */}
+      <Bodycell text={english} />
+      <Bodycell text={transcription} />
+      <Bodycell text={russian} />
+      {/* <Bodycell text={tags} /> */}
+      <td className="table__body-cell  table__body-cell_buttons">
+        <ButtonsRowKnownWords
+          deleteWord={deleteWord}
+          onClickLearn={props.onClickLearn}
+          clicked={props.clicked}
+          learnButtonIndex={props.learnButtonIndex}
+        />
+      </td>
+    </tr>
+  );
+};
+
+//компонент ряд в таблице с текстом и кнопками учить/добавить для рекомендованные слова
 const BodyRowRecommendedWords = ({
   english,
   transcription,
   russian,
 
-  index,
-  onClickEditWord,
   ...props
 }) => {
   return (
@@ -94,46 +121,69 @@ const BodyRowRecommendedWords = ({
   );
 };
 
+//функция для проверки соответствия регулярному выражению
+// const testInput = (reg, str) => {
+//   return reg.test(str);
+// };
+
 //компонент ряд в таблице для редактирования слова с кнопками сохранить/отмена
 const BodyRowChange = ({
-  english,
-  transcription,
-  russian,
-  index,
+  onClickCancel,
+
   ...props
 }) => {
   return (
     <React.Fragment>
-      {/* <Bodycell text={index} english={english} /> */}
       <BodyCellChange
-        defaultValue={english}
-        english={english}
-        value={english}
+        name="english"
+        onChangeWords={props.onChangeWords}
+        value={props.englishValue}
+        errorText={props.englishErrorText}
+        className={props.englishErrorText ? "input-error" : ""}
       />
       <BodyCellChange
-        defaultValue={transcription}
-        english={english}
-        value={transcription}
+        name="transcription"
+        onChangeWords={props.onChangeWords}
+        errorText={props.transcriptionErrorText}
+        value={props.transcriptionValue}
+        className={props.transcriptionErrorText ? "input-error" : ""}
       />
       <BodyCellChange
-        defaultValue={russian}
-        english={english}
-        value={russian}
+        name="translation"
+        onChangeWords={props.onChangeWords}
+        errorText={props.translationErrorText}
+        value={props.translationValue}
+        className={props.translationErrorText ? "input-error" : ""}
       />
-      {/* <Bodycell text={tags} /> */}
       <td className="table__body-cell table__body-cell_buttons">
         <div className="table__button-row">
-          <SaveButton />
+          <SaveButton
+            disabled={
+              props.translationErrorText !== "" ||
+              props.transcriptionErrorText !== "" ||
+              props.englishErrorText !== ""
+            }
+            saveOnClick={props.saveOnClick}
+          />
           <Button
             alt="Arrow"
             src="../assets/images/arrow.png"
             type="cancelButton"
-            onClick={props.onClickCancel}
+            onClick={onClickCancel}
           />
         </div>
       </td>
     </React.Fragment>
   );
+};
+
+//проверка на ниличие русских и английских букв там, где не надо
+const regForRussianLetters = /([а-я]+)/i;
+const onlyLatinCharacters = value => {
+  return /^[a-zA-Z\s]+$/.test(value);
+};
+const onlyRussianCharacters = value => {
+  return /^[а-яё\s]+$/i.test(value);
 };
 
 //компонент выбора типа строки при изменения props.isChanged
@@ -146,6 +196,75 @@ const BodyRowSelection = ({
   isChanged,
   ...props
 }) => {
+  //состояние для value инпутов
+  const [value, setValue] = useState({
+    english: english,
+    transcription: transcription,
+    translation: russian,
+  });
+
+  //состояние для текста ошибок
+  const [errors, setErrors] = useState({
+    english: "",
+    transcription: "",
+    translation: "",
+  });
+
+  //функция для внесения изменений в инпутах с проверкой на наличие ошибок
+  const onChangeWords = event => {
+    //сохраняем состояние при изменении слов в инпутах
+    setValue({
+      ...value,
+      [event.target.name]: event.target.value
+        .replace(/ +/g, " ")
+        .trim()
+        .toLowerCase(),
+    });
+
+    //Проверка на пустые строки для каждого компонента с инпутом
+    if (event.target.value === "") {
+      setErrors({
+        ...errors,
+        [event.target.name]: "Эта графа не должна быть пустой",
+      });
+    } else if (
+      event.target.name === "english" &&
+      !onlyLatinCharacters(event.target.value)
+    ) {
+      setErrors({
+        ...errors,
+        english: "Используйте только латинские буквы",
+      });
+    } else if (
+      event.target.name === "transcription" &&
+      event.target.value.match(regForRussianLetters) !== null
+    ) {
+      setErrors({
+        ...errors,
+        transcription:
+          "Используйте только латинские буквы и специальные символы",
+      });
+    } else if (
+      event.target.name === "translation" &&
+      !onlyRussianCharacters(event.target.value)
+    ) {
+      setErrors({
+        ...errors,
+        translation: "Используйте только русские буквы",
+      });
+    } else {
+      setErrors({
+        ...errors,
+        [event.target.name]: "",
+      });
+    }
+  };
+
+  //функция выводит измененное состояние в консоль и закрывает режим редактирования
+  const handleClickToSave = id => {
+    console.log(value);
+    props.handleChangeWord(id);
+  };
   return (
     <tr className="table__body-row">
       {isChanged ? (
@@ -155,21 +274,37 @@ const BodyRowSelection = ({
           russian={russian}
           index={index}
           onClickCancel={props.onClickCancel}
+          saveOnClick={() =>
+            handleClickToSave(props.selectedRowIndexForEditing)
+          }
+          handleClickToSave={props.handleClickToSave}
+          handleChangeWord={props.handleChangeWord}
+          // selectedRowIndex={props.selectedRowIndex}
+          selectedRowIndexForEditing={props.selectedRowIndexForEditing}
+          translationValue={value.translation}
+          onChangeWords={onChangeWords}
+          translationErrorText={errors.translation}
+          transcriptionValue={value.transcription}
+          transcriptionErrorText={errors.transcription}
+          englishValue={value.english}
+          englishErrorText={errors.english}
         />
       ) : (
         <BodyRow
-          english={english}
-          transcription={transcription}
-          russian={russian}
+          english={value.english}
+          transcription={value.transcription}
+          russian={value.translation}
           index={index}
           onClickEditWord={props.onClickEditWord}
           onClickLearn={props.onClickLearn}
           clicked={props.clicked}
           learnButtonIndex={props.learnButtonIndex}
+          addWordToKnown={props.addWordToKnown}
+          addedToKnown={props.addedToKnown}
         />
       )}
     </tr>
   );
 };
 
-export { BodyRowSelection, BodyRowRecommendedWords };
+export { BodyRowSelection, BodyRowRecommendedWords, BodyRowKnownWords };
