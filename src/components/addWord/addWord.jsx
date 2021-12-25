@@ -11,7 +11,7 @@ const onlyRussianCharacters = value => {
   return /^[а-яё\s]+$/i.test(value);
 };
 
-const AddWord = props => {
+const AddWord = () => {
   //состояние для value инпутов
   const [value, setValue] = useState({
     english: "",

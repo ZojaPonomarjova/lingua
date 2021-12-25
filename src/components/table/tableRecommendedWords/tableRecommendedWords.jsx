@@ -57,6 +57,10 @@ const TableRecommendedWords = props => {
   }, [myWordsArray, idArr]);
 
   const myWordsIdArr = JSON.parse(localStorage.getItem("myWordsId"));
+
+  if (errorLoading) {
+    return <p className="table__error-message">{errorLoading}</p>;
+  }
   return (
     <React.Fragment>
       {isWordsLoading ? (

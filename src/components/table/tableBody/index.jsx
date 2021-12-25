@@ -266,7 +266,7 @@ const BodyRowSelection = ({
   const handleClickToSave = id => {
     // console.log(value);
     // const dataForSending = { id: props.id, ...value };
-    // console.log(typeof props.id);
+    console.log(props.id);
     fetch(`/api/words/${props.id}/update/`, {
       method: "POST",
       body: JSON.stringify(value),
