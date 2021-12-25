@@ -5,6 +5,7 @@ import HeaderRow from "../tableHeader";
 import { BodyRowRecommendedWords } from "../tableBody";
 import { DataContext } from "../context";
 import Loader from "../loader";
+import ErrorMessage from "../errorMessage";
 
 //компонент таблица
 const TableRecommendedWords = props => {
@@ -59,8 +60,9 @@ const TableRecommendedWords = props => {
   const myWordsIdArr = JSON.parse(localStorage.getItem("myWordsId"));
 
   if (errorLoading) {
-    return <p className="table__error-message">{errorLoading}</p>;
+    return <ErrorMessage errorText={errorLoading} />;
   }
+
   return (
     <React.Fragment>
       {isWordsLoading ? (

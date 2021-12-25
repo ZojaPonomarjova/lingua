@@ -1,6 +1,7 @@
 import { useState, useContext } from "react";
 import "./addWord.scss";
 import { DataContext } from "../table/context";
+import ErrorMessage from "../table/errorMessage";
 
 //проверка на ниличие русских и английских букв там, где не надо
 const regForRussianLetters = /([а-я]+)/i;
@@ -27,6 +28,8 @@ const AddWord = () => {
     russianError: "",
     tagsError: "",
   });
+
+  const [sendError, setSendError] = useState("");
 
   const { wordsArrUpdate } = useContext(DataContext);
 
@@ -88,22 +91,33 @@ const AddWord = () => {
       value.english !== "" ||
       value.russian !== ""
     ) {
-      fetch(`/api/words/add`, {
-        method: "POST",
-        body: JSON.stringify(value),
-        headers: {
-          "Content-Type": "application/json;charset=utf-8",
-        },
-      })
-        .then(response => response.json())
-        .then(data => {
-          console.log(data);
+      try {
+        fetch(`/api/words/add`, {
+          method: "POST",
+          body: JSON.stringify(value),
+          headers: {
+            "Content-Type": "application/json;charset=utf-8",
+          },
         })
-        .catch(error => console.log(error));
-      setValue({ english: "", transcription: "", russian: "", tags: "" });
+          .then(response => response.json())
+          .then(data => {
+            console.log(data);
+          })
+          .catch(error => {
+            console.log(error);
+            setSendError("Проверьте ваше соединение с сетью.");
+          });
+        setValue({ english: "", transcription: "", russian: "", tags: "" });
+      } catch (error) {
+        console.log(error);
+        setSendError("что-то пошло не так.");
+      }
+      wordsArrUpdate();
     }
-    wordsArrUpdate();
   };
+  if (sendError) {
+    return <ErrorMessage errorText={sendError} />;
+  }
   return (
     <div>
       <label htmlFor="english" className="input__label">

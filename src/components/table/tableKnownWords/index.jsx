@@ -4,6 +4,7 @@ import HeaderRow from "../tableHeader";
 // import { bodyCellData } from "../tableData/bodyCellData";
 import { BodyRowKnownWords } from "../tableBody";
 import { DataContext } from "../context";
+import ErrorMessage from "../errorMessage";
 
 //компонент таблица
 const TableKnownWords = props => {
@@ -50,10 +51,10 @@ const TableKnownWords = props => {
   return (
     <React.Fragment>
       {knownWordsArrNew?.length === 0 ? (
-        <p className="table__error-message">
-          Вы не добавили ни одного слова. Чтобы добавить слово, зайдите в раздел
-          &quot;Мои слова&quot; и нажмите кнопку &quot;Знаю слово!&quot;
-        </p>
+        <ErrorMessage
+          errorText={`Вы не добавили ни одного слова. Чтобы добавить слово, зайдите в раздел
+          &quot;Мои слова&quot; и нажмите кнопку &quot;Знаю слово!&quot;`}
+        />
       ) : (
         <div className="scroll-table">
           <table className="table">

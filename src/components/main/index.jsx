@@ -4,7 +4,6 @@ import Table from "../table/tableCommon";
 import React from "react";
 import WordCardContainer from "../wordCard/wordCardContainer";
 import { useState, useEffect, useContext } from "react";
-// import { bodyCellData } from "../table/tableData/bodyCellData";
 // import Loader from "../loader";
 import { Switch, Route } from "react-router-dom";
 import PageNotFound from "../pageNotFound";

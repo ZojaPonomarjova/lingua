@@ -3,6 +3,7 @@ import "./tableCommon.scss";
 import HeaderRow from "../tableHeader";
 // import { bodyCellData } from "../tableData/bodyCellData";
 import { BodyRowSelection } from "../tableBody";
+import ErrorMessage from "../errorMessage";
 
 //компонент таблица
 const Table = props => {
@@ -74,11 +75,11 @@ const Table = props => {
   return (
     <React.Fragment>
       {myWordsArray?.length === 0 ? (
-        <p className="table__error-message">
-          Вы не добавили ни одного слова. Чтобы добавить слово, зайдите в раздел
+        <ErrorMessage
+          errorText={`Вы не добавили ни одного слова. Чтобы добавить слово, зайдите в раздел
           &quot;Рекомендуемые слова&quot; и нажмите кнопку &quot;Добавить в
-          &apos;Мои слова&apos;&quot;
-        </p>
+          &apos;Мои слова&apos;&quot;`}
+        />
       ) : (
         <div className="scroll-table">
           <table className="table">
