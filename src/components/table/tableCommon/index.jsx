@@ -75,6 +75,7 @@ const Table = props => {
   return (
     <React.Fragment>
       {myWordsArray?.length === 0 ? (
+        //если в хранилище нет сохраненных слов, показываем ошибку
         <ErrorMessage
           errorText={`Вы не добавили ни одного слова. Чтобы добавить слово, зайдите в раздел
           &quot;Рекомендуемые слова&quot; и нажмите кнопку &quot;Добавить в

@@ -3,7 +3,7 @@ import "./addWord.scss";
 import { DataContext } from "../table/context";
 import ErrorMessage from "../table/errorMessage";
 
-//проверка на ниличие русских и английских букв там, где не надо
+//проверка на наличие русских и английских букв там, где не надо
 const regForRussianLetters = /([а-я]+)/i;
 const onlyLatinCharacters = value => {
   return /^[a-zA-Z\s]+$/.test(value);
@@ -84,8 +84,11 @@ const AddWord = () => {
     console.log(value);
   };
 
+  //функция для добавления слов
   const handleClickToAdd = () => {
     // console.log(value);
+
+    //только если нет пустых граф
     if (
       value.transcription !== "" ||
       value.english !== "" ||
@@ -112,9 +115,11 @@ const AddWord = () => {
         console.log(error);
         setSendError("что-то пошло не так.");
       }
+      //вызываем функцию из контекста
       wordsArrUpdate();
     }
   };
+  //если отправка не удалась, выводим ошибку
   if (sendError) {
     return <ErrorMessage errorText={sendError} />;
   }

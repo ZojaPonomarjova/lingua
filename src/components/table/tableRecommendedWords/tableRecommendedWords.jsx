@@ -18,6 +18,7 @@ const TableRecommendedWords = props => {
     JSON.parse(localStorage.getItem("myWordsId")) || [],
   );
 
+  //данные, вытащенные из контекста
   const { data, isWordsLoading, errorLoading } = useContext(DataContext);
 
   //функция для редактирования строки и отмены редактирования строки
@@ -59,6 +60,7 @@ const TableRecommendedWords = props => {
 
   const myWordsIdArr = JSON.parse(localStorage.getItem("myWordsId"));
 
+  //если возникла ошибка при получении данных с сервера, показываем ошибку
   if (errorLoading) {
     return <ErrorMessage errorText={errorLoading} />;
   }
