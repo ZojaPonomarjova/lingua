@@ -53,7 +53,7 @@ const Table = props => {
           return item;
         }
       });
-      console.log(myWordsArrUpdate);
+      // console.log(myWordsArrUpdate);
       setMyWordsArray(myWordsArrUpdate);
     }
   };

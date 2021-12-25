@@ -1,8 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import "../tableCommon/tableCommon.scss";
 import HeaderRow from "../tableHeader";
-import { bodyCellData } from "../tableData/bodyCellData";
+// import { bodyCellData } from "../tableData/bodyCellData";
 import { BodyRowRecommendedWords } from "../tableBody";
+import { DataContext } from "../context";
+import Loader from "../loader";
 
 //компонент таблица
 const TableRecommendedWords = props => {
@@ -14,6 +16,8 @@ const TableRecommendedWords = props => {
   const [idArr, setIdArr] = useState(
     JSON.parse(localStorage.getItem("myWordsId")) || [],
   );
+
+  const { data, isWordsLoading, errorLoading } = useContext(DataContext);
 
   //функция для редактирования строки и отмены редактирования строки
   //   const [selectedRowIndex, setSelectedRowIndex] = useState(-1);
@@ -55,43 +59,49 @@ const TableRecommendedWords = props => {
   const myWordsIdArr = JSON.parse(localStorage.getItem("myWordsId"));
   return (
     <React.Fragment>
-      <div className="scroll-table">
-        <table className="table">
-          <thead>
-            <HeaderRow />
-          </thead>
-        </table>
-        <div className="scroll-table-body">
+      {isWordsLoading ? (
+        <Loader />
+      ) : errorLoading ? (
+        <p className="table__error-message">{errorLoading}</p>
+      ) : (
+        <div className="scroll-table">
           <table className="table">
-            <tbody>
-              {bodyCellData.map((bodyRow, i) => (
-                <BodyRowRecommendedWords
-                  //   onClickEditWord={() => handleClick(i)}
-                  //   onClickCancel={() => handleClick(i)}
-                  key={bodyRow.id}
-                  id={bodyRow.id}
-                  // index={i + 1}
-                  english={bodyRow.english}
-                  transcription={bodyRow.transcription}
-                  russian={bodyRow.russian}
-                  //   isChanged={i === selectedRowIndex}
-                  onClickLearn={() => props.onClickLearn(i)}
-                  clicked={props.clicked}
-                  learnButtonIndex={i}
-                  // tags={bodyRow.tags}
-                  addWordToMyWords={() => addWordToMyWords(bodyRow)}
-                  clickedToAdd={
-                    myWordsIdArr
-                      ? myWordsIdArr.includes(bodyRow.id) ||
-                        idArr.includes(bodyRow.id)
-                      : false
-                  }
-                />
-              ))}
-            </tbody>
+            <thead>
+              <HeaderRow />
+            </thead>
           </table>
+          <div className="scroll-table-body">
+            <table className="table">
+              <tbody>
+                {data?.map((bodyRow, i) => (
+                  <BodyRowRecommendedWords
+                    //   onClickEditWord={() => handleClick(i)}
+                    //   onClickCancel={() => handleClick(i)}
+                    key={bodyRow.id}
+                    id={bodyRow.id}
+                    // index={i + 1}
+                    english={bodyRow.english}
+                    transcription={bodyRow.transcription}
+                    russian={bodyRow.russian}
+                    //   isChanged={i === selectedRowIndex}
+                    onClickLearn={() => props.onClickLearn(i)}
+                    clicked={props.clicked}
+                    learnButtonIndex={i}
+                    // tags={bodyRow.tags}
+                    addWordToMyWords={() => addWordToMyWords(bodyRow)}
+                    clickedToAdd={
+                      myWordsIdArr
+                        ? myWordsIdArr.includes(bodyRow.id) ||
+                          idArr.includes(bodyRow.id)
+                        : false
+                    }
+                  />
+                ))}
+              </tbody>
+            </table>
+          </div>
         </div>
-      </div>
+      )}
     </React.Fragment>
   );
 };

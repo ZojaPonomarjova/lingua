@@ -1,15 +1,55 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import "../tableCommon/tableCommon.scss";
 import HeaderRow from "../tableHeader";
-import { bodyCellData } from "../tableData/bodyCellData";
-import { BodyRowKnownWords, BodyRowRecommendedWords } from "../tableBody";
+// import { bodyCellData } from "../tableData/bodyCellData";
+import { BodyRowKnownWords } from "../tableBody";
+import { DataContext } from "../context";
 
 //компонент таблица
 const TableKnownWords = props => {
-  const knownWordsArr = JSON.parse(localStorage.getItem("knownWords")) || [];
+  const { wordsArrUpdate } = useContext(DataContext);
+  // const knownWordsArr = JSON.parse(localStorage.getItem("knownWords")) || [];
+  // const [idForDel, setIdForDel] = useState("");
+  const [knownWordsArrNew, setKnownWordsArrNew] = useState(
+    JSON.parse(localStorage.getItem("knownWords")) || [],
+  );
+
+  const handleClickToDelete = (wordId, word) => {
+    // setIdForDel(wordId);
+    // setWordForDel(word);
+    console.log(wordId);
+    console.log(word);
+    fetch(`/api/words/${wordId}/delete`, {
+      method: "POST",
+      body: JSON.stringify(word),
+      headers: {
+        "Content-Type": "application/json;charset=utf-8",
+      },
+    })
+      .then(response => response.json())
+      .then(data => {
+        console.log(data);
+      })
+      .catch(error => console.log(error));
+
+    //убираем из массива с моими словами выученные слова
+    const knownWordsArrUpdate = knownWordsArrNew.filter(item => {
+      if (item.id !== wordId) {
+        return item;
+      }
+    });
+
+    setKnownWordsArrNew(knownWordsArrUpdate);
+    wordsArrUpdate();
+    // console.log(knownWordsArrUpdate);
+  };
+
+  useEffect(() => {
+    localStorage.setItem("knownWords", JSON.stringify(knownWordsArrNew));
+  }, [knownWordsArrNew]);
   return (
     <React.Fragment>
-      {knownWordsArr?.length === 0 ? (
+      {knownWordsArrNew?.length === 0 ? (
         <p className="table__error-message">
           Вы не добавили ни одного слова. Чтобы добавить слово, зайдите в раздел
           &quot;Мои слова&quot; и нажмите кнопку &quot;Знаю слово!&quot;
@@ -24,7 +64,7 @@ const TableKnownWords = props => {
           <div className="scroll-table-body">
             <table className="table">
               <tbody>
-                {knownWordsArr?.map((bodyRow, i) => (
+                {knownWordsArrNew?.map((bodyRow, i) => (
                   <BodyRowKnownWords
                     onClickEditWord={() => {
                       props.handleChangeWord(i);
@@ -44,6 +84,9 @@ const TableKnownWords = props => {
                     selectedRowIndex={props.selectedRowIndex}
                     selectedRowIndexForEditing={i}
                     handleChangeWord={props.handleChangeWord}
+                    onClickDeleteWord={() =>
+                      handleClickToDelete(bodyRow.id, bodyRow)
+                    }
                   />
                 ))}
               </tbody>

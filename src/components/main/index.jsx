@@ -3,8 +3,8 @@ import Title from "../titles";
 import Table from "../table/tableCommon";
 import React from "react";
 import WordCardContainer from "../wordCard/wordCardContainer";
-import { useState, useEffect } from "react";
-import { bodyCellData } from "../table/tableData/bodyCellData";
+import { useState, useEffect, useContext } from "react";
+// import { bodyCellData } from "../table/tableData/bodyCellData";
 // import Loader from "../loader";
 import { Switch, Route } from "react-router-dom";
 import PageNotFound from "../pageNotFound";
@@ -12,6 +12,9 @@ import CollectionCard from "../collectionCard";
 import TextLoader from "../textLoader/textLoader";
 import TableRecommendedWords from "../table/tableRecommendedWords/tableRecommendedWords";
 import TableKnownWords from "../table/tableKnownWords";
+// import classnames from "classnames";
+import { DataContext } from "../table/context";
+import AddWord from "../addWord/addWord";
 
 //массив с заголовками для страниц
 const titles = [
@@ -20,7 +23,7 @@ const titles = [
   "Добавьте свое слово",
   "Изученные слова",
 ];
-
+const myWordsArr = JSON.parse(localStorage.getItem("myWords"));
 //компонент для таблицы со словами пользователя
 const MyWords = props => {
   //функция для показа карточки при нажатии на кнопку учить слова
@@ -53,16 +56,18 @@ const MyWords = props => {
         <WordCardContainer
           selected={clicked}
           handleClickToLearn={handleClickToLearn}
-          arrayToShow={JSON.parse(localStorage.getItem("myWords")) || []}
+          arrayToShow={myWordsArr || []}
         />
       ) : null}
     </React.Fragment>
   );
 };
-const myWordsArr = JSON.parse(localStorage.getItem("myWords"));
+
 const knownWordsArr = JSON.parse(localStorage.getItem("knownWords"));
+
 //компонент для главной страницы
 const MainPage = () => {
+  const { data } = useContext(DataContext);
   return (
     <React.Fragment>
       <Title name={titles[0]} />
@@ -71,7 +76,7 @@ const MainPage = () => {
         type="commonWords"
         collectionCardPath="/recommended-words"
         linkText="Посмотреть"
-        amount={bodyCellData?.length || <TextLoader />}
+        amount={data?.length || <TextLoader />}
       />
       <Title name={titles[1]} />
       <div className="main__collection-cards-container">
@@ -107,6 +112,8 @@ const RecommendedWords = () => {
   const handleClickToLearn = i => {
     setClicked(i);
   };
+
+  const { data } = useContext(DataContext);
   return (
     <React.Fragment>
       <Title name={titles[0]} />
@@ -115,7 +122,7 @@ const RecommendedWords = () => {
         <WordCardContainer
           selected={clicked}
           handleClickToLearn={handleClickToLearn}
-          arrayToShow={bodyCellData}
+          arrayToShow={data || []}
         />
       ) : null}
     </React.Fragment>
@@ -125,11 +132,6 @@ const RecommendedWords = () => {
 //компонент для показа выученных слов
 const KnownWords = () => {
   //функция для показа карточки при нажатии на кнопку учить слова
-  useEffect(() => {
-    if (localStorage.getItem("myWords") === null) {
-      localStorage.setItem("myWords", "[]");
-    }
-  }, []);
 
   const [clicked, setClicked] = useState(null);
   const handleClickToLearn = i => {
@@ -152,12 +154,17 @@ const KnownWords = () => {
 
 //делаем Switch, чтобы в main рендерились разные компоненты
 const Main = () => {
+  // const { isWordsLoading } = useContext(DataContext);
+  // const classname = classnames("", {
+  //   "main-loading": isWordsLoading,
+  // });
   return (
-    <main className="main">
+    <main className={`main`}>
       <Switch>
         <Route exact path="/my-words" component={MyWords} />
         <Route exact path="/add-word">
           <Title name={titles[2]} />
+          <AddWord />
         </Route>
         <Route exact path="/recommended-words" component={RecommendedWords} />
         <Route exact path="/known-words" component={KnownWords} />
