@@ -30,19 +30,19 @@ const TableKnownWords = props => {
       .then(response => response.json())
       .then(data => {
         console.log(data);
+        //обновляем слова, приходящие с сервера
+        wordsArrUpdate();
+        //убираем из массива с изученными словами те, которые удалили
+        const knownWordsArrUpdate = knownWordsArrNew.filter(item => {
+          if (item.id !== wordId) {
+            return item;
+          }
+        });
+        //обновляем состояние
+        setKnownWordsArrNew(knownWordsArrUpdate);
       })
       .catch(error => console.log(error));
 
-    //убираем из массива с изученными словами те, которые удалили
-    const knownWordsArrUpdate = knownWordsArrNew.filter(item => {
-      if (item.id !== wordId) {
-        return item;
-      }
-    });
-    //обновляем состояние
-    setKnownWordsArrNew(knownWordsArrUpdate);
-    //обновляем слова, приходящие с сервера
-    wordsArrUpdate();
     // console.log(knownWordsArrUpdate);
   };
 
@@ -56,7 +56,7 @@ const TableKnownWords = props => {
         //Если в хранилище нет ни одного слова, выводим ошибку
         <ErrorMessage
           errorText={`Вы не добавили ни одного слова. Чтобы добавить слово, зайдите в раздел
-          &quot;Мои слова&quot; и нажмите кнопку &quot;Знаю слово!&quot;`}
+          "Мои слова" и нажмите кнопку "Знаю слово!"`}
         />
       ) : (
         <div className="scroll-table">

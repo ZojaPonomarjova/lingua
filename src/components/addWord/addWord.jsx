@@ -105,6 +105,8 @@ const AddWord = () => {
           .then(response => response.json())
           .then(data => {
             console.log(data);
+            //вызываем функцию из контекста
+            wordsArrUpdate();
           })
           .catch(error => {
             console.log(error);
@@ -115,8 +117,6 @@ const AddWord = () => {
         console.log(error);
         setSendError("что-то пошло не так.");
       }
-      //вызываем функцию из контекста
-      wordsArrUpdate();
     }
   };
   //если отправка не удалась, выводим ошибку
@@ -185,13 +185,14 @@ const AddWord = () => {
       <button
         type="button"
         disabled={
-          errors.russianError !== "" ||
-          errors.transcriptionError !== "" ||
-          errors.englishError !== "" ||
-          errors.tagsError !== "" ||
-          value.transcription === "" ||
-          value.russian === "" ||
-          value.english === ""
+          //   errors.russianError !== "" ||
+          //   errors.transcriptionError !== "" ||
+          //   errors.englishError !== "" ||
+          //   errors.tagsError !== "" ||
+          //   value.transcription === "" ||
+          //   value.russian === "" ||
+          //   value.english === ""
+          Object.values(errors).some(error => error !== "")
         }
         onClick={handleClickToAdd}
         className="word-card__show-button add-button"

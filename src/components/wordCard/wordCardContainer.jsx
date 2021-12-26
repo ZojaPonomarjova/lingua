@@ -76,6 +76,9 @@ const WordCardContainer = props => {
     },
     [learnedWords, learnedWordsCount],
   );
+  if (!arrayToShow.length) {
+    return null;
+  }
 
   return (
     <div className="word-card__shadow-container">

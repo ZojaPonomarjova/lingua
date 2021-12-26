@@ -22,7 +22,7 @@ const titles = [
   "Добавьте свое слово",
   "Изученные слова",
 ];
-const myWordsArr = JSON.parse(localStorage.getItem("myWords"));
+
 //компонент для таблицы со словами пользователя
 const MyWords = props => {
   //функция для показа карточки при нажатии на кнопку учить слова
@@ -40,7 +40,7 @@ const MyWords = props => {
       setSelectedRowIndex(-1);
     }
   };
-
+  const myWordsArr = JSON.parse(localStorage.getItem("myWords"));
   // console.log(isClicked);
   return (
     <React.Fragment>
@@ -62,11 +62,11 @@ const MyWords = props => {
   );
 };
 
-const knownWordsArr = JSON.parse(localStorage.getItem("knownWords"));
-
 //компонент для главной страницы
 const MainPage = () => {
   const { data } = useContext(DataContext);
+  const knownWordsArr = JSON.parse(localStorage.getItem("knownWords"));
+  const myWordsArr = JSON.parse(localStorage.getItem("myWords"));
   return (
     <React.Fragment>
       <Title name={titles[0]} />
@@ -136,6 +136,7 @@ const KnownWords = () => {
   const handleClickToLearn = i => {
     setClicked(i);
   };
+  const knownWordsArr = JSON.parse(localStorage.getItem("knownWords"));
   return (
     <React.Fragment>
       <Title name={titles[3]} />
