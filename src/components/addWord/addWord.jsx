@@ -36,6 +36,7 @@ const AddWord = () => {
   //функция для внесения изменений в инпутах с проверкой на наличие ошибок
   const onChangeWords = event => {
     //сохраняем состояние при изменении слов в инпутах
+    setErrors("");
     setValue({
       ...value,
       [event.target.name]: event.target.value
@@ -189,9 +190,9 @@ const AddWord = () => {
           //   errors.transcriptionError !== "" ||
           //   errors.englishError !== "" ||
           //   errors.tagsError !== "" ||
-          //   value.transcription === "" ||
-          //   value.russian === "" ||
-          //   value.english === ""
+          value.transcription === "" ||
+          value.russian === "" ||
+          value.english === "" ||
           Object.values(errors).some(error => error !== "")
         }
         onClick={handleClickToAdd}

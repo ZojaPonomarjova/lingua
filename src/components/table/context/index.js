@@ -12,6 +12,7 @@ const DataContextProvider = props => {
 
   //функция для обновления слов. Будем вызывать в других компонентах, когда меняем данные
   const wordsArrUpdate = () => {
+    setErrorLoading("");
     setIsWordsLoading(true);
     fetch(" /api/words")
       .then(response => response.json())
