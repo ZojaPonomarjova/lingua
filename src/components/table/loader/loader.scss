@@ -1,14 +1,6 @@
-html {
-  height: 100%;
-}
-
-body {
-  background-image: radial-gradient(
-    circle farthest-corner at center,
-    #3c4b57 0%,
-    #1c262b 100%
-  );
-}
+// html {
+//   height: 100%;
+// }
 
 .loader {
   position: absolute;
@@ -47,6 +39,24 @@ body {
   bottom: 0%;
   animation: rotate-three 1s linear infinite;
   border-top: 3px solid #efeffa;
+}
+.loader-background {
+  // background-image: radial-gradient(
+  //   circle farthest-corner at center,
+  //   #3c4b57 0%,
+  //   #1c262b 100%
+  // );
+  height: calc(100vh - 20px);
+  width: 100vw;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  background: #7e9f6d;
+  background: -webkit-radial-gradient(center, #7e9f6d, #373029);
+  background: -moz-radial-gradient(center, #7e9f6d, #373029);
+  background: radial-gradient(ellipse at center, #7e9f6d, #373029);
+  z-index: -1;
+  margin-top: -30px;
 }
 
 @keyframes rotate-one {

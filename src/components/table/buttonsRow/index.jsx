@@ -73,7 +73,7 @@ const DeleteButton = props => {
         src="../assets/images/basket.svg"
         type="buttonKnown"
         text={"Удалить слово"}
-        onClick={props.deleteWord}
+        onClick={props.onClickDeleteWord}
         // disabled={props.disabled}
       />
     </React.Fragment>
@@ -114,7 +114,7 @@ const ButtonsRowRecommendedWords = ({ onClickLearn, ...props }) => {
 const ButtonsRowKnownWords = ({ onClickLearn, ...props }) => {
   return (
     <div className="table__button-row">
-      <DeleteButton deleteWord={props.deleteWord} />
+      <DeleteButton onClickDeleteWord={props.onClickDeleteWord} />
       <LearnButton onClickLearn={onClickLearn} clicked={props.clicked} />
     </div>
   );

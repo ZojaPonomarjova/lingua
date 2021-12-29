@@ -34,9 +34,11 @@
 .table thead tr th:last-child,
 .table tbody tr td:last-child {
   border-right: none;
-  // width: fit-content;
-  // max-width: 300px;
   padding-left: 20px;
+}
+
+.table tbody .table__body-row:last-child {
+  border-bottom: 15px solid #f2f8f8;
 }
 
 // .scroll-table {
@@ -47,12 +49,14 @@
 .scroll-table-body {
   max-width: 1400px;
   margin: 0px auto;
-  height: 450px;
+  max-height: 450px;
+  // min-height: calc(100% + 20px);
   overflow-x: auto;
   margin-top: 0px;
   margin-bottom: 20px;
   // border-bottom: 1px solid #eee;
-  border-bottom: 15px solid #f2f8f8;
+  // border-bottom: 15px solid #f2f8f8;
+  padding-bottom: 25px;
 }
 .scroll-table table {
   width: 100%;

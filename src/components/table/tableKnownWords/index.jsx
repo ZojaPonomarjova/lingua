@@ -1,19 +1,63 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import "../tableCommon/tableCommon.scss";
 import HeaderRow from "../tableHeader";
-import { bodyCellData } from "../tableData/bodyCellData";
-import { BodyRowKnownWords, BodyRowRecommendedWords } from "../tableBody";
+// import { bodyCellData } from "../tableData/bodyCellData";
+import { BodyRowKnownWords } from "../tableBody";
+import { DataContext } from "../context";
+import ErrorMessage from "../errorMessage";
 
 //компонент таблица
 const TableKnownWords = props => {
-  const knownWordsArr = JSON.parse(localStorage.getItem("knownWords")) || [];
+  //вытаскиваем из контекста функцию для обновления слов
+  const { wordsArrUpdate } = useContext(DataContext);
+  //сохраняем в состояние слова из хранилища
+  const [knownWordsArrNew, setKnownWordsArrNew] = useState(
+    JSON.parse(localStorage.getItem("knownWords")) || [],
+  );
+
+  //функция для удаления слов
+  const handleClickToDelete = (wordId, word) => {
+    // console.log(wordId);
+    // console.log(word);
+
+    fetch(`/api/words/${wordId}/delete`, {
+      method: "POST",
+      body: JSON.stringify(word),
+      headers: {
+        "Content-Type": "application/json;charset=utf-8",
+      },
+    })
+      .then(response => response.json())
+      .then(data => {
+        console.log(data);
+        //обновляем слова, приходящие с сервера
+        wordsArrUpdate();
+        //убираем из массива с изученными словами те, которые удалили
+        const knownWordsArrUpdate = knownWordsArrNew.filter(item => {
+          if (item.id !== wordId) {
+            return item;
+          }
+        });
+        //обновляем состояние
+        setKnownWordsArrNew(knownWordsArrUpdate);
+      })
+      .catch(error => console.log(error));
+
+    // console.log(knownWordsArrUpdate);
+  };
+
+  //обновляем массив в хранилище
+  useEffect(() => {
+    localStorage.setItem("knownWords", JSON.stringify(knownWordsArrNew));
+  }, [knownWordsArrNew]);
   return (
     <React.Fragment>
-      {knownWordsArr?.length === 0 ? (
-        <p className="table__error-message">
-          Вы не добавили ни одного слова. Чтобы добавить слово, зайдите в раздел
-          &quot;Мои слова&quot; и нажмите кнопку &quot;Знаю слово!&quot;
-        </p>
+      {knownWordsArrNew?.length === 0 ? (
+        //Если в хранилище нет ни одного слова, выводим ошибку
+        <ErrorMessage
+          errorText={`Вы не добавили ни одного слова. Чтобы добавить слово, зайдите в раздел
+          "Мои слова" и нажмите кнопку "Знаю слово!"`}
+        />
       ) : (
         <div className="scroll-table">
           <table className="table">
@@ -24,7 +68,7 @@ const TableKnownWords = props => {
           <div className="scroll-table-body">
             <table className="table">
               <tbody>
-                {knownWordsArr?.map((bodyRow, i) => (
+                {knownWordsArrNew?.map((bodyRow, i) => (
                   <BodyRowKnownWords
                     onClickEditWord={() => {
                       props.handleChangeWord(i);
@@ -44,6 +88,9 @@ const TableKnownWords = props => {
                     selectedRowIndex={props.selectedRowIndex}
                     selectedRowIndexForEditing={i}
                     handleChangeWord={props.handleChangeWord}
+                    onClickDeleteWord={() =>
+                      handleClickToDelete(bodyRow.id, bodyRow)
+                    }
                   />
                 ))}
               </tbody>

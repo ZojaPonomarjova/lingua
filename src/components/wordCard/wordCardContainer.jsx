@@ -1,7 +1,7 @@
 import "./wordCard.scss";
 import WordCard from "./wordCard";
 // import { bodyCellData } from "../tableData/bodyCellData";
-import { useState, useEffect, useCallback } from "react";
+import { useState, useCallback } from "react";
 import classnames from "classnames";
 
 //компонент для стрелок в карусели
@@ -76,6 +76,9 @@ const WordCardContainer = props => {
     },
     [learnedWords, learnedWordsCount],
   );
+  if (!arrayToShow.length) {
+    return null;
+  }
 
   return (
     <div className="word-card__shadow-container">
