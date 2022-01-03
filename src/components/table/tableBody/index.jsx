@@ -149,7 +149,7 @@ const BodyRowChange = ({
         className={props.transcriptionErrorText ? "input-error" : ""}
       />
       <BodyCellChange
-        name="translation"
+        name="russian"
         onChangeWords={props.onChangeWords}
         errorText={props.translationErrorText}
         value={props.translationValue}
@@ -200,14 +200,14 @@ const BodyRowSelection = ({
   const [value, setValue] = useState({
     english: english,
     transcription: transcription,
-    translation: russian,
+    russian: russian,
   });
 
   //состояние для текста ошибок
   const [errors, setErrors] = useState({
     english: "",
     transcription: "",
-    translation: "",
+    russian: "",
   });
 
   //функция для внесения изменений в инпутах с проверкой на наличие ошибок
@@ -245,12 +245,12 @@ const BodyRowSelection = ({
           "Используйте только латинские буквы и специальные символы",
       });
     } else if (
-      event.target.name === "translation" &&
+      event.target.name === "russian" &&
       !onlyRussianCharacters(event.target.value)
     ) {
       setErrors({
         ...errors,
-        translation: "Используйте только русские буквы",
+        russian: "Используйте только русские буквы",
       });
     } else {
       setErrors({
@@ -263,6 +263,21 @@ const BodyRowSelection = ({
   //функция выводит измененное состояние в консоль и закрывает режим редактирования
   const handleClickToSave = id => {
     console.log(value);
+    // console.log(value);
+    // const dataForSending = { id: props.id, ...value };
+    console.log(props.id);
+    fetch(`/api/words/${props.id}/update/`, {
+      method: "POST",
+      body: JSON.stringify(value),
+      headers: {
+        "Content-Type": "application/json;charset=utf-8",
+      },
+    })
+      .then(response => response.json())
+      .then(data => {
+        console.log(data);
+      })
+      .catch(error => console.log(error));
     props.handleChangeWord(id);
   };
   return (
@@ -281,9 +296,9 @@ const BodyRowSelection = ({
           handleChangeWord={props.handleChangeWord}
           // selectedRowIndex={props.selectedRowIndex}
           selectedRowIndexForEditing={props.selectedRowIndexForEditing}
-          translationValue={value.translation}
+          translationValue={value.russian}
           onChangeWords={onChangeWords}
-          translationErrorText={errors.translation}
+          translationErrorText={errors.russian}
           transcriptionValue={value.transcription}
           transcriptionErrorText={errors.transcription}
           englishValue={value.english}
@@ -293,7 +308,7 @@ const BodyRowSelection = ({
         <BodyRow
           english={value.english}
           transcription={value.transcription}
-          russian={value.translation}
+          russian={value.russian}
           index={index}
           onClickEditWord={props.onClickEditWord}
           onClickLearn={props.onClickLearn}

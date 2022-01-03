@@ -10,8 +10,10 @@ import { Switch, Route } from "react-router-dom";
 import PageNotFound from "../pageNotFound";
 import CollectionCard from "../collectionCard";
 import TextLoader from "../textLoader/textLoader";
-import TableRecommendedWords from "../table/tableRecommendedWords/tableRecommendedWords";
+// import TableRecommendedWords from "../table/tableRecommendedWords/tableRecommendedWords";
 import TableKnownWords from "../table/tableKnownWords";
+import { inject, observer } from "mobx-react";
+import RecommendedWords from "./recommendedWords";
 
 //массив с заголовками для страниц
 const titles = [
@@ -62,7 +64,7 @@ const MyWords = props => {
 const myWordsArr = JSON.parse(localStorage.getItem("myWords"));
 const knownWordsArr = JSON.parse(localStorage.getItem("knownWords"));
 //компонент для главной страницы
-const MainPage = () => {
+const MainPage = props => {
   return (
     <React.Fragment>
       <Title name={titles[0]} />
@@ -71,7 +73,7 @@ const MainPage = () => {
         type="commonWords"
         collectionCardPath="/recommended-words"
         linkText="Посмотреть"
-        amount={bodyCellData?.length || <TextLoader />}
+        amount={props.data?.length || <TextLoader />}
       />
       <Title name={titles[1]} />
       <div className="main__collection-cards-container">
@@ -94,33 +96,47 @@ const MainPage = () => {
   );
 };
 
-//компонент для страницы с рекомендованными словами
-const RecommendedWords = () => {
-  //функция для показа карточки при нажатии на кнопку учить слова
-  useEffect(() => {
-    if (localStorage.getItem("myWords") === null) {
-      localStorage.setItem("myWords", "[]");
-    }
-  }, []);
+// //компонент для страницы с рекомендованными словами
+// const RecommendedWords = props => {
+//   //функция для показа карточки при нажатии на кнопку учить слова
+//   useEffect(() => {
+//     if (localStorage.getItem("myWords") === null) {
+//       localStorage.setItem("myWords", "[]");
+//     }
+//   }, []);
 
-  const [clicked, setClicked] = useState(null);
-  const handleClickToLearn = i => {
-    setClicked(i);
-  };
-  return (
-    <React.Fragment>
-      <Title name={titles[0]} />
-      <TableRecommendedWords onClickLearn={handleClickToLearn} />
-      {clicked != null ? (
-        <WordCardContainer
-          selected={clicked}
-          handleClickToLearn={handleClickToLearn}
-          arrayToShow={bodyCellData}
-        />
-      ) : null}
-    </React.Fragment>
-  );
-};
+//   const [clicked, setClicked] = useState(null);
+//   const handleClickToLearn = i => {
+//     setClicked(i);
+//   };
+//   return (
+//     <React.Fragment>
+//       <Title name={titles[0]} />
+//       <TableRecommendedWords
+//         onClickLearn={handleClickToLearn}
+//         data={props.data}
+//       />
+//       {clicked != null ? (
+//         <WordCardContainer
+//           selected={clicked}
+//           handleClickToLearn={handleClickToLearn}
+//           arrayToShow={bodyCellData}
+//         />
+//       ) : null}
+//     </React.Fragment>
+//   );
+// };
+
+// inject(({ dataStore }) => {
+//   const { data, getData } = dataStore;
+//   useEffect(() => {
+//     getData();
+//   });
+//   return {
+//     data,
+//     getData,
+//   };
+// })(observer(RecommendedWords));
 
 //компонент для показа выученных слов
 const KnownWords = () => {
@@ -151,7 +167,7 @@ const KnownWords = () => {
 };
 
 //делаем Switch, чтобы в main рендерились разные компоненты
-const Main = () => {
+const Main = props => {
   return (
     <main className="main">
       <Switch>
@@ -159,14 +175,37 @@ const Main = () => {
         <Route exact path="/add-word">
           <Title name={titles[2]} />
         </Route>
-        <Route exact path="/recommended-words" component={RecommendedWords} />
+        <Route
+          exact
+          path="/recommended-words"
+          // component={RecommendedWords}
+          // data={props.data}
+        >
+          <RecommendedWords data={props.data} />
+        </Route>
         <Route exact path="/known-words" component={KnownWords} />
 
-        <Route exact path="/" component={MainPage} />
+        <Route
+          exact
+          path="/"
+          // component={MainPage} data={props.data}
+        >
+          <MainPage data={props.data} />
+        </Route>
         <Route component={PageNotFound} />
       </Switch>
     </main>
   );
 };
 
-export default Main;
+export default inject(({ dataStore }) => {
+  const { data, getData } = dataStore;
+  useEffect(() => {
+    getData();
+  });
+  return {
+    data,
+    getData,
+  };
+})(observer(Main));
+//Main;

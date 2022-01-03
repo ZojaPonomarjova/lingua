@@ -1,8 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import "../tableCommon/tableCommon.scss";
 import HeaderRow from "../tableHeader";
-import { bodyCellData } from "../tableData/bodyCellData";
-import { BodyRowKnownWords, BodyRowRecommendedWords } from "../tableBody";
+import { BodyRowKnownWords } from "../tableBody";
 
 //компонент таблица
 const TableKnownWords = props => {

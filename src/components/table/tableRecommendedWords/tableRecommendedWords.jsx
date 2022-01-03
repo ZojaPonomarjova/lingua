@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 import "../tableCommon/tableCommon.scss";
 import HeaderRow from "../tableHeader";
-import { bodyCellData } from "../tableData/bodyCellData";
 import { BodyRowRecommendedWords } from "../tableBody";
+import { inject, observer } from "mobx-react";
 
 //компонент таблица
-const TableRecommendedWords = props => {
+const TableRecommendedWords = ({ data, ...props }) => {
   //массив для сохранения слов в localStorage
   const [myWordsArray, setMyWordsArray] = useState(
     JSON.parse(localStorage.getItem("myWords")) || [],
@@ -14,7 +14,6 @@ const TableRecommendedWords = props => {
   const [idArr, setIdArr] = useState(
     JSON.parse(localStorage.getItem("myWordsId")) || [],
   );
-
   //функция для редактирования строки и отмены редактирования строки
   //   const [selectedRowIndex, setSelectedRowIndex] = useState(-1);
 
@@ -64,7 +63,7 @@ const TableRecommendedWords = props => {
         <div className="scroll-table-body">
           <table className="table">
             <tbody>
-              {bodyCellData.map((bodyRow, i) => (
+              {data?.map((bodyRow, i) => (
                 <BodyRowRecommendedWords
                   //   onClickEditWord={() => handleClick(i)}
                   //   onClickCancel={() => handleClick(i)}
@@ -95,5 +94,16 @@ const TableRecommendedWords = props => {
     </React.Fragment>
   );
 };
+
+// export default inject(({ dataStore }) => {
+//   const { data, getData } = dataStore;
+//   useEffect(() => {
+//     getData();
+//   });
+//   return {
+//     data,
+//     getData,
+//   };
+// })(observer(TableRecommendedWords));
 
 export default TableRecommendedWords;
