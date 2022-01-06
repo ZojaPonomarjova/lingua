@@ -2,7 +2,8 @@ import React, { useState, useEffect } from "react";
 import "./tableCommon.scss";
 import HeaderRow from "../tableHeader";
 // import { bodyCellData } from "../tableData/bodyCellData";
-import { BodyRowSelection } from "../tableBody";
+import BodyRowSelection from "../tableBody";
+import ErrorMessage from "../../errorMessage";
 
 //компонент таблица
 const Table = props => {
@@ -53,7 +54,7 @@ const Table = props => {
           return item;
         }
       });
-      console.log(myWordsArrUpdate);
+      // console.log(myWordsArrUpdate);
       setMyWordsArray(myWordsArrUpdate);
     }
   };
@@ -74,11 +75,11 @@ const Table = props => {
   return (
     <React.Fragment>
       {myWordsArray?.length === 0 ? (
-        <p className="table__error-message">
-          Вы не добавили ни одного слова. Чтобы добавить слово, зайдите в раздел
-          &quot;Рекомендуемые слова&quot; и нажмите кнопку &quot;Добавить в
-          &apos;Мои слова&apos;&quot;
-        </p>
+        //Если в хранилище нет ни одного слова, выводим ошибку
+        <ErrorMessage
+          errorText={`Вы не добавили ни одного слова. Чтобы добавить слово, зайдите в раздел
+          "Мои слова" и нажмите кнопку "Знаю слово!"`}
+        />
       ) : (
         <div className="scroll-table">
           <table className="table">

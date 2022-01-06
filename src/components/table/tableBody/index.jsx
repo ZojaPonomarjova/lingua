@@ -1,15 +1,16 @@
 import React, { useState } from "react";
 import "./tableBody.scss";
-import { Button, SaveButton } from "../button";
+import { Button, SaveButton } from "../../button";
 // import classnames from "classnames";
 import {
   ButtonsRow,
   ButtonsRowRecommendedWords,
   ButtonsRowKnownWords,
 } from "../buttonsRow";
+import { inject, observer } from "mobx-react";
 
 //компонент для клетки в таблице
-const Bodycell = ({ text }) => {
+const BodyCell = ({ text }) => {
   return (
     <td className="table__body-cell">
       <p className="table__text">{text}</p>
@@ -45,11 +46,11 @@ const BodyRow = ({
 }) => {
   return (
     <React.Fragment>
-      {/* <Bodycell text={index} /> */}
-      <Bodycell text={english} />
-      <Bodycell text={transcription} />
-      <Bodycell text={russian} />
-      {/* <Bodycell text={tags} /> */}
+      {/* <BodyCell text={index} /> */}
+      <BodyCell text={english} />
+      <BodyCell text={transcription} />
+      <BodyCell text={russian} />
+      {/* <BodyCell text={tags} /> */}
       <td className="table__body-cell  table__body-cell_buttons">
         <ButtonsRow
           onClickEditWord={onClickEditWord}
@@ -70,22 +71,23 @@ const BodyRowKnownWords = ({
   english,
   transcription,
   russian,
-  deleteWord,
+  // deleteWord,
   ...props
 }) => {
   return (
     <tr className="table__body-row">
-      {/* <Bodycell text={index} /> */}
-      <Bodycell text={english} />
-      <Bodycell text={transcription} />
-      <Bodycell text={russian} />
-      {/* <Bodycell text={tags} /> */}
+      {/* <BodyCell text={index} /> */}
+      <BodyCell text={english} />
+      <BodyCell text={transcription} />
+      <BodyCell text={russian} />
+      {/* <BodyCell text={tags} /> */}
       <td className="table__body-cell  table__body-cell_buttons">
         <ButtonsRowKnownWords
-          deleteWord={deleteWord}
+          // deleteWord={deleteWord}
           onClickLearn={props.onClickLearn}
           clicked={props.clicked}
           learnButtonIndex={props.learnButtonIndex}
+          onClickDeleteWord={props.onClickDeleteWord}
         />
       </td>
     </tr>
@@ -102,11 +104,11 @@ const BodyRowRecommendedWords = ({
 }) => {
   return (
     <tr className="table__body-row">
-      {/* <Bodycell text={index} /> */}
-      <Bodycell text={english} />
-      <Bodycell text={transcription} />
-      <Bodycell text={russian} />
-      {/* <Bodycell text={tags} /> */}
+      {/* <BodyCell text={index} /> */}
+      <BodyCell text={english} />
+      <BodyCell text={transcription} />
+      <BodyCell text={russian} />
+      {/* <BodyCell text={tags} /> */}
       <td className="table__body-cell  table__body-cell_buttons">
         <ButtonsRowRecommendedWords
           // onClickEditWord={onClickEditWord}
@@ -261,24 +263,9 @@ const BodyRowSelection = ({
   };
 
   //функция выводит измененное состояние в консоль и закрывает режим редактирования
-  const handleClickToSave = id => {
-    console.log(value);
-    // console.log(value);
-    // const dataForSending = { id: props.id, ...value };
-    console.log(props.id);
-    fetch(`/api/words/${props.id}/update/`, {
-      method: "POST",
-      body: JSON.stringify(value),
-      headers: {
-        "Content-Type": "application/json;charset=utf-8",
-      },
-    })
-      .then(response => response.json())
-      .then(data => {
-        console.log(data);
-      })
-      .catch(error => console.log(error));
-    props.handleChangeWord(id);
+  const handleClickToSave = (index, id, value) => {
+    props.handleClickToSendChanges(id, value);
+    props.handleChangeWord(index);
   };
   return (
     <tr className="table__body-row">
@@ -290,9 +277,9 @@ const BodyRowSelection = ({
           index={index}
           onClickCancel={props.onClickCancel}
           saveOnClick={() =>
-            handleClickToSave(props.selectedRowIndexForEditing)
+            handleClickToSave(props.selectedRowIndexForEditing, props.id, value)
           }
-          handleClickToSave={props.handleClickToSave}
+          // handleClickToSave={props.handleClickToSave}
           handleChangeWord={props.handleChangeWord}
           // selectedRowIndex={props.selectedRowIndex}
           selectedRowIndexForEditing={props.selectedRowIndexForEditing}
@@ -321,5 +308,13 @@ const BodyRowSelection = ({
     </tr>
   );
 };
+export { BodyRowRecommendedWords, BodyRowKnownWords };
+export default inject(({ dataStore }) => {
+  const { handleClickToSendChanges, isWordChanged, data } = dataStore;
 
-export { BodyRowSelection, BodyRowRecommendedWords, BodyRowKnownWords };
+  return {
+    handleClickToSendChanges,
+    isWordChanged,
+    data,
+  };
+})(observer(BodyRowSelection));

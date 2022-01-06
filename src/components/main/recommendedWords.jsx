@@ -4,7 +4,6 @@ import React from "react";
 import WordCardContainer from "../wordCard/wordCardContainer";
 import { useState, useEffect } from "react";
 import TableRecommendedWords from "../table/tableRecommendedWords/tableRecommendedWords";
-// import { inject, observer } from "mobx-react";
 
 //компонент для страницы с рекомендованными словами
 const RecommendedWords = props => {
@@ -38,13 +37,3 @@ const RecommendedWords = props => {
 };
 
 export default RecommendedWords;
-// inject(({ dataStore }) => {
-//   const { data, getData } = dataStore;
-//   useEffect(() => {
-//     getData();
-//   });
-//   return {
-//     data,
-//     getData,
-//   };
-// })(observer(RecommendedWords));

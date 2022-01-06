@@ -16,8 +16,8 @@ const WordCard = props => {
     <div className="word-card" key={props.id} id={props.id}>
       <div className="cl-btn-2" onClick={() => props.handleClickToLearn(null)}>
         <div>
-          <div className="leftright"></div>
-          <div className="rightleft"></div>
+          <div className="left-right"></div>
+          <div className="right-left"></div>
           <span className="close-btn">закрыть</span>
         </div>
       </div>

@@ -77,6 +77,10 @@ const WordCardContainer = props => {
     [learnedWords, learnedWordsCount],
   );
 
+  if (!arrayToShow.length) {
+    return null;
+  }
+
   return (
     <div className="word-card__shadow-container">
       <div className="word-card__container">
@@ -95,8 +99,8 @@ const WordCardContainer = props => {
               onClick={() => props.handleClickToLearn(null)}
             >
               <div>
-                <div className="leftright"></div>
-                <div className="rightleft"></div>
+                <div className="left-right"></div>
+                <div className="right-left"></div>
                 <span className="close-btn">закрыть</span>
               </div>
             </div>

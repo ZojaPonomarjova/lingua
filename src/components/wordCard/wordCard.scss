@@ -14,7 +14,7 @@
   height: 68px;
   width: 50px;
 }
-.cl-btn-2 .leftright {
+.cl-btn-2 .left-right {
   height: 4px;
   width: 30px;
   position: absolute;
@@ -24,7 +24,7 @@
   transform: rotate(45deg);
   transition: all 0.3s ease-in;
 }
-.cl-btn-2 .rightleft {
+.cl-btn-2 .right-left {
   height: 4px;
   width: 30px;
   position: absolute;
@@ -45,11 +45,11 @@
   transition: all 0.3s ease-in;
   opacity: 0;
 }
-.cl-btn-2 div:hover .leftright {
+.cl-btn-2 div:hover .left-right {
   transform: rotate(-45deg);
   background-color: $darkGreen;
 }
-.cl-btn-2 div:hover .rightleft {
+.cl-btn-2 div:hover .right-left {
   transform: rotate(45deg);
   background-color: $darkGreen;
 }
@@ -151,6 +151,22 @@
   &:focus {
     // border: 1px dotted #cc7722;
     outline: 3px solid #cc7722;
+  }
+  &:disabled {
+    &:hover {
+      top: 0px;
+    }
+    // background-color: gray;
+    box-shadow: inset #947d3d 0 -1px 1px, inset 0 1px 1px #ad913b,
+      #705030 0 0 0 1px, #000 0 10px 15px -10px;
+    background: linear-gradient(
+        to left,
+        rgba(0, 0, 0, 0.2),
+        rgba(0, 0, 0, 0.05) 50%,
+        rgba(0, 0, 0, 0.2)
+      ),
+      linear-gradient($brown, $orange, $brown);
+    cursor: no-drop;
   }
 }
 
