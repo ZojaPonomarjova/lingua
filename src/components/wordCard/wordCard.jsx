@@ -41,7 +41,7 @@ const WordCard = props => {
                 type="cancelButton"
                 text="Знаю слово"
                 onClick={props.onClickKnownWordCount}
-                disabled={props.islearned}
+                disabled={props.isLearned}
 
                 // ref={ref}
               />

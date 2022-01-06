@@ -126,7 +126,7 @@ const WordCardContainer = props => {
             onClickKnownWordCount={() =>
               showLearnedWordsCount(arrayToShow[selectedCardIndex].id)
             }
-            islearned={learnedWords.includes(arrayToShow[selectedCardIndex].id)}
+            isLearned={learnedWords.includes(arrayToShow[selectedCardIndex].id)}
             // ref={ref}
             {...props}
           />

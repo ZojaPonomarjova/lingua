@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import "./tableBody.scss";
 import { inject, observer } from "mobx-react";
 import { BodyRow, BodyRowChange } from "./bodyRows";
