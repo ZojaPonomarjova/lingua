@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 // import "../tableCommon/tableCommon.scss";
 import HeaderRow from "../tableHeader";
-import { BodyRowKnownWords } from "../tableBody";
+import { BodyRowKnownWords } from "../tableBody/bodyRows";
 import ErrorMessage from "../../errorMessage";
 import { observer, inject } from "mobx-react";
 import "./tableKnownWords.scss";
@@ -16,7 +16,8 @@ const TableKnownWords = props => {
   const handleClickDeleteWord = (wordId, word) => {
     //убираем из массива с изученными словами те, которые удалили
     props.handleClickToDelete(wordId, word);
-    if (props.isDeleted === true) {
+    if (props.isDeleted) {
+      console.log(props.isDeleted);
       const knownWordsArrUpdate = knownWordsArr.filter(item => {
         if (item.id !== wordId) {
           return item;

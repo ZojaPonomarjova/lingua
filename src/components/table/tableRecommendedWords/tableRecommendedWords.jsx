@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "../tableCommon/tableCommon.scss";
 import HeaderRow from "../tableHeader";
-import { BodyRowRecommendedWords } from "../tableBody";
+import { BodyRowRecommendedWords } from "../tableBody/bodyRows";
 import Loader from "../../loader";
 import { observer, inject } from "mobx-react";
 import ErrorMessage from "../../errorMessage";

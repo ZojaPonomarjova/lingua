@@ -1,8 +1,6 @@
 import "./main.scss";
 import Title from "../titles";
-// import Table from "../table/tableCommon";
 import React from "react";
-// import WordCardContainer from "../wordCard/wordCardContainer";
 import { useEffect } from "react";
 import { Switch, Route } from "react-router-dom";
 import PageNotFound from "../pageNotFound";
