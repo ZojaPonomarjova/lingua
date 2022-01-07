@@ -43,7 +43,9 @@ export default class DataStore {
 
           this.isWordsLoading = false;
           this.isLoaded = true;
-          // setTimeout(() => (this.isWordsLoading = false), 5000);
+          // setTimeout(() => {
+          //   this.isWordsLoading = false;
+          // }, 5000);
           if (words.length === 0) {
             throw new ReferenceError("Что-то пошло не так.");
           }

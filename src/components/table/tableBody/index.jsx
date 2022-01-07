@@ -92,6 +92,15 @@ const BodyRowSelection = ({
     props.handleChangeWord(index);
   };
 
+  const handleClickToCancelEditing = () => {
+    props.handleChangeWord(props.indexForEditCancel);
+    setValue({
+      english: english,
+      transcription: transcription,
+      russian: russian,
+    });
+  };
+
   return (
     <tr className="table__body-row">
       {isChanged ? (
@@ -100,7 +109,7 @@ const BodyRowSelection = ({
           transcription={transcription}
           russian={russian}
           index={index}
-          onClickCancel={props.onClickCancel}
+          onClickCancel={handleClickToCancelEditing}
           saveOnClick={() =>
             handleClickToSave(props.selectedRowIndexForEditing, props.id, value)
           }

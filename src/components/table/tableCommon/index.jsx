@@ -95,7 +95,11 @@ const Table = props => {
                     onClickEditWord={() => {
                       props.handleChangeWord(i);
                     }}
-                    onClickCancel={() => props.handleChangeWord(i)}
+                    onClickCancel={() => {
+                      // props.handleChangeWord(i);
+                      props.handleChangeWord;
+                    }}
+                    indexForEditCancel={i}
                     key={bodyRow.id}
                     id={bodyRow.id}
                     // index={i + 1}
