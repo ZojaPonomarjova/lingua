@@ -16,15 +16,15 @@ const TableKnownWords = props => {
   const handleClickDeleteWord = (wordId, word) => {
     //убираем из массива с изученными словами те, которые удалили
     props.handleClickToDelete(wordId, word);
-    if (props.isDeleted) {
-      console.log(props.isDeleted);
-      const knownWordsArrUpdate = knownWordsArr.filter(item => {
-        if (item.id !== wordId) {
-          return item;
-        }
-      });
-      setKnownWordsArr(knownWordsArrUpdate);
-    }
+    // if (props.isDeleted) {
+    // console.log(props.isDeleted);
+    const knownWordsArrUpdate = knownWordsArr.filter(item => {
+      // if (item.id !== wordId) {
+      return item.id !== wordId;
+      // }
+    });
+    setKnownWordsArr(knownWordsArrUpdate);
+    // }
   };
 
   useEffect(() => {
@@ -87,11 +87,22 @@ const TableKnownWords = props => {
   );
 };
 export default inject(({ dataStore }) => {
-  const { handleClickToDelete, data, isDeleted } = dataStore;
+  const {
+    handleClickToDelete,
+    getData,
+    handleClickToAdd,
+    handleClickToSendChanges,
+    data,
+    isDeleted,
+  } = dataStore;
 
   return {
     handleClickToDelete,
     data,
     isDeleted,
+    getData,
+    handleClickToAdd,
+
+    handleClickToSendChanges,
   };
 })(observer(TableKnownWords));

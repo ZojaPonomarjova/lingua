@@ -1,4 +1,4 @@
-import { action, makeObservable, observable } from "mobx";
+import { action, makeObservable, observable, runInAction } from "mobx";
 
 export default class DataStore {
   data = [];
@@ -7,16 +7,17 @@ export default class DataStore {
 
   isWordsLoading = false;
   isLoaded = false;
-  isDeleted = undefined;
+  // isDeleted = undefined;
   isWordChanged = undefined;
 
   constructor() {
+    // makeAutoObservable(this);
     makeObservable(this, {
       data: observable,
       errorText: observable,
       isLoaded: observable,
       errorTextForGetData: observable,
-      isDeleted: observable,
+      // isDeleted: observable,
       isWordChanged: observable,
       getData: action,
       handleClickToAdd: action,
@@ -36,7 +37,10 @@ export default class DataStore {
       .then(words => {
         try {
           // console.log(words);
-          this.data = words;
+          runInAction(() => {
+            this.data = words;
+          });
+
           this.isWordsLoading = false;
           this.isLoaded = true;
           // setTimeout(() => (this.isWordsLoading = false), 5000);
@@ -83,14 +87,9 @@ export default class DataStore {
           .then(response => response.json())
           .then(word => {
             // console.log(word);
-            this.data.push(word);
-
-            // value = {
-            //   english: "",
-            //   transcription: "",
-            //   russian: "",
-            //   tags: "",
-            // };
+            runInAction(() => {
+              this.data.push(word);
+            });
           })
           .catch(error => {
             console.log(error);
@@ -108,7 +107,7 @@ export default class DataStore {
 
   //функция для удаления слов
   handleClickToDelete = (wordId, word) => {
-    this.isDeleted = undefined;
+    // this.isDeleted = undefined;
     try {
       fetch(`/api/words/${wordId}/delete`, {
         method: "POST",
@@ -119,27 +118,30 @@ export default class DataStore {
       })
         .then(response => response.json())
         .then(response => {
-          // console.log(response);
+          console.log(response);
           //если слово удаляется успешно, передаем состояние, чтобы удалить его из хранилища
-          this.isDeleted = true;
+          // this.isDeleted = true;
+          // console.log(this.isDeleted);
           //если запрос прошел, убираем слово в рекомендованных словах
-          if (response === true) {
-            const recommendedWordsArrUpdate = this.data.filter(item => {
-              if (item.id !== wordId) {
-                return item;
-              }
-            });
-            this.data = recommendedWordsArrUpdate;
-          }
+          runInAction(() => {
+            if (response === true) {
+              const recommendedWordsArrUpdate = this.data.filter(item => {
+                // if (item.id !== wordId) {
+                return item.id !== wordId;
+                // }
+              });
+              this.data = recommendedWordsArrUpdate;
+            }
+          });
         })
         .catch(error => {
           //если запрос не прошел, выводим ошибку и не удаляем слово из массива
-          this.isDeleted = false;
+          // this.isDeleted = false;
 
           console.log(error);
         });
     } catch (error) {
-      this.isDeleted = false;
+      // this.isDeleted = false;
       console.log(error);
     }
   };

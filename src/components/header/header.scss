@@ -37,6 +37,25 @@
   width: 50px;
   height: auto;
   cursor: pointer;
+  margin-right: 30px;
+}
+
+.header__container {
+  display: flex;
+  align-items: center;
+}
+
+.header__name {
+  // color: $olive;
+
+  font-family: "OpenSans-Medium", sans-serif;
+  font-weight: 500;
+  font-size: 20px;
+  background: #ea9f54;
+  background: linear-gradient(to right, #ea9f54 0%, #bf5a3b 100%);
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  // text-fill-color: transparent;
 }
 
 .header {

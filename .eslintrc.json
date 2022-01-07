@@ -10,6 +10,7 @@
     "plugin:react-hooks/recommended",
     "prettier"
   ],
+  "parser": "babel-eslint",
   "parserOptions": {
     "ecmaFeatures": {
       "jsx": true

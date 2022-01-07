@@ -29,8 +29,6 @@ const AddWord = props => {
     tagsError: "",
   });
 
-  // const [sendError, setSendError] = useState("");
-
   //функция для внесения изменений в инпутах с проверкой на наличие ошибок
   const onChangeWords = event => {
     //сохраняем состояние при изменении слов в инпутах
@@ -174,10 +172,21 @@ const AddWord = props => {
 };
 
 export default inject(({ dataStore }) => {
-  const { errorText, handleClickToAdd, data } = dataStore;
+  const {
+    errorText,
+    handleClickToAdd,
+    data,
+    // getData,
+    // handleClickToDelete,
+    // handleClickToSendChanges,
+  } = dataStore;
   return {
     errorText,
     handleClickToAdd,
     data,
+    // getData,
+
+    // handleClickToDelete,
+    // handleClickToSendChanges,
   };
 })(observer(AddWord));
