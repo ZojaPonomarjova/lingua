@@ -17,4 +17,7 @@
 
 .table__button-row .button__container {
   margin-right: 30px;
+  @media screen and (max-width: 300px) {
+    margin-right: 0px;
+  }
 }

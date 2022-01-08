@@ -21,9 +21,9 @@ const BodyRow = ({
   return (
     <React.Fragment>
       {/* <BodyCell text={index} /> */}
-      <BodyCell text={english} />
-      <BodyCell text={transcription} />
-      <BodyCell text={russian} />
+      <BodyCell text={english} dataLabel="english" />
+      <BodyCell text={transcription} dataLabel="transcription" />
+      <BodyCell text={russian} dataLabel="russian" />
       {/* <BodyCell text={tags} /> */}
       <td className="table__body-cell  table__body-cell_buttons">
         <ButtonsRow
@@ -51,9 +51,9 @@ const BodyRowKnownWords = ({
   return (
     <tr className="table__body-row">
       {/* <BodyCell text={index} /> */}
-      <BodyCell text={english} />
-      <BodyCell text={transcription} />
-      <BodyCell text={russian} />
+      <BodyCell text={english} dataLabel="english" />
+      <BodyCell text={transcription} dataLabel="transcription" />
+      <BodyCell text={russian} dataLabel="russian" />
       {/* <BodyCell text={tags} /> */}
       <td className="table__body-cell  table__body-cell_buttons">
         <ButtonsRowKnownWords
@@ -79,9 +79,9 @@ const BodyRowRecommendedWords = ({
   return (
     <tr className="table__body-row">
       {/* <BodyCell text={index} /> */}
-      <BodyCell text={english} />
-      <BodyCell text={transcription} />
-      <BodyCell text={russian} />
+      <BodyCell text={english} dataLabel="english" />
+      <BodyCell text={transcription} dataLabel="transcription" />
+      <BodyCell text={russian} dataLabel="russian" />
       {/* <BodyCell text={tags} /> */}
       <td className="table__body-cell  table__body-cell_buttons">
         <ButtonsRowRecommendedWords

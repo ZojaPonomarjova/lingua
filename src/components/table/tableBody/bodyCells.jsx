@@ -1,10 +1,12 @@
 // import "./tableBody.scss";
 
 //компонент для клетки в таблице
-const BodyCell = ({ text }) => {
+const BodyCell = ({ text, ...props }) => {
   return (
     <td className="table__body-cell">
-      <p className="table__text">{text}</p>
+      <p className="table__text" data-label={props.dataLabel}>
+        {text}
+      </p>
     </td>
   );
 };

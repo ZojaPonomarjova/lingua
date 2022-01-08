@@ -1,6 +1,7 @@
 import MenuItem from "./headerMenu";
 import "./header.scss";
 import { Link } from "react-router-dom";
+import MenuBurger from "./menuBurger";
 
 const Header = () => {
   // console.log(props);
@@ -19,6 +20,7 @@ const Header = () => {
           <MenuItem text="Добавить слово" href="/add-word"></MenuItem>
         </ul>
       </nav>
+      <MenuBurger />
     </header>
   );
 };
