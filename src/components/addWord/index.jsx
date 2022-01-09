@@ -96,7 +96,7 @@ const AddWord = props => {
     return <ErrorMessage errorText={props.errorText} />;
   }
   return (
-    <div>
+    <div className="add-word__container">
       <label htmlFor="english" className="input__label">
         Английский вариант
       </label>

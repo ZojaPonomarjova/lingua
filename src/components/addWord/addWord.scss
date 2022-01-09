@@ -4,16 +4,29 @@
   font-family: "OpenSans-Semibold", sans-serif;
   font-weight: 600;
   font-size: 18px;
+  margin-left: 5%;
+  @media screen and (max-width: 1023px) {
+    margin-left: 25%;
+  }
+  @media screen and (max-width: 578px) {
+    margin-left: 0%;
+  }
 }
 
 .add-input {
-  margin: 10px 0 0px;
+  margin: 10px 5% 0px;
   height: 35px;
 
   font-family: "OpenSans-Semibold", sans-serif;
   font-weight: 600;
   font-size: 16px;
   color: $darkBrown;
+  @media screen and (max-width: 1023px) {
+    margin-left: 25%;
+  }
+  @media screen and (max-width: 578px) {
+    margin-left: 5%;
+  }
 }
 
 .add-error {
@@ -21,5 +34,18 @@
 }
 
 .add-button {
-  margin-left: calc(45% - 82px);
+  margin-left: calc(48% - 62px);
+  @media screen and (max-width: 578px) {
+    margin-left: 0%;
+    margin-bottom: 20px;
+    margin-top: 0px;
+  }
+}
+
+.add-word__container {
+  max-width: 1000px;
+  margin: auto;
+  @media screen and (max-width: 578px) {
+    text-align: center;
+  }
 }

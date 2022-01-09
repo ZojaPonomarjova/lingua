@@ -85,6 +85,11 @@
       -0.1rem 0 2rem rgba(0, 0, 0, 0.12);
     // transform: scale(1.005);
   }
+
+  @media screen and (max-width: 578px) {
+    margin: 0px;
+    min-height: 300px;
+  }
 }
 
 .word-card__container {
@@ -96,9 +101,13 @@
   max-width: 1000px;
   margin: 10% auto 0;
   z-index: 4;
+  @media screen and (max-width: 1023px) {
+    margin: 150px auto 0;
+  }
 }
+
 .word-card__shadow-container {
-  background-color: rgba(0, 0, 0, 0.7);
+  background-color: rgba(0, 0, 0, 0.8);
 
   position: fixed;
   top: 0;
@@ -167,6 +176,12 @@
       ),
       linear-gradient($brown, $orange, $brown);
     cursor: no-drop;
+  }
+
+  @media screen and (max-width: 578px) {
+    font-size: 15px;
+    padding: 0.8em 0.7em;
+    margin-top: 20px;
   }
 }
 
