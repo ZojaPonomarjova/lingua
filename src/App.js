@@ -3,13 +3,17 @@ import "./components/assets/styles/common.scss";
 import Header from "./components/header/header";
 import Main from "./components/main";
 import Footer from "./components/footer/footer";
+import { Provider } from "mobx-react";
+import store from "./store";
 
 const App = () => {
   return (
     <div className="App">
-      <Header />
-      <Main />
-      <Footer />
+      <Provider {...store}>
+        <Header />
+        <Main />
+        <Footer />
+      </Provider>
     </div>
   );
 };

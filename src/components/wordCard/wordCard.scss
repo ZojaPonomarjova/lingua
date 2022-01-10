@@ -14,7 +14,7 @@
   height: 68px;
   width: 50px;
 }
-.cl-btn-2 .leftright {
+.cl-btn-2 .left-right {
   height: 4px;
   width: 30px;
   position: absolute;
@@ -24,7 +24,7 @@
   transform: rotate(45deg);
   transition: all 0.3s ease-in;
 }
-.cl-btn-2 .rightleft {
+.cl-btn-2 .right-left {
   height: 4px;
   width: 30px;
   position: absolute;
@@ -45,11 +45,11 @@
   transition: all 0.3s ease-in;
   opacity: 0;
 }
-.cl-btn-2 div:hover .leftright {
+.cl-btn-2 div:hover .left-right {
   transform: rotate(-45deg);
   background-color: $darkGreen;
 }
-.cl-btn-2 div:hover .rightleft {
+.cl-btn-2 div:hover .right-left {
   transform: rotate(45deg);
   background-color: $darkGreen;
 }
@@ -85,6 +85,11 @@
       -0.1rem 0 2rem rgba(0, 0, 0, 0.12);
     // transform: scale(1.005);
   }
+
+  @media screen and (max-width: 578px) {
+    margin: 0px;
+    min-height: 300px;
+  }
 }
 
 .word-card__container {
@@ -96,9 +101,13 @@
   max-width: 1000px;
   margin: 10% auto 0;
   z-index: 4;
+  @media screen and (max-width: 1023px) {
+    margin: 150px auto 0;
+  }
 }
+
 .word-card__shadow-container {
-  background-color: rgba(0, 0, 0, 0.7);
+  background-color: rgba(0, 0, 0, 0.8);
 
   position: fixed;
   top: 0;
@@ -151,6 +160,28 @@
   &:focus {
     // border: 1px dotted #cc7722;
     outline: 3px solid #cc7722;
+  }
+  &:disabled {
+    &:hover {
+      top: 0px;
+    }
+    // background-color: gray;
+    box-shadow: inset #947d3d 0 -1px 1px, inset 0 1px 1px #ad913b,
+      #705030 0 0 0 1px, #000 0 10px 15px -10px;
+    background: linear-gradient(
+        to left,
+        rgba(0, 0, 0, 0.2),
+        rgba(0, 0, 0, 0.05) 50%,
+        rgba(0, 0, 0, 0.2)
+      ),
+      linear-gradient($brown, $orange, $brown);
+    cursor: no-drop;
+  }
+
+  @media screen and (max-width: 578px) {
+    font-size: 15px;
+    padding: 0.8em 0.7em;
+    margin-top: 20px;
   }
 }
 

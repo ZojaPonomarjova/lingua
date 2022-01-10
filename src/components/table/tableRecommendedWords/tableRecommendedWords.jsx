@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from "react";
 import "../tableCommon/tableCommon.scss";
 import HeaderRow from "../tableHeader";
-import { bodyCellData } from "../tableData/bodyCellData";
-import { BodyRowRecommendedWords } from "../tableBody";
+import { BodyRowRecommendedWords } from "../tableBody/bodyRows";
+import Loader from "../../loader";
+import { observer, inject } from "mobx-react";
+import ErrorMessage from "../../errorMessage";
 
 //компонент таблица
-const TableRecommendedWords = props => {
+const TableRecommendedWords = ({ data, ...props }) => {
   //массив для сохранения слов в localStorage
   const [myWordsArray, setMyWordsArray] = useState(
     JSON.parse(localStorage.getItem("myWords")) || [],
@@ -14,7 +16,6 @@ const TableRecommendedWords = props => {
   const [idArr, setIdArr] = useState(
     JSON.parse(localStorage.getItem("myWordsId")) || [],
   );
-
   //функция для редактирования строки и отмены редактирования строки
   //   const [selectedRowIndex, setSelectedRowIndex] = useState(-1);
 
@@ -53,47 +54,63 @@ const TableRecommendedWords = props => {
   }, [myWordsArray, idArr]);
 
   const myWordsIdArr = JSON.parse(localStorage.getItem("myWordsId"));
+  //если возникла ошибка при получении данных с сервера, показываем ошибку
+  if (props.errorTextForGetData) {
+    return <ErrorMessage errorText={props.errorTextForGetData} />;
+  }
   return (
     <React.Fragment>
-      <div className="scroll-table">
-        <table className="table">
-          <thead>
-            <HeaderRow />
-          </thead>
-        </table>
-        <div className="scroll-table-body">
+      {!props.isWordsLoading ? (
+        <Loader />
+      ) : (
+        <div className="scroll-table">
           <table className="table">
-            <tbody>
-              {bodyCellData.map((bodyRow, i) => (
-                <BodyRowRecommendedWords
-                  //   onClickEditWord={() => handleClick(i)}
-                  //   onClickCancel={() => handleClick(i)}
-                  key={bodyRow.id}
-                  id={bodyRow.id}
-                  // index={i + 1}
-                  english={bodyRow.english}
-                  transcription={bodyRow.transcription}
-                  russian={bodyRow.russian}
-                  //   isChanged={i === selectedRowIndex}
-                  onClickLearn={() => props.onClickLearn(i)}
-                  clicked={props.clicked}
-                  learnButtonIndex={i}
-                  // tags={bodyRow.tags}
-                  addWordToMyWords={() => addWordToMyWords(bodyRow)}
-                  clickedToAdd={
-                    myWordsIdArr
-                      ? myWordsIdArr.includes(bodyRow.id) ||
-                        idArr.includes(bodyRow.id)
-                      : false
-                  }
-                />
-              ))}
-            </tbody>
+            <thead>
+              <HeaderRow />
+            </thead>
           </table>
+          <div className="scroll-table-body">
+            <table className="table">
+              <tbody>
+                {data?.map((bodyRow, i) => (
+                  <BodyRowRecommendedWords
+                    //   onClickEditWord={() => handleClick(i)}
+                    //   onClickCancel={() => handleClick(i)}
+                    key={bodyRow.id}
+                    id={bodyRow.id}
+                    // index={i + 1}
+                    english={bodyRow.english}
+                    transcription={bodyRow.transcription}
+                    russian={bodyRow.russian}
+                    //   isChanged={i === selectedRowIndex}
+                    onClickLearn={() => props.onClickLearn(i)}
+                    clicked={props.clicked}
+                    learnButtonIndex={i}
+                    // tags={bodyRow.tags}
+                    addWordToMyWords={() => addWordToMyWords(bodyRow)}
+                    clickedToAdd={
+                      myWordsIdArr
+                        ? myWordsIdArr.includes(bodyRow.id) ||
+                          idArr.includes(bodyRow.id)
+                        : false
+                    }
+                  />
+                ))}
+              </tbody>
+            </table>
+          </div>
         </div>
-      </div>
+      )}
     </React.Fragment>
   );
 };
 
-export default TableRecommendedWords;
+export default inject(({ dataStore }) => {
+  const { isWordsLoading, errorTextForGetData } = dataStore;
+  return {
+    isWordsLoading,
+    errorTextForGetData,
+  };
+})(observer(TableRecommendedWords));
+
+// export default TableRecommendedWords;

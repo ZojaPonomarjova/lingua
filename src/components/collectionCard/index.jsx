@@ -1,7 +1,7 @@
 import "./collectionCard.scss";
 import classnames from "classnames";
 import { Link } from "react-router-dom";
-import Title from "../titles";
+// import Title from "../titles";
 
 //компонент для главной страницы Карточка со ссылкой
 

@@ -1,0 +1,11 @@
+@import "../../assets/styles/vars.scss";
+
+.known-words__error {
+  text-align: center;
+  margin: 0px;
+  color: $darkGreen;
+  font-family: "OpenSans-Semibold", sans-serif;
+  font-weight: 600;
+  font-size: 15px;
+  margin-top: -15px;
+}

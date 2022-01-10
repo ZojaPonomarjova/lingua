@@ -21,6 +21,9 @@
   flex-wrap: wrap;
 
   margin: 0;
+  @media screen and (max-width: 578px) {
+    flex-direction: column-reverse;
+  }
 }
 
 .footer__social {
