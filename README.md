@@ -21,7 +21,8 @@ _Помощь в изучении слов английского языка._
     4.2 Удаление слова.<br>
 5.  <ins>Страница "Добавить слово"</ins>. <br>
     Отправка нового слова на сервер.<br>
-    Так же добавлен Loader (ожидание загрузки с сервера) и страница 404.<br>
+
+    Также добавлен Loader (ожидание загрузки с сервера) и страница 404.<br>
 
     ![GitHub language count](https://img.shields.io/github/languages/count/ZojaPonomarjova/lingua)
     ![GitHub top language](https://img.shields.io/github/languages/top/ZojaPonomarjova/lingua)

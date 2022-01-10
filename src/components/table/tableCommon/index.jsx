@@ -1,80 +1,15 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import "./tableCommon.scss";
 import HeaderRow from "../tableHeader";
-// import { bodyCellData } from "../tableData/bodyCellData";
 import BodyRowSelection from "../tableBody";
 import ErrorMessage from "../../errorMessage";
+import { observer, inject } from "mobx-react";
 
 //компонент таблица
 const Table = props => {
-  // //функция для редактирования строки и отмены редактирования строки
-  // const [selectedRowIndex, setSelectedRowIndex] = useState(-1);
-
-  // const handleChangeWord = id => {
-  //   if (selectedRowIndex !== id) {
-  //     setSelectedRowIndex(id);
-  //   } else {
-  //     setSelectedRowIndex(-1);
-  //   }
-  // };
-  //массив для сохранения изученных слов в localStorage
-  const [knownWordsArray, setKnownWordsArray] = useState(
-    JSON.parse(localStorage.getItem("knownWords")) || [],
-  );
-  //отдельный массив с ид изученных слов, чтобы по ним дизэйблить кнопку добавления. Иначе не смогла
-  const [knownWordsIdArr, setKnownWordsIdArr] = useState(
-    JSON.parse(localStorage.getItem("knownWordsId")) || [],
-  );
-
-  //массив для сохранения моих слов в localStorage
-  const [myWordsArray, setMyWordsArray] = useState(
-    JSON.parse(localStorage.getItem("myWords")) || [],
-  );
-
-  //добавляем слова в массив
-  const addWordToKnownWords = word => {
-    //если слова не было в массиве, добавляем его в массив
-    if (!JSON.parse(localStorage.getItem("knownWords")).includes(word)) {
-      //если длина массива больше ноля, то myWordsArray является итерируемым и мы можем так сделать
-      if (knownWordsArray.length > 0) {
-        setKnownWordsArray([...knownWordsArray, word]);
-        setKnownWordsIdArr([...knownWordsIdArr, word.id]);
-      } else {
-        //Если нет, то сделала добавление нового слова через копию массива
-        const emptyArray = [];
-        emptyArray.push(word);
-        setKnownWordsArray(emptyArray);
-        const emptyArray1 = [];
-        emptyArray1.push(word.id);
-        setKnownWordsIdArr(emptyArray1);
-      }
-      //убираем из массива с моими словами выученные слова
-      const myWordsArrUpdate = myWordsArray.filter(item => {
-        if (item.id !== word.id) {
-          return item;
-        }
-      });
-      // console.log(myWordsArrUpdate);
-      setMyWordsArray(myWordsArrUpdate);
-    }
-  };
-
-  // //обновляем массивы в хранилище
-  useEffect(() => {
-    localStorage.setItem("knownWords", JSON.stringify(knownWordsArray));
-    localStorage.setItem("knownWordsId", JSON.stringify(knownWordsIdArr));
-    localStorage.setItem("myWords", JSON.stringify(myWordsArray));
-    //myWordsArray
-  }, [knownWordsArray, knownWordsIdArr, myWordsArray]);
-
-  const IdArrForKnownWords = JSON.parse(localStorage.getItem("knownWordsId"));
-
-  //Достаем из хранилища массив со словами для генерации таблицы
-  // const myWordsArr = JSON.parse(localStorage.getItem("myWords")) || [];
-
   return (
     <React.Fragment>
-      {myWordsArray?.length === 0 ? (
+      {props.myWordsArray?.length === 0 ? (
         //Если в хранилище нет ни одного слова, выводим ошибку
         <ErrorMessage
           errorText={`Вы не добавили ни одного слова. Чтобы добавить слово, зайдите в раздел
@@ -90,7 +25,7 @@ const Table = props => {
           <div className="scroll-table-body">
             <table className="table">
               <tbody>
-                {myWordsArray?.map((bodyRow, i) => (
+                {props.myWordsArray?.map((bodyRow, i) => (
                   <BodyRowSelection
                     onClickEditWord={() => {
                       props.handleChangeWord(i);
@@ -114,13 +49,14 @@ const Table = props => {
                     selectedRowIndex={props.selectedRowIndex}
                     selectedRowIndexForEditing={i}
                     handleChangeWord={props.handleChangeWord}
-                    addWordToKnown={() => addWordToKnownWords(bodyRow)}
-                    addedToKnown={
-                      IdArrForKnownWords
-                        ? IdArrForKnownWords.includes(bodyRow.id) ||
-                          knownWordsIdArr.includes(bodyRow.id)
-                        : false
-                    }
+                    addWordToKnown={() => props.addWordToKnownWords(bodyRow)}
+                    // addedToKnown={
+                    //   IdArrForKnownWords
+                    //     ?
+                    //     IdArrForKnownWords.includes(bodyRow.id) ||
+                    //       knownWordsIdArr.includes(bodyRow.id)
+                    //     : false
+                    // }
                   />
                 ))}
               </tbody>
@@ -132,4 +68,18 @@ const Table = props => {
   );
 };
 
-export default Table;
+export default inject(({ dataStore }) => {
+  const {
+    addWordToKnownWords,
+    knownWordsArray,
+
+    myWordsArray,
+  } = dataStore;
+  return {
+    addWordToKnownWords,
+    knownWordsArray,
+
+    myWordsArray,
+  };
+})(observer(Table));
+// export default Table;
