@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import "../tableCommon/tableCommon.scss";
 import HeaderRow from "../tableHeader";
 import { BodyRowRecommendedWords } from "../tableBody/bodyRows";
@@ -8,52 +8,6 @@ import ErrorMessage from "../../errorMessage";
 
 //компонент таблица
 const TableRecommendedWords = ({ data, ...props }) => {
-  //массив для сохранения слов в localStorage
-  const [myWordsArray, setMyWordsArray] = useState(
-    JSON.parse(localStorage.getItem("myWords")) || [],
-  );
-  //отдельный массив с ид, чтобы по ним дизэйблить кнопку добавления. Иначе не смогла
-  const [idArr, setIdArr] = useState(
-    JSON.parse(localStorage.getItem("myWordsId")) || [],
-  );
-  //функция для редактирования строки и отмены редактирования строки
-  //   const [selectedRowIndex, setSelectedRowIndex] = useState(-1);
-
-  //   const handleClick = id => {
-  //     if (selectedRowIndex !== id) {
-  //       setSelectedRowIndex(id);
-  //     } else {
-  //       setSelectedRowIndex(-1);
-  //     }
-  //   };
-
-  //добавляем слова в массив
-  const addWordToMyWords = word => {
-    //если слова не было в массиве, добавляем его в массив
-    if (!JSON.parse(localStorage.getItem("myWords")).includes(word)) {
-      //если длина массива больше ноля, то myWordsArray является итерируемым и мы можем так сделать
-      if (myWordsArray.length > 0) {
-        setMyWordsArray([...myWordsArray, word]);
-        setIdArr([...idArr, word.id]);
-      } else {
-        //Если нет, то сделала добавление нового слова через копию массива
-        const emptyArray = [];
-        emptyArray.push(word);
-        setMyWordsArray(emptyArray);
-        const emptyArray1 = [];
-        emptyArray1.push(word.id);
-        setIdArr(emptyArray1);
-      }
-    }
-  };
-
-  // //обновляем массивы в хранилище
-  useEffect(() => {
-    localStorage.setItem("myWords", JSON.stringify(myWordsArray));
-    localStorage.setItem("myWordsId", JSON.stringify(idArr));
-  }, [myWordsArray, idArr]);
-
-  const myWordsIdArr = JSON.parse(localStorage.getItem("myWordsId"));
   //если возникла ошибка при получении данных с сервера, показываем ошибку
   if (props.errorTextForGetData) {
     return <ErrorMessage errorText={props.errorTextForGetData} />;
@@ -86,14 +40,8 @@ const TableRecommendedWords = ({ data, ...props }) => {
                     onClickLearn={() => props.onClickLearn(i)}
                     clicked={props.clicked}
                     learnButtonIndex={i}
-                    // tags={bodyRow.tags}
-                    addWordToMyWords={() => addWordToMyWords(bodyRow)}
-                    clickedToAdd={
-                      myWordsIdArr
-                        ? myWordsIdArr.includes(bodyRow.id) ||
-                          idArr.includes(bodyRow.id)
-                        : false
-                    }
+                    addWordToMyWords={() => props.addWordToMyWords(bodyRow)}
+                    clickedToAdd={props.myWordsIdArr.includes(bodyRow.id)}
                   />
                 ))}
               </tbody>
@@ -106,11 +54,18 @@ const TableRecommendedWords = ({ data, ...props }) => {
 };
 
 export default inject(({ dataStore }) => {
-  const { isWordsLoading, errorTextForGetData } = dataStore;
+  const {
+    isWordsLoading,
+    errorTextForGetData,
+    addWordToMyWords,
+    myWordsArray,
+    myWordsIdArr,
+  } = dataStore;
   return {
     isWordsLoading,
     errorTextForGetData,
+    addWordToMyWords,
+    myWordsArray,
+    myWordsIdArr,
   };
 })(observer(TableRecommendedWords));
-
-// export default TableRecommendedWords;
