@@ -8,11 +8,6 @@ import TableKnownWords from "../table/tableKnownWords";
 
 //компонент для показа выученных слов
 const KnownWords = () => {
-  //   useEffect(() => {
-  //     if (localStorage.getItem("myWords") === null) {
-  //       localStorage.setItem("myWords", "[]");
-  //     }
-  //   }, []);
   //функция для показа карточки при нажатии на кнопку учить слова
   const [clicked, setClicked] = useState(null);
   const handleClickToLearn = i => {

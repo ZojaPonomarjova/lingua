@@ -74,7 +74,6 @@ const DeleteButton = props => {
         type="buttonKnown"
         text={"Удалить слово"}
         onClick={props.onClickDeleteWord}
-        // disabled={props.disabled}
       />
     </React.Fragment>
   );

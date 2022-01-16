@@ -31,13 +31,11 @@ const Table = props => {
                       props.handleChangeWord(i);
                     }}
                     onClickCancel={() => {
-                      // props.handleChangeWord(i);
                       props.handleChangeWord;
                     }}
                     indexForEditCancel={i}
                     key={bodyRow.id}
                     id={bodyRow.id}
-                    // index={i + 1}
                     english={bodyRow.english}
                     transcription={bodyRow.transcription}
                     russian={bodyRow.russian}
@@ -50,13 +48,6 @@ const Table = props => {
                     selectedRowIndexForEditing={i}
                     handleChangeWord={props.handleChangeWord}
                     addWordToKnown={() => props.addWordToKnownWords(bodyRow)}
-                    // addedToKnown={
-                    //   IdArrForKnownWords
-                    //     ?
-                    //     IdArrForKnownWords.includes(bodyRow.id) ||
-                    //       knownWordsIdArr.includes(bodyRow.id)
-                    //     : false
-                    // }
                   />
                 ))}
               </tbody>
@@ -82,4 +73,3 @@ export default inject(({ dataStore }) => {
     myWordsArray,
   };
 })(observer(Table));
-// export default Table;

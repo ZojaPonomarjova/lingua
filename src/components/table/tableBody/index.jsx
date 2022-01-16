@@ -17,7 +17,6 @@ const BodyRowSelection = ({
   english,
   transcription,
   russian,
-  // tags,
   index,
   isChanged,
   ...props
@@ -113,9 +112,7 @@ const BodyRowSelection = ({
           saveOnClick={() =>
             handleClickToSave(props.selectedRowIndexForEditing, props.id, value)
           }
-          // handleClickToSave={props.handleClickToSave}
           handleChangeWord={props.handleChangeWord}
-          // selectedRowIndex={props.selectedRowIndex}
           selectedRowIndexForEditing={props.selectedRowIndexForEditing}
           translationValue={value.russian}
           onChangeWords={onChangeWords}

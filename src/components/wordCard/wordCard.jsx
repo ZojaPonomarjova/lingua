@@ -42,15 +42,12 @@ const WordCard = props => {
                 text="Знаю слово"
                 onClick={props.onClickKnownWordCount}
                 disabled={props.isLearned}
-
-                // ref={ref}
               />
             </div>
           </React.Fragment>
         ) : (
           <ShowTranslationButton
             showTranslationButtonOnClick={props.showTranslationButtonOnClick}
-            // clicked={props.clicked}
             ref={ref}
           />
         )}

@@ -1,7 +1,6 @@
 import React from "react";
 import "./tableBody.scss";
 import { Button, SaveButton } from "../../button";
-// import classnames from "classnames";
 import {
   ButtonsRow,
   ButtonsRowRecommendedWords,
@@ -20,11 +19,9 @@ const BodyRow = ({
 }) => {
   return (
     <React.Fragment>
-      {/* <BodyCell text={index} /> */}
       <BodyCell text={english} dataLabel="english" />
       <BodyCell text={transcription} dataLabel="transcription" />
       <BodyCell text={russian} dataLabel="russian" />
-      {/* <BodyCell text={tags} /> */}
       <td className="table__body-cell  table__body-cell_buttons">
         <ButtonsRow
           onClickEditWord={onClickEditWord}
@@ -50,14 +47,11 @@ const BodyRowKnownWords = ({
 }) => {
   return (
     <tr className="table__body-row">
-      {/* <BodyCell text={index} /> */}
       <BodyCell text={english} dataLabel="english" />
       <BodyCell text={transcription} dataLabel="transcription" />
       <BodyCell text={russian} dataLabel="russian" />
-      {/* <BodyCell text={tags} /> */}
       <td className="table__body-cell  table__body-cell_buttons">
         <ButtonsRowKnownWords
-          // deleteWord={deleteWord}
           onClickLearn={props.onClickLearn}
           clicked={props.clicked}
           learnButtonIndex={props.learnButtonIndex}
@@ -78,14 +72,11 @@ const BodyRowRecommendedWords = ({
 }) => {
   return (
     <tr className="table__body-row">
-      {/* <BodyCell text={index} /> */}
       <BodyCell text={english} dataLabel="english" />
       <BodyCell text={transcription} dataLabel="transcription" />
       <BodyCell text={russian} dataLabel="russian" />
-      {/* <BodyCell text={tags} /> */}
       <td className="table__body-cell  table__body-cell_buttons">
         <ButtonsRowRecommendedWords
-          // onClickEditWord={onClickEditWord}
           onClickLearn={props.onClickLearn}
           clicked={props.clicked}
           learnButtonIndex={props.learnButtonIndex}

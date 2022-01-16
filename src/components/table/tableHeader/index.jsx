@@ -1,5 +1,4 @@
 import "./tableHeader.scss";
-// import { tableHeaderData } from "../tableData/tableHeaderData";
 
 //компонент для клетки в шапке таблицы
 const HeaderCell = ({ text }) => {

@@ -4,7 +4,6 @@
 
 .cl-btn-2 {
   align-self: flex-end;
-  //   margin: 15px;
   display: flex;
   justify-content: flex-end;
 }
@@ -65,7 +64,6 @@
   min-height: 300px;
   margin: 20px;
 
-  //   background-color: $beige-yellow;
   background: rgb(241, 224, 177);
   background: linear-gradient(
     335deg,
@@ -83,7 +81,6 @@
   &:hover {
     box-shadow: 0.1rem 1rem 2rem rgba(0, 0, 0, 0.12),
       -0.1rem 0 2rem rgba(0, 0, 0, 0.12);
-    // transform: scale(1.005);
   }
 
   @media screen and (max-width: 578px) {
@@ -94,7 +91,7 @@
 
 .word-card__container {
   display: flex;
-  // flex-wrap: wrap;
+
   justify-content: space-around;
   align-items: center;
 
@@ -124,7 +121,6 @@
   font-weight: 700;
   font-size: 18px;
   color: white;
-  // text-shadow: 0 -1px 1px #cc5500;
   user-select: none;
   padding: 0.8em 2em;
   outline: none;
@@ -144,7 +140,6 @@
   transition: 0.2s;
 
   &:hover {
-    // background-size: 140% 100%, auto;
     top: 2px;
     box-shadow: inset #ebab00 0 -1px 1px, inset 0 1px 1px #ffbf00,
       #cc7722 0 0 0 1px, 0 10px 10px -8px #000;
@@ -158,14 +153,12 @@
   }
 
   &:focus {
-    // border: 1px dotted #cc7722;
     outline: 3px solid #cc7722;
   }
   &:disabled {
     &:hover {
       top: 0px;
     }
-    // background-color: gray;
     box-shadow: inset #947d3d 0 -1px 1px, inset 0 1px 1px #ad913b,
       #705030 0 0 0 1px, #000 0 10px 15px -10px;
     background: linear-gradient(

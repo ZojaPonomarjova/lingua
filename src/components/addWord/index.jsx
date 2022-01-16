@@ -78,7 +78,6 @@ const AddWord = props => {
         [event.target.name + "Error"]: "",
       });
     }
-    // console.log(value);
   };
   //функция для отправки слова на сервер и очистки полей
   const addWordAndClearInputs = () => {
@@ -172,21 +171,10 @@ const AddWord = props => {
 };
 
 export default inject(({ dataStore }) => {
-  const {
-    errorText,
-    handleClickToAdd,
-    data,
-    // getData,
-    // handleClickToDelete,
-    // handleClickToSendChanges,
-  } = dataStore;
+  const { errorText, handleClickToAdd, data } = dataStore;
   return {
     errorText,
     handleClickToAdd,
     data,
-    // getData,
-
-    // handleClickToDelete,
-    // handleClickToSendChanges,
   };
 })(observer(AddWord));

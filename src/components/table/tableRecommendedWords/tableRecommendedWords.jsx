@@ -28,15 +28,11 @@ const TableRecommendedWords = ({ data, ...props }) => {
               <tbody>
                 {data?.map((bodyRow, i) => (
                   <BodyRowRecommendedWords
-                    //   onClickEditWord={() => handleClick(i)}
-                    //   onClickCancel={() => handleClick(i)}
                     key={bodyRow.id}
                     id={bodyRow.id}
-                    // index={i + 1}
                     english={bodyRow.english}
                     transcription={bodyRow.transcription}
                     russian={bodyRow.russian}
-                    //   isChanged={i === selectedRowIndex}
                     onClickLearn={() => props.onClickLearn(i)}
                     clicked={props.clicked}
                     learnButtonIndex={i}
