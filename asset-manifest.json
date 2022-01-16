@@ -1,0 +1,24 @@
+{
+  "files": {
+    "main.css": "/lingua/static/css/main.592c71ee.chunk.css",
+    "main.js": "/lingua/static/js/main.49de3e85.chunk.js",
+    "main.js.map": "/lingua/static/js/main.49de3e85.chunk.js.map",
+    "runtime-main.js": "/lingua/static/js/runtime-main.f15b46e2.js",
+    "runtime-main.js.map": "/lingua/static/js/runtime-main.f15b46e2.js.map",
+    "static/js/2.f9979767.chunk.js": "/lingua/static/js/2.f9979767.chunk.js",
+    "static/js/2.f9979767.chunk.js.map": "/lingua/static/js/2.f9979767.chunk.js.map",
+    "static/js/3.4dca5193.chunk.js": "/lingua/static/js/3.4dca5193.chunk.js",
+    "static/js/3.4dca5193.chunk.js.map": "/lingua/static/js/3.4dca5193.chunk.js.map",
+    "index.html": "/lingua/index.html",
+    "static/css/main.592c71ee.chunk.css.map": "/lingua/static/css/main.592c71ee.chunk.css.map",
+    "static/js/2.f9979767.chunk.js.LICENSE.txt": "/lingua/static/js/2.f9979767.chunk.js.LICENSE.txt",
+    "static/media/collectionCard.scss": "/lingua/static/media/Rubik-Medium.5bd2b2c6.ttf",
+    "static/media/pageNotFound.scss": "/lingua/static/media/cat-head-smash.a6e92b9c.gif"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.f15b46e2.js",
+    "static/js/2.f9979767.chunk.js",
+    "static/css/main.592c71ee.chunk.css",
+    "static/js/main.49de3e85.chunk.js"
+  ]
+}
