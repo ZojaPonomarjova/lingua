@@ -1,6 +1,8 @@
 import "./wordCard.scss";
 import React, { useEffect, useRef } from "react";
 import ShowTranslationButton, { Button } from "../button";
+import eye from "../assets/images/hidden.png";
+import confetti from "../assets/images/confetti.png";
 
 //перевод, "спрятанный под кнопкой"
 const HiddenText = ({ translation }) => {
@@ -29,14 +31,14 @@ const WordCard = props => {
             <HiddenText translation={props.russian} />
             <div className="word-card__buttons-container">
               <Button
-                src="../assets/images/hidden.png"
+                src={eye}
                 alt="eye"
                 type="cancelButton"
                 text="Скрыть перевод"
                 onClick={props.onClickHideTranslation}
               />
               <Button
-                src="../assets/images/confetti.png"
+                src={confetti}
                 alt="confetti"
                 type="cancelButton"
                 text="Знаю слово"
