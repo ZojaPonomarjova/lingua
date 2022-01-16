@@ -3,7 +3,7 @@
   "proxy": "http://itgirlschool.justmakeit.ru",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://ZojaPonomarjova.github.io/lingua",
+  "homepage": "https://zojaponomarjova.github.io/lingua/",
   "dependencies": {
     "@testing-library/jest-dom": "^5.15.0",
     "@testing-library/react": "^11.2.7",
