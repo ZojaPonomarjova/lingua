@@ -2,6 +2,8 @@ import "./wordCard.scss";
 import WordCard from "./wordCard";
 import { useState, useCallback } from "react";
 import classnames from "classnames";
+import rightArrow from "../assets/images/right-arrow.png";
+import leftArrow from "../assets/images/left-arrow.png";
 
 //компонент для стрелок в карусели
 const Arrow = props => {
@@ -84,7 +86,7 @@ const WordCardContainer = props => {
     <div className="word-card__shadow-container">
       <div className="word-card__container">
         <Arrow
-          src={"../assets/images/left-arrow.png"}
+          src={leftArrow}
           alt={"left-arrow"}
           onClick={handleClickPrev}
           className={classnames("", {
@@ -135,7 +137,7 @@ const WordCardContainer = props => {
           <div className="word-card__img-container" />
         ) : (
           <Arrow
-            src={"../assets/images/right-arrow.png"}
+            src={rightArrow}
             alt={"right-arrow"}
             onClick={handleClickNext}
             className={""}

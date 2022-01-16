@@ -2,13 +2,14 @@ import MenuItem from "./headerMenu";
 import "./header.scss";
 import { Link } from "react-router-dom";
 import MenuBurger from "./menuBurger";
+import books from "../assets/images/books.png";
 
 const Header = () => {
   return (
     <header className="header">
       <div className="header__container">
         <Link className="header__logo" to="/">
-          <img src="../assets/images/books.png" alt="books" className="logo" />
+          <img src={books} alt="books" className="logo" />
         </Link>
         <span className="header__name">lingua</span>
       </div>
