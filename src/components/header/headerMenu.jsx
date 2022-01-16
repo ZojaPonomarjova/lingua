@@ -1,4 +1,3 @@
-// import { menuItems } from "./menuItems";
 import { Link } from "react-router-dom";
 
 //компонент для ссылки

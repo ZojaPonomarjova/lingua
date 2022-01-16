@@ -1,6 +1,5 @@
 import "./buttonsRow.scss";
-// import { Button } from "../../button";
-// import React from "react";
+
 import {
   EditButton,
   LearnButton,
@@ -33,7 +32,6 @@ const ButtonsRowRecommendedWords = ({ onClickLearn, ...props }) => {
         disabled={props.clickedToAdd}
       />
       <LearnButton onClickLearn={onClickLearn} clicked={props.clicked} />
-      {/* <KnownButton /> */}
     </div>
   );
 };

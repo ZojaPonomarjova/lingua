@@ -24,7 +24,6 @@ const MyWords = props => {
     }
   };
   const myWordsArr = JSON.parse(localStorage.getItem("myWords"));
-  // console.log(isClicked);
   return (
     <React.Fragment>
       <Title name={"Мой словарь"} />

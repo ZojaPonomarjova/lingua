@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 import MenuBurger from "./menuBurger";
 
 const Header = () => {
-  // console.log(props);
   return (
     <header className="header">
       <div className="header__container">

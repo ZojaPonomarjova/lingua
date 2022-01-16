@@ -30,10 +30,8 @@ const TableKnownWords = props => {
                     onClickEditWord={() => {
                       props.handleChangeWord(i);
                     }}
-                    // onClickCancel={() => props.handleChangeWord(i)}
                     key={bodyRow.id}
                     id={bodyRow.id}
-                    // index={i + 1}
                     english={bodyRow.english}
                     transcription={bodyRow.transcription}
                     russian={bodyRow.russian}

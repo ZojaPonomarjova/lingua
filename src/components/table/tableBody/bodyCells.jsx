@@ -1,5 +1,3 @@
-// import "./tableBody.scss";
-
 //компонент для клетки в таблице
 const BodyCell = ({ text, ...props }) => {
   return (

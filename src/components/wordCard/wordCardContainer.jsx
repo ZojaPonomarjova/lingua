@@ -1,6 +1,5 @@
 import "./wordCard.scss";
 import WordCard from "./wordCard";
-// import { bodyCellData } from "../tableData/bodyCellData";
 import { useState, useCallback } from "react";
 import classnames from "classnames";
 

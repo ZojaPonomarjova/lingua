@@ -7,8 +7,6 @@
 
   display: flex;
   justify-content: space-between;
-
-  //   width: 50vw;
 }
 
 .list__link {
@@ -23,10 +21,6 @@
   &:hover {
     color: $lightGreen;
   }
-
-  // &:visited {
-  //   color: $brown;
-  // }
 }
 
 .logo {
@@ -46,8 +40,6 @@
 }
 
 .header__name {
-  // color: $olive;
-
   font-family: "OpenSans-Medium", sans-serif;
   font-weight: 500;
   font-size: 20px;
@@ -55,7 +47,6 @@
   background: linear-gradient(to right, #ea9f54 0%, #bf5a3b 100%);
   background-clip: text;
   -webkit-text-fill-color: transparent;
-  // text-fill-color: transparent;
 }
 
 .header {
@@ -164,7 +155,6 @@
 
   background: #ece898;
   list-style-type: none;
-  // -webkit-font-smoothing: antialiased;
 
   transform-origin: 0% 0%;
   transform: translate(100%, 0);

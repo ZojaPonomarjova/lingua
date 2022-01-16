@@ -65,21 +65,12 @@ const Main = props => {
           <Title name={titles[2]} />
           <AddWord />
         </Route>
-        <Route
-          exact
-          path="/recommended-words"
-          // component={RecommendedWords}
-          // data={props.data}
-        >
+        <Route exact path="/recommended-words">
           <RecommendedWords data={props.data} />
         </Route>
         <Route exact path="/known-words" component={KnownWords} />
 
-        <Route
-          exact
-          path="/"
-          // component={MainPage} data={props.data}
-        >
+        <Route exact path="/">
           <MainPage data={props.data} />
         </Route>
         <Route component={PageNotFound} />
@@ -99,4 +90,3 @@ export default inject(({ dataStore }) => {
     handleClickToDelete,
   };
 })(observer(Main));
-//Main;
