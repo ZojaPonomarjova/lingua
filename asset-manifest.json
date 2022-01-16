@@ -1,8 +1,8 @@
 {
   "files": {
-    "main.css": "/lingua/static/css/main.592c71ee.chunk.css",
-    "main.js": "/lingua/static/js/main.49de3e85.chunk.js",
-    "main.js.map": "/lingua/static/js/main.49de3e85.chunk.js.map",
+    "main.css": "/lingua/static/css/main.8820ace1.chunk.css",
+    "main.js": "/lingua/static/js/main.6a22c262.chunk.js",
+    "main.js.map": "/lingua/static/js/main.6a22c262.chunk.js.map",
     "runtime-main.js": "/lingua/static/js/runtime-main.f15b46e2.js",
     "runtime-main.js.map": "/lingua/static/js/runtime-main.f15b46e2.js.map",
     "static/js/2.f9979767.chunk.js": "/lingua/static/js/2.f9979767.chunk.js",
@@ -10,15 +10,27 @@
     "static/js/3.4dca5193.chunk.js": "/lingua/static/js/3.4dca5193.chunk.js",
     "static/js/3.4dca5193.chunk.js.map": "/lingua/static/js/3.4dca5193.chunk.js.map",
     "index.html": "/lingua/index.html",
-    "static/css/main.592c71ee.chunk.css.map": "/lingua/static/css/main.592c71ee.chunk.css.map",
+    "static/css/main.8820ace1.chunk.css.map": "/lingua/static/css/main.8820ace1.chunk.css.map",
     "static/js/2.f9979767.chunk.js.LICENSE.txt": "/lingua/static/js/2.f9979767.chunk.js.LICENSE.txt",
     "static/media/collectionCard.scss": "/lingua/static/media/Rubik-Medium.5bd2b2c6.ttf",
-    "static/media/pageNotFound.scss": "/lingua/static/media/cat-head-smash.a6e92b9c.gif"
+    "static/media/arrow.013bc073.png": "/lingua/static/media/arrow.013bc073.png",
+    "static/media/basket.d43378af.svg": "/lingua/static/media/basket.d43378af.svg",
+    "static/media/books.6db0b684.png": "/lingua/static/media/books.6db0b684.png",
+    "static/media/pageNotFound.scss": "/lingua/static/media/cat-head-smash.a6e92b9c.gif",
+    "static/media/confetti.28492103.png": "/lingua/static/media/confetti.28492103.png",
+    "static/media/hidden.3cf82816.png": "/lingua/static/media/hidden.3cf82816.png",
+    "static/media/icon-add.19d11d05.png": "/lingua/static/media/icon-add.19d11d05.png",
+    "static/media/icons8-github.16391164.svg": "/lingua/static/media/icons8-github.16391164.svg",
+    "static/media/icons8-instagram.b564dc2a.svg": "/lingua/static/media/icons8-instagram.b564dc2a.svg",
+    "static/media/icons8-linkedin.e8da29d7.svg": "/lingua/static/media/icons8-linkedin.e8da29d7.svg",
+    "static/media/icons8-telegram-app.813f48c7.svg": "/lingua/static/media/icons8-telegram-app.813f48c7.svg",
+    "static/media/pencil.3c38fb23.png": "/lingua/static/media/pencil.3c38fb23.png",
+    "static/media/sticky-notes.04cfa112.png": "/lingua/static/media/sticky-notes.04cfa112.png"
   },
   "entrypoints": [
     "static/js/runtime-main.f15b46e2.js",
     "static/js/2.f9979767.chunk.js",
-    "static/css/main.592c71ee.chunk.css",
-    "static/js/main.49de3e85.chunk.js"
+    "static/css/main.8820ace1.chunk.css",
+    "static/js/main.6a22c262.chunk.js"
   ]
 }
