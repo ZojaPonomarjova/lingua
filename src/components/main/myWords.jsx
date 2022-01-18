@@ -2,7 +2,7 @@ import "./main.scss";
 import Title from "../titles";
 import Table from "../table/tableCommon";
 import React from "react";
-import WordCardContainer from "../wordCard/wordCardContainer";
+import WordCardContainer from "../wordCard";
 import { useState } from "react";
 import { inject, observer } from "mobx-react";
 
