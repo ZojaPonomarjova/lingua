@@ -2,8 +2,8 @@ import "./wordCard.scss";
 import WordCard from "./wordCard";
 import { useState, useCallback } from "react";
 import classnames from "classnames";
-import rightArrow from "../assets/images/right-arrow.png";
-import leftArrow from "../assets/images/left-arrow.png";
+import rightArrow from "../../assets/images/right-arrow.png";
+import leftArrow from "../../assets/images/left-arrow.png";
 
 //компонент для стрелок в карусели
 const Arrow = props => {

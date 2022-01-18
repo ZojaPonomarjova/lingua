@@ -2,7 +2,7 @@ import MenuItem from "./headerMenu";
 import "./header.scss";
 import { Link } from "react-router-dom";
 import MenuBurger from "./menuBurger";
-import books from "../assets/images/books.png";
+import books from "../../assets/images/books.png";
 
 const Header = () => {
   return (

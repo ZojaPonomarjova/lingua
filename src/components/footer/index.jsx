@@ -1,9 +1,9 @@
 import "./footer.scss";
 import FooterSocial from "./footerSocial";
-import linkedIn from "../assets/images/icons8-linkedin.svg";
-import github from "../assets/images/icons8-github.svg";
-import telegram from "../assets/images/icons8-telegram-app.svg";
-import instagram from "../assets/images/icons8-instagram.svg";
+import linkedIn from "../../assets/images/icons8-linkedin.svg";
+import github from "../../assets/images/icons8-github.svg";
+import telegram from "../../assets/images/icons8-telegram-app.svg";
+import instagram from "../../assets/images/icons8-instagram.svg";
 
 const Footer = () => {
   return (
