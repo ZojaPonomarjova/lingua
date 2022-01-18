@@ -1,8 +1,8 @@
 import "./app.scss";
 import "./components/assets/styles/common.scss";
-import Header from "./components/header/header";
+import Header from "./components/header";
 import Main from "./components/main";
-import Footer from "./components/footer/footer";
+import Footer from "./components/footer";
 import { Provider } from "mobx-react";
 import store from "./store";
 

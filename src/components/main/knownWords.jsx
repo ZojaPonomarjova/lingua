@@ -1,7 +1,7 @@
 import "./main.scss";
 import Title from "../titles";
 import React from "react";
-import WordCardContainer from "../wordCard/wordCardContainer";
+import WordCardContainer from "../wordCard";
 import { useState } from "react";
 
 import TableKnownWords from "../table/tableKnownWords";

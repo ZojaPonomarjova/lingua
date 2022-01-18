@@ -1,9 +1,9 @@
 import "./main.scss";
 import Title from "../titles";
 import React from "react";
-import WordCardContainer from "../wordCard/wordCardContainer";
+import WordCardContainer from "../wordCard";
 import { useState, useEffect } from "react";
-import TableRecommendedWords from "../table/tableRecommendedWords/tableRecommendedWords";
+import TableRecommendedWords from "../table/tableRecommendedWords";
 
 //компонент для страницы с рекомендованными словами
 const RecommendedWords = props => {

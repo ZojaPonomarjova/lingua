@@ -5,7 +5,7 @@ import { useEffect } from "react";
 import { Switch, Route } from "react-router-dom";
 import PageNotFound from "../pageNotFound";
 import CollectionCard from "../collectionCard";
-import TextLoader from "../textLoader/textLoader";
+import TextLoader from "../textLoader";
 import { inject, observer } from "mobx-react";
 import RecommendedWords from "./recommendedWords";
 import AddWord from "../addWord";
