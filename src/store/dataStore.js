@@ -49,7 +49,7 @@ export default class DataStore {
     if (this.isLoaded) {
       return;
     }
-    fetch("http://itgirlschool.justmakeit.ru/api/words")
+    fetch("/api/words")
       .then(response => response.json())
       .then(words => {
         try {
@@ -93,7 +93,7 @@ export default class DataStore {
       value.russian !== ""
     ) {
       try {
-        fetch(`http://itgirlschool.justmakeit.ru/api/words/add`, {
+        fetch(`/api/words/add`, {
           method: "POST",
           body: JSON.stringify(value),
           headers: {
@@ -122,7 +122,7 @@ export default class DataStore {
   handleClickToDelete = (wordId, word) => {
     this.isDeleted = undefined;
     try {
-      fetch(`http://itgirlschool.justmakeit.ru/api/words/${wordId}/delete`, {
+      fetch(`/api/words/${wordId}/delete`, {
         method: "POST",
         body: JSON.stringify(word),
         headers: {
@@ -168,7 +168,7 @@ export default class DataStore {
 
   handleClickToSendChanges = (id, value) => {
     this.isWordChanged = undefined;
-    fetch(`http://itgirlschool.justmakeit.ru/api/words/${id}/update/`, {
+    fetch(`/api/words/${id}/update/`, {
       method: "POST",
       body: JSON.stringify(value),
       headers: {
