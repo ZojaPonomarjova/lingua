@@ -1,8 +1,8 @@
 import "./wordCard.scss";
 import React, { useEffect, useRef } from "react";
 import ShowTranslationButton, { Button } from "../button";
-import eye from "../assets/images/hidden.png";
-import confetti from "../assets/images/confetti.png";
+import eye from "../../assets/images/hidden.png";
+import confetti from "../../assets/images/confetti.png";
 
 //перевод, "спрятанный под кнопкой"
 const HiddenText = ({ translation }) => {

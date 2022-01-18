@@ -1,11 +1,11 @@
 import "./buttonsRow.scss";
 import { Button } from "../../button";
 import React from "react";
-import pencil from "../../assets/images/pencil.png";
-import notes from "../../assets/images/sticky-notes.png";
-import confetti from "../../assets/images/confetti.png";
-import addButton from "../../assets/images/icon-add.png";
-import deleteButton from "../../assets/images/basket.svg";
+import pencil from "../../../assets/images/pencil.png";
+import notes from "../../../assets/images/sticky-notes.png";
+import confetti from "../../../assets/images/confetti.png";
+import addButton from "../../../assets/images/icon-add.png";
+import deleteButton from "../../../assets/images/basket.svg";
 
 //компонент кнопка с карандашом для редактирования текста в таблице
 const EditButton = props => {

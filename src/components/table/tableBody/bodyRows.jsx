@@ -7,7 +7,7 @@ import {
   ButtonsRowKnownWords,
 } from "../buttonsRow";
 import { BodyCell, BodyCellChange } from "./bodyCells";
-import arrow from "../../assets/images/arrow.png";
+import arrow from "../../../assets/images/arrow.png";
 
 //компонент ряд в таблице с текстом и кнопками учить/редактировать
 const BodyRow = ({
