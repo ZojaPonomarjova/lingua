@@ -33,7 +33,7 @@ _Помощь в изучении слов английского языка._
 
 ---
 
-![gif](https://github.com/ZojaPonomarjova/lingua/blob/master/public/assets/images/review2.gif)
+![gif](https://github.com/ZojaPonomarjova/lingua/blob/master/src/assets/images/review2.gif)
 
 #### Используемые технологии:
 
